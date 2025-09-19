@@ -1,0 +1,404 @@
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import logoDevz from '../img/logos/logo_devez.png';
+import { 
+  Menu, 
+  X, 
+  ChevronDown, 
+  Globe, 
+  ShoppingCart, 
+  Utensils, 
+  Stethoscope, 
+  Scissors, 
+  Heart, 
+  Tractor,
+  Brain,
+  BarChart3,
+  Code
+} from 'lucide-react';
+
+interface HeaderProps {
+  onNavigate?: (page: string) => void;
+  currentPage?: string;
+}
+
+export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const menuItems = [
+    { label: 'Home', href: '#home', page: 'home' },
+    { label: 'Sobre a Devz', href: '#sobre', page: 'about-devz' },
+    { label: 'Empresa', href: '#sobre' },
+    { label: 'Automação', href: '#automacao' },
+    { label: 'Blog', href: '#blog' },
+    { label: 'Contato', href: '#contato' }
+  ];
+
+  const devzProducts = [
+    {
+      name: 'DEVZ Web',
+      description: '50+ tipos de varejo, Prestadoras de serviços, MEI',
+      icon: Globe,
+      page: 'devz-web'
+    },
+    {
+      name: 'DEVZ Shop',
+      description: 'Para todos os tipos de varejo',
+      icon: ShoppingCart,
+      page: 'devz-shop'
+    },
+    {
+      name: 'DEVZ Food',
+      description: 'Bares e Restaurantes, Delivery, Pizzarias',
+      icon: Utensils,
+      page: 'devz-food'
+    },
+    {
+      name: 'DEVZ Clínicas',
+      description: 'Clínicas, Consultórios, Profissionais da saúde',
+      icon: Stethoscope,
+      page: 'devz-clinicas'
+    },
+    {
+      name: 'DEVZ Salões',
+      description: 'Salões, Clínicas de estética, Profissionais liberais',
+      icon: Scissors,
+      page: 'devz-saloes'
+    },
+    {
+      name: 'DEVZ Pet',
+      description: 'Pet Shop, Clínicas veterinárias',
+      icon: Heart,
+      page: 'devz-pet'
+    },
+    {
+      name: 'DEVZ Agro',
+      description: 'Produtor rural, Fazendas, Cooperativas',
+      icon: Tractor,
+      page: 'devz-agro'
+    }
+  ];
+
+  const customSolutions = [
+    {
+      name: 'Automação Python + IA',
+      description: 'Scripts inteligentes, processamento de dados e ML',
+      icon: Brain,
+      page: 'automacao-python'
+    },
+    {
+      name: 'Dashboards Power BI',
+      description: 'Visualização de dados e Business Intelligence',
+      icon: BarChart3,
+      href: '#produtos'
+    },
+    {
+      name: 'Desenvolvimento Sob Medida',
+      description: 'Soluções personalizadas para seu negócio',
+      icon: Code,
+      href: '#produtos'
+    }
+  ];
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const handleNavigation = (item: any) => {
+    if (item.page && onNavigate) {
+      onNavigate(item.page);
+    } else if (item.href) {
+      scrollToSection(item.href);
+    }
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <button 
+              onClick={() => onNavigate ? onNavigate('home') : scrollToSection('#home')}
+              className="h-12 hover:opacity-90 transition-opacity flex items-center"
+            >
+              <img 
+                src={logoDevz} 
+                alt="Devz Logo" 
+                className="h-10 w-auto object-contain"
+              />
+            </button>
+          </div>
+
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex space-x-8 items-center">
+            {/* Home */}
+            <button
+              onClick={() => onNavigate ? onNavigate('home') : scrollToSection('#home')}
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                currentPage === 'home' 
+                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
+                  : 'text-gray-600 hover:text-[#1E40AF]'
+              }`}
+            >
+              Home
+            </button>
+            
+            {/* Sobre a Devz */}
+            <button
+              onClick={() => onNavigate ? onNavigate('about-devz') : scrollToSection('#sobre')}
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                currentPage === 'about-devz' 
+                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
+                  : 'text-gray-600 hover:text-[#1E40AF]'
+              }`}
+            >
+              Sobre a Devz
+            </button>
+            
+            {/* Produtos Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center text-gray-600 hover:text-[#1E40AF] px-3 py-2 text-sm font-medium transition-colors">
+                  Produtos
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[900px] p-6 border border-gray-100 shadow-lg bg-white rounded-lg">
+                {/* Header simples */}
+                <div className="mb-6">
+                  <h3 className="text-lg text-gray-900 mb-1">Produtos</h3>
+                  <p className="text-sm text-gray-500">Soluções completas para seu negócio</p>
+                </div>
+
+                {/* Linha DEVZ - Layout Horizontal */}
+                <div className="mb-8">
+                  <h4 className="text-sm text-gray-700 mb-4">Linha DEVZ ERP</h4>
+                  <div className="grid grid-cols-4 gap-4">
+                    {devzProducts.map((product) => {
+                      const IconComponent = product.icon;
+                      return (
+                        <DropdownMenuItem
+                          key={product.name}
+                          onClick={() => {
+                            if (product.page && onNavigate) {
+                              onNavigate(product.page);
+                            }
+                          }}
+                          className="group p-0 h-auto border border-gray-100 bg-transparent hover:bg-gray-50 hover:border-blue-200 rounded-lg transition-all cursor-pointer"
+                        >
+                          <div className="p-3 w-full text-center">
+                            <div className="flex flex-col items-center gap-2">
+                              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
+                                <IconComponent className="h-5 w-5 text-[#1E40AF]" />
+                              </div>
+                              <div>
+                                <h5 className="text-sm font-medium text-gray-900 mb-1">{product.name}</h5>
+                                <p className="text-xs text-gray-500 line-clamp-2">
+                                  {product.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </DropdownMenuItem>
+                      );
+                    })}
+                  </div>
+                </div>
+                
+                {/* Separator */}
+                <div className="border-t-2 border-gray-200 mb-6 mx-4"></div>
+
+                {/* Soluções Customizadas - Layout Horizontal */}
+                <div>
+                  <h4 className="text-sm text-gray-700 mb-4">Desenvolvimento Customizado</h4>
+                  <div className="grid grid-cols-3 gap-4">
+                    {customSolutions.map((solution) => {
+                      const IconComponent = solution.icon;
+                      return (
+                        <DropdownMenuItem
+                          key={solution.name}
+                          onClick={() => {
+                            if (solution.page && onNavigate) {
+                              onNavigate(solution.page);
+                            } else if (solution.href) {
+                              scrollToSection(solution.href);
+                            }
+                          }}
+                          className="group p-0 h-auto border border-gray-100 bg-transparent hover:bg-gray-50 hover:border-green-200 rounded-lg transition-all cursor-pointer"
+                        >
+                          <div className="p-3 w-full text-center">
+                            <div className="flex flex-col items-center gap-2">
+                              <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
+                                <IconComponent className="h-5 w-5 text-green-600" />
+                              </div>
+                              <div>
+                                <h5 className="text-sm font-medium text-gray-900 mb-1">{solution.name}</h5>
+                                <p className="text-xs text-gray-500 line-clamp-2">
+                                  {solution.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </DropdownMenuItem>
+                      );
+                    })}
+                  </div>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            {/* Outros itens do menu */}
+            <button
+              onClick={() => onNavigate ? onNavigate('automacao') : scrollToSection('#automacao')}
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                currentPage === 'automacao' 
+                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
+                  : 'text-gray-600 hover:text-[#1E40AF]'
+              }`}
+            >
+              Automação
+            </button>
+            
+            <button
+              onClick={() => onNavigate ? onNavigate('blog') : scrollToSection('#blog')}
+              className={`px-3 py-2 text-sm font-medium transition-colors ${
+                currentPage === 'blog' 
+                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
+                  : 'text-gray-600 hover:text-[#1E40AF]'
+              }`}
+            >
+              Blog
+            </button>
+            
+            <button
+              onClick={() => scrollToSection('#contato')}
+              className="text-gray-600 hover:text-[#1E40AF] px-3 py-2 text-sm font-medium transition-colors"
+            >
+              Contato
+            </button>
+          </nav>
+
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <button 
+              onClick={() => scrollToSection('#contato')}
+              className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-6 py-2 font-medium h-10 min-w-fit whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
+            >
+              Solicitar Demonstração
+            </button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-600 hover:text-[#1E40AF] p-2"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {/* Mobile Navigation Items */}
+              <button
+                onClick={() => onNavigate ? onNavigate('home') : scrollToSection('#home')}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+              >
+                Home
+              </button>
+              
+              <button
+                onClick={() => onNavigate ? onNavigate('about-devz') : scrollToSection('#sobre')}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+              >
+                Sobre a Devz
+              </button>
+              
+              {/* Mobile Products Section */}
+              <div className="pt-2">
+                <div className="px-3 py-2 text-base font-medium text-gray-900 border-b border-gray-100">
+                  Produtos DEVZ
+                </div>
+                <div className="pl-4 space-y-1">
+                  {devzProducts.map((product) => (
+                    <button
+                      key={product.name}
+                      onClick={() => {
+                        if (product.page && onNavigate) {
+                          onNavigate(product.page);
+                        }
+                      }}
+                      className="block w-full text-left px-3 py-2 hover:bg-gray-50"
+                    >
+                      <div className="text-sm font-medium text-gray-900 mb-1">
+                        {product.name}
+                      </div>
+                      <div className="text-xs text-gray-600">
+                        {product.description}
+                      </div>
+                    </button>
+                  ))}
+                  
+                  {/* Mobile Custom Solutions */}
+                  <button
+                    onClick={() => scrollToSection('#produtos')}
+                    className="block w-full text-left px-3 py-2 hover:bg-blue-50"
+                  >
+                    <div className="text-sm font-medium text-[#1E40AF] mb-1">
+                      Soluções Personalizadas
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      Automações Python + IA e Dashboards Power BI
+                    </div>
+                  </button>
+                </div>
+              </div>
+              
+              {/* Outros itens do menu mobile */}
+              <button
+                onClick={() => onNavigate ? onNavigate('automacao') : scrollToSection('#automacao')}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+              >
+                Automação
+              </button>
+              
+              <button
+                onClick={() => onNavigate ? onNavigate('blog') : scrollToSection('#blog')}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+              >
+                Blog
+              </button>
+              
+              <button
+                onClick={() => scrollToSection('#contato')}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+              >
+                Contato
+              </button>
+              
+              <div className="pt-4">
+                <button 
+                  onClick={() => scrollToSection('#contato')}
+                  className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white font-medium h-10 whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
+                >
+                  Solicitar Demonstração
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+}
