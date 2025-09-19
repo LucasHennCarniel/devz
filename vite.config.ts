@@ -57,8 +57,8 @@
       port: 3000,
       open: true,
       allowedHosts: [
-      '980ba5bac0d3.ngrok-free.app'
-    ],
+        'all',
+      ],
     },
   });
 
