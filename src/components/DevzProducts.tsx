@@ -12,91 +12,28 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // TODO: Define these functions and data
+  const prevSlide = () => setCurrentIndex(Math.max(0, currentIndex - 1));
+  const nextSlide = () => setCurrentIndex(currentIndex + 1);
+  const canScrollLeft = currentIndex > 0;
+  const canScrollRight = true; // TODO: Implement logic
+  const getVisibleCards = () => 4; // TODO: Implement responsive logic
+  const scrollToSection = (selector: string) => {
+    // TODO: Implement scroll logic
+    console.log('Scroll to:', selector);
+  };
+
   const devzProducts = [
+    // TODO: Add product data
     {
-      name: 'DEVZ Web',
-      description: '50+ tipos de varejo, Prestadoras de serviços, MEI',
+      name: 'Devz Web',
       icon: Globe,
       page: 'devz-web',
-      category: 'Varejo Geral',
-      highlights: ['PDV Integrado', 'NFe/NFCe', 'Gestão Financeira', 'Controle de Estoque']
+      category: 'web',
+      highlights: ['Gestão completa', 'Integração online', 'Relatórios avançados']
     },
-    {
-      name: 'DEVZ Shop',
-      description: 'Para todos os tipos de varejo físico e online',
-      icon: ShoppingCart,
-      page: 'devz-shop',
-      category: 'Varejo Especializado',
-      highlights: ['E-commerce', 'Marketplace', 'Omnichannel', 'Analytics']
-    },
-    {
-      name: 'DEVZ Food',
-      description: 'Bares, Restaurantes, Delivery, Pizzarias',
-      icon: Utensils,
-      page: 'devz-food',
-      category: 'Alimentação',
-      highlights: ['Comanda Digital', 'Delivery Integrado', 'Controle de Mesa', 'Cardápio Online']
-    },
-    {
-      name: 'DEVZ Clínicas',
-      description: 'Clínicas, Consultórios, Profissionais da saúde',
-      icon: Stethoscope,
-      page: 'devz-clinicas',
-      category: 'Saúde',
-      highlights: ['Prontuário Digital', 'Agendamento', 'Telemedicina', 'TISS/ANS']
-    },
-    {
-      name: 'DEVZ Salões',
-      description: 'Salões, Clínicas de estética, Profissionais liberais',
-      icon: Scissors,
-      page: 'devz-saloes',
-      category: 'Beleza',
-      highlights: ['Agenda Online', 'Comissões', 'Marketing Digital', 'Fidelização']
-    },
-    {
-      name: 'DEVZ Pet',
-      description: 'Pet Shop, Clínicas veterinárias',
-      icon: Heart,
-      page: 'devz-pet',
-      category: 'Pet Care',
-      highlights: ['Ficha Veterinária', 'Vacinas', 'Grooming', 'Pet Shop']
-    },
-    {
-      name: 'DEVZ Agro',
-      description: 'Produtor rural, Fazendas, Cooperativas',
-      icon: Tractor,
-      page: 'devz-agro',
-      category: 'Agronegócio',
-      highlights: ['CTe Agro', 'Rastreabilidade', 'Gestão Rural', 'Cooperativas']
-    }
+    // Add more products...
   ];
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const nextSlide = () => {
-    const maxIndex = Math.max(0, devzProducts.length - getVisibleCards());
-    setCurrentIndex(prev => Math.min(prev + 1, maxIndex));
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex(prev => Math.max(prev - 1, 0));
-  };
-
-  const getVisibleCards = () => {
-    if (typeof window === 'undefined') return 3;
-    if (window.innerWidth >= 1280) return 4; // xl
-    if (window.innerWidth >= 1024) return 3; // lg
-    if (window.innerWidth >= 768) return 2;  // md
-    return 1; // mobile
-  };
-
-  const canScrollLeft = currentIndex > 0;
-  const canScrollRight = currentIndex < devzProducts.length - getVisibleCards();
 
   return (
     <section className="py-16 md:py-24 bg-[#F5F6F7]">
@@ -137,7 +74,7 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
 
           {/* Products Container */}
           <div className="overflow-hidden" ref={containerRef}>
-            <div 
+            <div
               className="flex transition-transform duration-300 ease-in-out gap-6"
               style={{
                 transform: `translateX(-${currentIndex * (100 / getVisibleCards())}%)`
@@ -150,37 +87,31 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
                     key={product.name}
                     className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
                   >
-                    <Card className="border border-gray-200 hover:shadow-lg transition-all duration-200 group cursor-pointer hover:border-gray-300 h-full">
-                      <CardContent className="p-6 h-full flex flex-col">
+                    <Card className="border border-gray-200 hover:shadow-lg transition-all duration-200 cursor-pointer hover:border-gray-300 h-full">
+                      <CardContent className="p-6 h-full flex flex-col group">
                         <div className="flex items-start justify-between mb-4">
-                          <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center group-hover:bg-[#1E40AF]/15 transition-colors">
-                            <IconComponent className="w-6 h-6 text-[#1E40AF]" />
+                          <div className="w-12 h-12 bg-[#31496e]/10 rounded-lg flex items-center justify-center group-hover:bg-[#31496e]/15 transition-colors">
+                            <IconComponent className="w-6 h-6 text-[#31496e]" />
                           </div>
                           <Badge variant="outline" className="text-xs text-gray-500 border-gray-300">
                             ERP
                           </Badge>
                         </div>
-                        
                         <div className="flex-1 mb-6">
-                          <h4 className="text-gray-900 mb-2 group-hover:text-[#1E40AF] transition-colors">
+                          <h4 className="text-gray-900 mb-2 group-hover:text-[#31496e] transition-colors">
                             {product.name}
                           </h4>
-                          <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                            {product.description}
-                          </p>
-
                           {/* Key Features */}
                           <div className="space-y-2">
                             {product.highlights.map((highlight, index) => (
                               <div key={index} className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-[#3B82F6] rounded-full flex-shrink-0"></div>
+                                <div className="w-1.5 h-1.5 bg-[#31496e] rounded-full flex-shrink-0"></div>
                                 <span className="text-xs text-gray-600">{highlight}</span>
                               </div>
                             ))}
                           </div>
                         </div>
-
-                        <Button 
+                        <Button
                           onClick={() => {
                             if (product.page && onNavigate) {
                               onNavigate(product.page);
@@ -188,8 +119,8 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
                               scrollToSection('#contato');
                             }
                           }}
-                          variant="outline" 
-                          className="w-full text-sm border-gray-300 text-gray-700 hover:bg-[#1E40AF] hover:text-white hover:border-[#1E40AF] transition-colors"
+                          variant="outline"
+                          className="w-full text-sm border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e] transition-colors"
                         >
                           Ver Detalhes
                           <ArrowRight className="ml-2 h-4 w-4" />
@@ -210,7 +141,7 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-200 ${
                   Math.floor(currentIndex / getVisibleCards()) === index
-                    ? 'bg-[#1E40AF] scale-125'
+                    ? 'bg-[#31496e] scale-125'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
@@ -227,15 +158,14 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
             <p className="text-gray-500 mb-6 max-w-2xl mx-auto">
               Cada segmento tem suas particularidades. Converse conosco e descubra qual sistema DEVZ se adapta melhor ao seu negócio.
             </p>
-            
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+              <Button
                 onClick={() => scrollToSection('#contato')}
-                className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-8 py-3"
+                className="bg-[#31496e] hover:bg-[#31496e]/90 text-white px-8 py-3"
               >
                 Falar com Consultor
               </Button>
-              <Button 
+              <Button
                 variant="outline"
                 onClick={() => onNavigate ? onNavigate('about-devz') : scrollToSection('#sobre')}
                 className="border-gray-300 text-gray-900 hover:bg-gray-50 px-8 py-3"

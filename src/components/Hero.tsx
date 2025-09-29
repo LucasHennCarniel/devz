@@ -12,6 +12,7 @@ interface Slide {
   features: string[];
   backgroundGradient: string;
   themeColor: string;
+  images: string[];
 }
 
 // Constants
@@ -33,8 +34,13 @@ const SLIDES: Slide[] = [
       'Dashboards em Power BI',
       'Suporte Especializado'
     ],
-    backgroundGradient: "bg-gradient-to-r from-[#1E40AF] to-[#3B82F6]",
-    themeColor: "#1b1d24ff"
+    backgroundGradient: "",
+    themeColor: "#6B7280",
+    images: [
+      "https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&h=400&fit=crop&crop=center", // Consultoria/Meeting
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center", // Analytics Dashboard
+      "https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=300&fit=crop&crop=center"  // Automation/Tech
+    ]
   },
   {
     id: 2,
@@ -48,8 +54,13 @@ const SLIDES: Slide[] = [
       'Faturamento Integrado',
       'Relatórios Gerenciais'
     ],
-    backgroundGradient: "bg-gradient-to-r from-[#3B82F6] to-[#1E40AF]",
-    themeColor: "#3B82F6"
+    backgroundGradient: "",
+    themeColor: "#6B7280",
+    images: [
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&h=400&fit=crop&crop=center", // ERP/Business Management
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop&crop=center", // Financial Management
+      "https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=400&h=300&fit=crop&crop=center"  // Inventory/Stock
+    ]
   },
   {
     id: 3,
@@ -63,8 +74,13 @@ const SLIDES: Slide[] = [
       'KPIs em Tempo Real',
       'Tomada de Decisão Inteligente'
     ],
-    backgroundGradient: "bg-gradient-to-r from-[#1E40AF] to-[#1E3A8A]",
-    themeColor: "#1E3A8A"
+    backgroundGradient: "",
+    themeColor: "#6B7280",
+    images: [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=400&fit=crop&crop=center", // Data Analytics/BI
+      "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=300&fit=crop&crop=center", // AI/Machine Learning
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center"  // Decision Making/Charts
+    ]
   }
 ];
 
@@ -75,9 +91,10 @@ const SlideContent: React.FC<{
   currentSlide: number;
   scrollToSection: (href: string) => void;
 }> = ({ slide, index, currentSlide, scrollToSection }) => (
-  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-    <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="max-w-4xl mx-auto text-center space-y-8">
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[60vh]">
+      {/* Left Column - Content */}
+      <div className="space-y-8">
         {/* Content Animation */}
         <div 
           className={`space-y-6 transition-all duration-700 ${
@@ -87,24 +104,24 @@ const SlideContent: React.FC<{
           }`}
           style={{ transitionDelay: index === currentSlide ? '300ms' : '0ms' }}
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl text-white leading-tight">
             {slide.title}
             <span className="text-white/80">{slide.highlight}</span>
             {slide.subtitle && (
               <>
                 <br />
-                <span className="text-3xl md:text-5xl lg:text-6xl">{slide.subtitle}</span>
+                <span className="text-2xl md:text-4xl lg:text-5xl">{slide.subtitle}</span>
               </>
             )}
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-white/90 leading-relaxed">
             {slide.description}
           </p>
         </div>
 
         {/* Buttons */}
         <div 
-          className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 ${
+          className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 ${
             index === currentSlide 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
@@ -113,14 +130,14 @@ const SlideContent: React.FC<{
         >
           <button 
             onClick={() => scrollToSection('#contato')}
-            className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-md inline-flex items-center justify-center font-medium"
+            className="bg-white hover:bg-white/90 text-[#31496e] px-8 py-4 text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 rounded-md inline-flex items-center justify-center font-medium"
           >
             Solicitar Consultoria Gratuita
             <ArrowRight className="ml-2 h-5 w-5" />
           </button>
           <button 
             onClick={() => scrollToSection('#produtos')}
-            className="border border-white text-white hover:bg-white hover:text-[#1E40AF] px-8 py-4 text-lg backdrop-blur-sm transform hover:scale-105 transition-all duration-300 rounded-md inline-flex items-center justify-center font-medium"
+            className="border border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg backdrop-blur-sm transform hover:scale-105 transition-all duration-300 rounded-md inline-flex items-center justify-center font-medium"
           >
             Ver Soluções
           </button>
@@ -128,7 +145,7 @@ const SlideContent: React.FC<{
 
         {/* Features */}
         <div 
-          className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-12 max-w-5xl mx-auto transition-all duration-700 ${
+          className={`grid sm:grid-cols-2 gap-4 transition-all duration-700 ${
             index === currentSlide 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 translate-y-8'
@@ -138,17 +155,73 @@ const SlideContent: React.FC<{
           {slide.features.map((feature, featureIndex) => (
             <div 
               key={`${slide.id}-${featureIndex}`} 
-              className="flex flex-col items-center gap-3 bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+              className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10 hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
               style={{ 
                 transitionDelay: index === currentSlide ? `${800 + featureIndex * 100}ms` : '0ms' 
               }}
             >
-              <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
+              <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                 <Check className="w-4 h-4 text-white" />
               </div>
-              <span className="text-white/90 text-center text-sm">{feature}</span>
+              <span className="text-white/90 text-sm">{feature}</span>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Right Column - Images */}
+      <div className="relative">
+        <div 
+          className={`transition-all duration-700 ${
+            index === currentSlide 
+              ? 'opacity-100 translate-x-0' 
+              : 'opacity-0 translate-x-8'
+          }`}
+          style={{ transitionDelay: index === currentSlide ? '400ms' : '0ms' }}
+        >
+          <div className="grid grid-cols-2 gap-4">
+            {/* Main Image - spans 2 rows */}
+            <div className="col-span-2 relative group">
+              <div className="relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                <img 
+                  src={slide.images[0]} 
+                  alt={`${slide.title} - Imagem Principal`}
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+            </div>
+            
+            {/* Secondary Images */}
+            <div className="relative group">
+              <div className="relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                <img 
+                  src={slide.images[1]} 
+                  alt={`${slide.title} - Imagem 2`}
+                  className="w-full h-32 object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+            </div>
+            
+            <div className="relative group">
+              <div className="relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                <img 
+                  src={slide.images[2]} 
+                  alt={`${slide.title} - Imagem 3`}
+                  className="w-full h-32 object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Floating decorative elements */}
+          <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/5 rounded-full blur-xl"></div>
+          <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-white/5 rounded-full blur-lg"></div>
         </div>
       </div>
     </div>
@@ -173,10 +246,10 @@ const DynamicPagination: React.FC<{
         }`}
       >
         <div 
-          className={`w-full h-full rounded-full transition-all duration-500 ${
+          className={`swiper-pagination-bullet-custom transition-all duration-500 ${
             index === currentSlide 
-              ? 'bg-white shadow-lg shadow-white/40 pagination-active' 
-              : 'bg-white/40 hover:bg-white/70 group-hover:shadow-md'
+              ? 'w-12 h-3 bg-white shadow-lg shadow-white/40 pagination-active' 
+              : 'w-3 h-3 hover:w-8 bg-white/40 hover:bg-white/70 group-hover:shadow-md'
           }`}
         />
         
@@ -462,8 +535,17 @@ export function Hero() {
                   className="w-full flex-shrink-0 relative min-h-[80vh] lg:min-h-[90vh]"
                 >
                   {/* Background Gradient with Fade Effect */}
-                  <div className={`absolute inset-0 ${slide.backgroundGradient} transition-all duration-1000`}>
-                    <div className="absolute inset-0 bg-black/5"></div>
+                  <div 
+                    className={`absolute inset-0 transition-all duration-1000`}
+                    style={{ 
+                      background: index === 0 
+                        ? 'linear-gradient(to right, #4B5563, #374151)' 
+                        : index === 1 
+                        ? 'linear-gradient(to right, #374151, #4B5563)' 
+                        : 'linear-gradient(to right, #4B5563, #1F2937)'
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-black/20"></div>
                     
                     {/* Animated Background Elements */}
                     <div className="absolute inset-0 overflow-hidden">

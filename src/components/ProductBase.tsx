@@ -74,9 +74,9 @@ export function ProductBase({
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#1E40AF]">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] relative overflow-hidden">
+      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-[#31496e] to-[#31496e] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -101,7 +101,7 @@ export function ProductBase({
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={() => scrollToSection('#contato')}
-                  className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-4 text-lg font-medium"
+                  className="bg-white hover:bg-white/90 text-[#31496e] px-8 py-4 text-lg font-medium"
                 >
                   Solicitar Demonstração
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -109,7 +109,7 @@ export function ProductBase({
                 <Button 
                   variant="outline"
                   onClick={() => scrollToSection('#funcionalidades')}
-                  className="border-white text-white hover:bg-white hover:text-[#1E40AF] px-8 py-4 text-lg font-medium"
+                  className="bg-white hover:bg-white/90 text-[#31496e] px-8 py-4 text-lg font-medium"
                 >
                   Ver Funcionalidades
                 </Button>
@@ -149,8 +149,8 @@ export function ProductBase({
               return (
                 <Card key={index} className="p-8 hover:shadow-lg transition-shadow duration-200 border border-gray-200">
                   <div className="space-y-4">
-                    <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-[#1E40AF]" />
+                    <div className="w-12 h-12 bg-[#31496e]/10 rounded-lg flex items-center justify-center">
+                      <IconComponent className="w-6 h-6 text-[#31496e]" />
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-gray-900 mb-2">{feature.title}</h3>
@@ -179,7 +179,7 @@ export function ProductBase({
           <div className="grid md:grid-cols-2 gap-8">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-[#1E40AF] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-8 h-8 bg-[#31496e] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                   <Check className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -226,8 +226,8 @@ export function ProductBase({
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-              <MessageCircle className="w-8 h-8 text-[#1E40AF]" />
+            <div className="w-16 h-16 bg-[#31496e]/10 rounded-lg flex items-center justify-center mx-auto mb-6">
+              <MessageCircle className="w-8 h-8 text-[#31496e]" />
             </div>
             <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-4">
               Tire suas dúvidas
@@ -270,7 +270,7 @@ export function ProductBase({
       </section>
 
       {/* Call to Action Final */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6]">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-[#31496e] to-[#31496e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-8">
             <div className="space-y-6">
@@ -292,14 +292,14 @@ export function ProductBase({
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 onClick={() => scrollToSection('#contato')}
-                className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-4 text-lg font-medium"
+                className="bg-white hover:bg-white/90 text-[#31496e] px-8 py-4 text-lg font-medium"
               >
                 Solicitar Demonstração Gratuita
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#1E40AF] px-8 py-4 text-lg font-medium"
+                className="border-white text-white hover:bg-white hover:text-[#31496e] px-8 py-4 text-lg font-medium"
               >
                 Baixar Material
               </Button>

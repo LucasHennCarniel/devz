@@ -56,11 +56,11 @@ export default function AutomationPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-16 bg-gradient-to-br from-gray-900 via-gray-800 to-[#1E40AF] relative overflow-hidden">
+      <section className="pt-16 bg-gradient-to-br from-gray-900 via-gray-800 to-[#31496e] relative overflow-hidden">
         {/* Animated Background Pattern */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white/30 rounded-full -translate-x-48 -translate-y-48 animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#3B82F6]/30 rounded-full translate-x-48 translate-y-48 animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#31496e]/30 rounded-full translate-x-48 translate-y-48 animate-pulse"></div>
           <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white/20 rounded-full -translate-x-32 -translate-y-32 animate-bounce"></div>
         </div>
 
@@ -74,7 +74,7 @@ export default function AutomationPage() {
                 </Badge>
                 
                 <h1 className="text-4xl lg:text-6xl xl:text-7xl leading-tight">
-                  Automação que <span className="text-[#3B82F6]">multiplica</span> resultados
+                  Automação que <span className="text-[#31496e]">multiplica</span> resultados
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl">
@@ -100,14 +100,14 @@ export default function AutomationPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={handleExternalRedirect}
-                  className="bg-[#3B82F6] hover:bg-[#3B82F6]/90 text-white px-8 py-4 text-lg"
+                  className="bg-[#31496e] hover:bg-[#31496e]/90 text-white px-8 py-4 text-lg"
                 >
                   Descobrir Como Funciona
                   <ExternalLink className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg"
+                  className="border-white text-gray-900 hover:!bg-gray-900 hover:!text-white px-8 py-4 text-lg"
                 >
                   Ver Casos de Sucesso
                 </Button>
@@ -165,7 +165,7 @@ export default function AutomationPage() {
               return (
                 <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer">
                   <CardContent className="p-8 text-center h-full flex flex-col">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#1E40AF] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#31496e] to-[#31496e] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                       <IconComponent className="w-8 h-8 text-white" />
                     </div>
                     
@@ -178,7 +178,7 @@ export default function AutomationPage() {
                     </p>
 
                     <div className="bg-[#F5F6F7] rounded-lg p-3">
-                      <span className="text-sm text-[#1E40AF]">{solution.hint}</span>
+                      <span className="text-sm text-[#31496e]">{solution.hint}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -229,8 +229,8 @@ export default function AutomationPage() {
               const IconComponent = stat.icon;
               return (
                 <div key={index} className="text-center text-white">
-                  <div className="w-16 h-16 bg-[#3B82F6]/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-8 h-8 text-[#3B82F6]" />
+                  <div className="w-16 h-16 bg-[#31496e]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="w-8 h-8 text-[#31496e]" />
                   </div>
                   <div className="text-3xl lg:text-4xl mb-2">
                     {stat.number}
@@ -249,7 +249,7 @@ export default function AutomationPage() {
               "Eles automatizaram nosso atendimento completo. O chatbot resolve 80% das questões sozinho 
               e nossos analistas agora focam apenas em estratégia. O ROI foi de 400% no primeiro ano."
             </blockquote>
-            <div className="text-[#3B82F6]">
+            <div className="text-[#31496e]">
               CEO de empresa do setor financeiro
             </div>
           </div>
@@ -286,7 +286,7 @@ export default function AutomationPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] rounded-lg p-8 text-white">
+          <div className="bg-gradient-to-r from-[#31496e] to-[#31496e] rounded-lg p-8 text-white">
             <h3 className="text-white mb-4">
               Curioso para ver o que podemos fazer pelo seu negócio?
             </h3>
@@ -297,7 +297,7 @@ export default function AutomationPage() {
             
             <Button 
               onClick={handleExternalRedirect}
-              className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-4 text-lg"
+              className="bg-white hover:bg-white/90 text-[#31496e] px-8 py-4 text-lg"
             >
               Acessar Site Completo
               <ExternalLink className="ml-2 h-5 w-5" />

@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Button } from './ui/button';
+import React, { useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
 import logoDevz from '../img/logos/logo_devez.png';
 import { 
@@ -23,17 +22,51 @@ interface HeaderProps {
   currentPage?: string;
 }
 
+// Componente para renderizar um card de produto/solução
+const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
+  item: any;
+  type: 'devz' | 'custom';
+  onNavigate?: (page: string) => void;
+  scrollToSection?: (href: string) => void;
+}) => {
+  const IconComponent = item.icon;
+  const isDevz = type === 'devz';
+  
+  return (
+    <DropdownMenuItem
+      key={item.name}
+      onClick={() => {
+        if (item.page && onNavigate) {
+          onNavigate(item.page);
+        } else if (item.href && scrollToSection) {
+          scrollToSection(item.href);
+        }
+      }}
+      className="group p-0 h-auto bg-transparent transition-all cursor-pointer"
+    >
+      <div className={`p-3 w-full text-center border border-gray-100 rounded-lg transition-all ${
+        isDevz 
+          ? 'hover:border-[#1E40AF] focus:border-[#1E40AF]' 
+          : 'hover:border-green-600 focus:border-green-600'
+      }`}>
+        <div className="flex flex-col items-center gap-2">
+          <div className={`${isDevz ? 'w-20 h-20 bg-blue-50' : 'w-12 h-12 bg-green-50'} rounded-lg flex items-center justify-center`}>
+            <IconComponent className={`h-5 w-5 ${isDevz ? 'text-[#1E40AF]' : 'text-green-600'}`} />
+          </div>
+          <div>
+            <h5 className="text-sm font-medium text-gray-900 mb-1">{item.name}</h5>
+            <p className="text-xs text-gray-500 line-clamp-2">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </DropdownMenuItem>
+  );
+};
+
 export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = [
-    { label: 'Home', href: '#home', page: 'home' },
-    { label: 'Sobre a Devz', href: '#sobre', page: 'about-devz' },
-    { label: 'Empresa', href: '#sobre' },
-    { label: 'Automação', href: '#automacao' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contato', href: '#contato' }
-  ];
 
   const devzProducts = [
     {
@@ -109,13 +142,16 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
     setIsMenuOpen(false);
   };
 
-  const handleNavigation = (item: any) => {
-    if (item.page && onNavigate) {
-      onNavigate(item.page);
-    } else if (item.href) {
-      scrollToSection(item.href);
+  const handleContactClick = () => {
+    if (currentPage !== 'home' && onNavigate) {
+      onNavigate('home');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        scrollToSection('#contato');
+      }, 100);
+    } else {
+      scrollToSection('#contato');
     }
-    setIsMenuOpen(false);
   };
 
   return (
@@ -179,36 +215,15 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
 
                 {/* Linha DEVZ - Layout Horizontal */}
                 <div className="mb-8">
-                  <h4 className="text-sm text-gray-700 mb-4">Linha DEVZ ERP</h4>
+                  <h4 className="text-sm text-gray-700 mb-4 hover:text-white transition-colors">Linha DEVZ ERP</h4>
                   <div className="grid grid-cols-4 gap-4">
-                    {devzProducts.map((product) => {
-                      const IconComponent = product.icon;
-                      return (
-                        <DropdownMenuItem
-                          key={product.name}
-                          onClick={() => {
-                            if (product.page && onNavigate) {
-                              onNavigate(product.page);
-                            }
-                          }}
-                          className="group p-0 h-auto border border-gray-100 bg-transparent hover:bg-gray-50 hover:border-blue-200 rounded-lg transition-all cursor-pointer"
-                        >
-                          <div className="p-3 w-full text-center">
-                            <div className="flex flex-col items-center gap-2">
-                              <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
-                                <IconComponent className="h-5 w-5 text-[#1E40AF]" />
-                              </div>
-                              <div>
-                                <h5 className="text-sm font-medium text-gray-900 mb-1">{product.name}</h5>
-                                <p className="text-xs text-gray-500 line-clamp-2">
-                                  {product.description}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </DropdownMenuItem>
-                      );
-                    })}
+                    {devzProducts.map((product) => (
+                      <ProductCard 
+                        item={product} 
+                        type="devz" 
+                        onNavigate={onNavigate}
+                      />
+                    ))}
                   </div>
                 </div>
                 
@@ -219,36 +234,14 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                 <div>
                   <h4 className="text-sm text-gray-700 mb-4">Desenvolvimento Customizado</h4>
                   <div className="grid grid-cols-3 gap-4">
-                    {customSolutions.map((solution) => {
-                      const IconComponent = solution.icon;
-                      return (
-                        <DropdownMenuItem
-                          key={solution.name}
-                          onClick={() => {
-                            if (solution.page && onNavigate) {
-                              onNavigate(solution.page);
-                            } else if (solution.href) {
-                              scrollToSection(solution.href);
-                            }
-                          }}
-                          className="group p-0 h-auto border border-gray-100 bg-transparent hover:bg-gray-50 hover:border-green-200 rounded-lg transition-all cursor-pointer"
-                        >
-                          <div className="p-3 w-full text-center">
-                            <div className="flex flex-col items-center gap-2">
-                              <div className="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
-                                <IconComponent className="h-5 w-5 text-green-600" />
-                              </div>
-                              <div>
-                                <h5 className="text-sm font-medium text-gray-900 mb-1">{solution.name}</h5>
-                                <p className="text-xs text-gray-500 line-clamp-2">
-                                  {solution.description}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </DropdownMenuItem>
-                      );
-                    })}
+                    {customSolutions.map((solution) => (
+                      <ProductCard 
+                        item={solution} 
+                        type="custom" 
+                        onNavigate={onNavigate}
+                        scrollToSection={scrollToSection}
+                      />
+                    ))}
                   </div>
                 </div>
               </DropdownMenuContent>
@@ -267,6 +260,13 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             </button>
             
             <button
+              onClick={() => window.location.href = 'https://devzconecta.com'}
+              className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#1E40AF] transition-colors"
+            >
+              Devz Conecta
+            </button>
+            
+            <button
               onClick={() => onNavigate ? onNavigate('blog') : scrollToSection('#blog')}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 currentPage === 'blog' 
@@ -278,17 +278,16 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             </button>
             
             <button
-              onClick={() => scrollToSection('#contato')}
+              onClick={handleContactClick}
               className="text-gray-600 hover:text-[#1E40AF] px-3 py-2 text-sm font-medium transition-colors"
             >
               Contato
             </button>
           </nav>
 
-          {/* CTA Button */}
           <div className="hidden md:block">
             <button 
-              onClick={() => scrollToSection('#contato')}
+              onClick={handleContactClick}
               className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-6 py-2 font-medium h-10 min-w-fit whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
             >
               Solicitar Demonstração
@@ -374,6 +373,13 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               </button>
               
               <button
+                onClick={() => window.location.href = 'https://devzconecta.com'}
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+              >
+                Devz Conecta
+              </button>
+              
+              <button
                 onClick={() => onNavigate ? onNavigate('blog') : scrollToSection('#blog')}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
@@ -381,7 +387,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               </button>
               
               <button
-                onClick={() => scrollToSection('#contato')}
+                onClick={handleContactClick}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Contato
@@ -389,7 +395,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               
               <div className="pt-4">
                 <button 
-                  onClick={() => scrollToSection('#contato')}
+                  onClick={handleContactClick}
                   className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white font-medium h-10 whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
                 >
                   Solicitar Demonstração

@@ -3364,7 +3364,7 @@ html {
 
 .swiper-pagination-bullet-custom {
   cursor: pointer;
-  background: #fff6;
+  background: #d1d5db;
   border: none;
   border-radius: 50%;
   outline: none;
@@ -3376,7 +3376,7 @@ html {
 
 .swiper-pagination-bullet-active-custom {
   transform: scale(1.2)translateZ(0);
-  background: #ffffffe6 !important;
+  background: #3b82f6 !important;
 }
 
 .hero-swiper .swiper-button-next, .hero-swiper .swiper-button-prev {

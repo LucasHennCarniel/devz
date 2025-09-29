@@ -5,8 +5,8 @@ import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 function Blog() {
   const categories = [
-    { name: 'ERP', color: 'bg-[#1E40AF] text-white' },
-    { name: 'Python & IA', color: 'bg-[#3B82F6] text-white' },
+    { name: 'ERP', color: 'bg-[#31496e] text-white' },
+    { name: 'Python & IA', color: 'bg-[#31496e] text-white' },
     { name: 'Power BI', color: 'bg-gray-100 text-gray-700' },
     { name: 'Gestão', color: 'bg-gray-100 text-gray-700' }
   ];
@@ -127,7 +127,7 @@ function Blog() {
                     </div>
                   </div>
                   <div className="pt-4">
-                    <button className="flex items-center gap-2 text-[#1E40AF] hover:text-[#1E40AF]/80 transition-colors">
+                    <button className="flex items-center gap-2 text-[#31496e] hover:text-[#31496e]/80 transition-colors">
                       <span>Ler artigo completo</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
@@ -157,7 +157,7 @@ function Blog() {
               
               <CardContent className="p-6">
                 <div className="space-y-3">
-                  <h3 className="text-gray-900 leading-tight group-hover:text-[#1E40AF] transition-colors">
+                  <h3 className="text-gray-900 leading-tight group-hover:text-[#31496e] transition-colors">
                     {article.title}
                   </h3>
                   <p className="text-gray-500 text-sm leading-relaxed">
@@ -174,7 +174,7 @@ function Blog() {
                         <span>{article.readTime}</span>
                       </div>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-[#1E40AF]" />
+                    <ArrowRight className="h-4 w-4 text-[#31496e]" />
                   </div>
                 </div>
               </CardContent>
@@ -194,9 +194,9 @@ function Blog() {
             <input
               type="email"
               placeholder="Seu e-mail"
-              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]"
+              className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-[#31496e] focus:ring-1 focus:ring-[#31496e]"
             />
-            <button className="bg-[#1E40AF] text-white px-6 py-3 rounded-lg hover:bg-[#1E40AF]/90 transition-colors">
+            <button className="bg-[#31496e] text-white px-6 py-3 rounded-lg hover:bg-[#31496e]/90 transition-colors">
               Assinar
             </button>
           </div>

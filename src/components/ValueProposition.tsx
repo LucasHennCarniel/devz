@@ -34,7 +34,7 @@ export function ValueProposition() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-gray-900 mb-6">
+          <h2 className="text-gray-900 mb-6 text-3xl md:text-4xl lg:text-5xl font-bold">
             Por que escolher a Devz?
           </h2>
           <p className="text-gray-500 max-w-3xl mx-auto text-lg">
@@ -78,8 +78,8 @@ export function ValueProposition() {
             Tecnologia que gera resultados reais
           </h3>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Nossos clientes relatam em média <strong className="text-gray-900">30% de redução de custos operacionais</strong> e 
-            <strong className="text-gray-900"> 50% de aumento na produtividade</strong> nos primeiros 6 meses.
+            Nossos clientes relatam em média <strong className="text-green-600">30% de redução de custos operacionais</strong> e 
+            <strong className="text-green-600"> 50% de aumento na produtividade</strong> nos primeiros 6 meses.
           </p>
         </div>
       </div>

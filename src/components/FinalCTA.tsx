@@ -40,14 +40,21 @@ export function FinalCTA() {
   ];
 
   return (
-    <section id="contato" className="py-16 md:py-24 bg-[#F5F6F7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contato" className="py-16 md:py-24 bg-gradient-to-br from-[#31496e] to-[#31496e]/80 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-white/3 rounded-full blur-2xl"></div>
+      </div>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Vamos começar sua transformação digital?
           </h2>
-          <p className="text-gray-500 max-w-3xl mx-auto text-lg">
+          <p className="text-gray-600 max-w-3xl mx-auto text-lg">
             Converse conosco agora e descubra como podemos automatizar seus processos, 
             integrar seus sistemas e acelerar seus resultados.
           </p>
@@ -76,7 +83,7 @@ export function FinalCTA() {
                         type="text"
                         placeholder="Seu nome"
                         required
-                        className="border-gray-300 focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
                       />
                     </div>
                     <div className="space-y-2">
@@ -86,7 +93,7 @@ export function FinalCTA() {
                         type="text"
                         placeholder="Nome da empresa"
                         required
-                        className="border-gray-300 focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
                       />
                     </div>
                   </div>
@@ -99,7 +106,7 @@ export function FinalCTA() {
                         type="email"
                         placeholder="seu@email.com"
                         required
-                        className="border-gray-300 focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
                       />
                     </div>
                     <div className="space-y-2">
@@ -108,7 +115,7 @@ export function FinalCTA() {
                         id="phone"
                         type="tel"
                         placeholder="(11) 99999-9999"
-                        className="border-gray-300 focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
                       />
                     </div>
                   </div>
@@ -119,13 +126,13 @@ export function FinalCTA() {
                       id="message"
                       placeholder="Qual seu segmento? Quais são seus principais desafios? O que você gostaria de automatizar?"
                       rows={4}
-                      className="border-gray-300 focus:border-[#3B82F6] focus:ring-[#3B82F6]"
+                      className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
                     />
                   </div>
 
                   <Button 
                     type="submit"
-                    className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white py-4 text-lg"
+                    className="w-full bg-[#31496e] hover:bg-[#31496e]/90 text-white py-4 text-lg"
                   >
                     Solicitar Consultoria Gratuita
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -140,7 +147,7 @@ export function FinalCTA() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     {process.map((step, index) => (
                       <div key={index} className="flex items-center gap-3">
-                        <div className="w-6 h-6 bg-[#1E40AF] text-white rounded-full flex items-center justify-center text-sm">
+                        <div className="w-6 h-6 bg-[#31496e] text-white rounded-full flex items-center justify-center text-sm">
                           {index + 1}
                         </div>
                         <span className="text-sm text-gray-600">{step}</span>
@@ -166,14 +173,14 @@ export function FinalCTA() {
                     <Card key={index} className="border-0 shadow-sm bg-white hover:shadow-md transition-shadow cursor-pointer">
                       <CardContent className="p-6">
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center">
-                            <IconComponent className="w-6 h-6 text-[#1E40AF]" />
+                          <div className="w-12 h-12 bg-[#31496e]/10 rounded-lg flex items-center justify-center">
+                            <IconComponent className="w-6 h-6 text-[#31496e]" />
                           </div>
                           <div className="flex-1">
                             <div className="text-gray-900 mb-1">
                               {method.title}
                             </div>
-                            <div className="text-[#1E40AF]">
+                            <div className="text-[#31496e]">
                               {method.value}
                             </div>
                             <div className="text-sm text-gray-500">
@@ -211,17 +218,17 @@ export function FinalCTA() {
             </Card>
 
             {/* Urgency */}
-            <div className="bg-[#1E40AF] text-white rounded-lg p-6">
+            <div className="bg-white/10 backdrop-blur-sm  text-green-500 rounded-lg p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-4">
                 <Clock className="w-6 h-6" />
-                <h4 className="text-white">
+                <h4 className="text-gray-600">
                   Limitado a 10 consultorias por mês
                 </h4>
               </div>
-              <p className="text-white/90 text-sm">
-                Para garantir a qualidade do atendimento, oferecemos apenas 
-                10 consultorias gratuitas por mês. Entre em contato agora e 
-                garante sua vaga.
+              <p className="text-gray-600 text-sm">
+                Para garantir a qualidade do atendimento, oferecemos apenas
+                10 consultorias gratuitas por mês. Entre em contato agora e
+                garanta sua vaga.
               </p>
             </div>
           </div>

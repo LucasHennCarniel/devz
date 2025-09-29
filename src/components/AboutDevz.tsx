@@ -359,7 +359,8 @@ function AboutDevz() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Informações de Contato */}
             <div className="space-y-8">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -368,7 +369,8 @@ function AboutDevz() {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Sede Principal</h3>
                   <p className="text-gray-600">
-                    São Paulo, SP<br />
+                    R. Antônio Nunes Varela, 688 - Centro<br />
+                    Joaçaba - SC, 89600-000<br />
                     Atendimento presencial e remoto
                   </p>
                 </div>
@@ -394,26 +396,104 @@ function AboutDevz() {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Telefone</h3>
                   <p className="text-gray-600">
-                    (11) 9999-9999<br />
+                    (49) 9999-9999<br />
                     Horário comercial: 8h às 18h
                   </p>
                 </div>
               </div>
+
+              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">Agende uma Consultoria</h3>
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  Converse com nossos especialistas e descubra como a Devz pode 
+                  transformar sua empresa através da tecnologia.
+                </p>
+                <Button 
+                  onClick={() => scrollToSection('#contato')}
+                  className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-6 py-3 font-medium"
+                >
+                  Solicitar Consultoria Gratuita
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-8 border border-gray-200">
-              <h3 className="text-xl font-medium text-gray-900 mb-6">Agende uma Consultoria</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Converse com nossos especialistas e descubra como a Devz pode 
-                transformar sua empresa através da tecnologia.
-              </p>
-              <Button 
-                onClick={() => scrollToSection('#contato')}
-                className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-6 py-3 font-medium"
-              >
-                Solicitar Consultoria Gratuita
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+            {/* Mapa Interativo */}
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="p-6 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] text-white">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-6 h-6" />
+                    <div>
+                      <h3 className="text-xl font-semibold">Nossa Localização</h3>
+                      <p className="text-white/90">Devz Group - Joaçaba, SC</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="relative h-96 bg-gray-100">
+                  <iframe
+                    src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3515.8362!2d-51.522993!3d-27.172657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDEwJzIxLjYiUyA1McKwMzEnMjIuOCJX!5e0!3m2!1spt-BR!2sbr!4v${Date.now()}!5m2!1spt-BR!2sbr&zoom=15`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, filter: 'grayscale(0%)' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Localização da Devz - Passo Fundo, RS"
+                  ></iframe>
+                  
+                  {/* Overlay com informações */}
+                  <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg p-3 shadow-lg border border-white/20">
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                      <span className="font-medium text-gray-900">Devz Group</span>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-1">Tecnologia & Inovação</p>
+                  </div>
+                </div>
+                
+                <div className="p-6 bg-gray-50">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <MapPin className="w-4 h-4 text-[#1E40AF]" />
+                      <span>Joaçaba, SC</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                      <span>Aberto agora</span>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs text-gray-500">
+                        Coordenadas: -27.172657, -51.522993
+                      </div>
+                      <button 
+                        onClick={() => window.open(`https://www.google.com/maps/dir//-27.172657,-51.522993/@-27.172657,-51.522993,15z`, '_blank')}
+                        className="text-xs text-[#1E40AF] hover:text-[#1E40AF]/80 font-medium flex items-center gap-1"
+                      >
+                        <span>Abrir no Maps</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Informações adicionais */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
+                <h4 className="text-lg font-semibold text-gray-900 mb-3">Como chegar</h4>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <p>📍 Centro de Joaçaba - SC</p>
+                  <p>🚗 Fácil acesso e estacionamento disponível</p>
+                  <p>🏢 Atendimento presencial e remoto</p>
+                  <p>⏰ Seg-Sex: 8h às 18h | Sáb: 8h às 12h</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -443,7 +523,7 @@ function AboutDevz() {
               </Button>
               <Button 
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#1E40AF] px-8 py-4 text-lg font-medium"
+                className="border-white text-[#1E40AF] hover:bg-[#1E40AF] hover:text-white px-8 py-4 text-lg font-medium"
               >
                 Ver Portfólio
               </Button>

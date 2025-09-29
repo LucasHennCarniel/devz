@@ -63,8 +63,8 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
           <Card className="border-0 shadow-lg bg-white overflow-hidden">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center">
-                  <Settings className="w-6 h-6 text-[#1E40AF]" />
+                <div className="w-12 h-12 bg-[#31496e]/10 rounded-lg flex items-center justify-center">
+                  <Settings className="w-6 h-6 text-[#31496e]" />
                 </div>
                 <div>
                   <h3 className="text-gray-900 mb-1">
@@ -86,14 +86,14 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
                       onClick={() => onNavigate?.(product.page)}
                       className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer group"
                     >
-                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center group-hover:bg-[#1E40AF]/10 transition-colors">
-                        <IconComponent className="w-4 h-4 text-gray-600 group-hover:text-[#1E40AF]" />
+                      <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center group-hover:bg-[#31496e]/10 transition-colors">
+                        <IconComponent className="w-4 h-4 text-gray-600 group-hover:text-[#31496e]" />
                       </div>
                       <div>
-                        <div className="text-sm text-gray-900 group-hover:text-[#1E40AF] transition-colors">
+                        <div className="text-sm text-gray-900 group-hover:text-[#31496e] transition-colors">
                           {product.name}
                         </div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-black group-hover:text-white">
                           {product.description}
                         </div>
                       </div>
@@ -105,7 +105,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
               <Button 
                 onClick={() => scrollToSection('#contato')}
                 variant="outline" 
-                className="w-full border-gray-300 text-gray-700 hover:bg-[#1E40AF] hover:text-white hover:border-[#1E40AF] transition-colors"
+                className="w-full border-gray-300 text-white bg-[#1E40AF] hover:bg-[#1E40AF]/90 hover:text-white hover:border-[#31496e] transition-colors"
               >
                 Ver Todos os ERPs
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -117,8 +117,8 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
           <Card className="border-0 shadow-lg bg-white overflow-hidden">
             <CardContent className="p-8">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center">
-                  <Code className="w-6 h-6 text-[#1E40AF]" />
+                <div className="w-12 h-12 bg-[#31496e]/10 rounded-lg flex items-center justify-center">
+                  <Code className="w-6 h-6 text-[#31496e]" />
                 </div>
                 <div>
                   <h3 className="text-gray-900 mb-1">
@@ -130,13 +130,13 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
                 </div>
               </div>
 
-              <Badge className="bg-[#1E40AF] text-white mb-6">Mais Procurada</Badge>
+              <Badge className="bg-[#31496e] text-white mb-6">Mais Procurada</Badge>
 
               {/* Features List */}
               <div className="space-y-4 mb-8">
                 {solutions[1].features.map((feature, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-[#3B82F6] rounded-full mt-2 flex-shrink-0"></div>
+                    <div className="w-2 h-2 bg-[#31496e] rounded-full mt-2 flex-shrink-0"></div>
                     <span className="text-gray-600">{feature}</span>
                   </div>
                 ))}
@@ -156,7 +156,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
 
               <Button 
                 onClick={() => onNavigate?.('automacao-python')}
-                className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white"
+                className="w-full bg-[#31496e] hover:bg-[#31496e]/90 text-white"
               >
                 Solicitar Automação
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -176,7 +176,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
           
           <Button 
             onClick={() => scrollToSection('#contato')}
-            className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-8 py-3"
+            className="bg-[#31496e] hover:bg-[#31496e]/90 text-white px-8 py-3"
           >
             Falar com Especialista
             <ArrowRight className="ml-2 h-5 w-5" />

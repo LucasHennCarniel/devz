@@ -52,9 +52,9 @@ export function Footer({ onNavigate }: FooterProps) {
   ];
 
   const contactInfo = [
-    { icon: Mail, value: 'contato@devz.com.br' },
-    { icon: Phone, value: '(11) 3333-4444' },
-    { icon: MapPin, value: 'São Paulo - SP' }
+    { icon: Mail, value: 'suporte@devz.com.br' },
+    { icon: Phone, value: '(49) 9999-9999' },
+    { icon: MapPin, value: 'Joaçaba - SC' }
   ];
 
   return (
@@ -177,9 +177,9 @@ export function Footer({ onNavigate }: FooterProps) {
               <input
                 type="email"
                 placeholder="Seu e-mail"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6]"
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900 bg-white border border-gray-300 focus:outline-none focus:border-[#31496e] focus:ring-1 focus:ring-[#31496e]"
               />
-              <button className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 px-6 py-3 rounded-lg text-white transition-colors duration-200">
+              <button className="bg-[#31496e] hover:bg-[#31496e]/90 px-6 py-3 rounded-lg text-white transition-colors duration-200">
                 Assinar
               </button>
             </div>

@@ -123,7 +123,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white pt-16">
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6]">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-[#31496e] to-[#31496e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white mb-12">
             <h1 className="text-4xl lg:text-6xl mb-6">
@@ -143,7 +143,7 @@ export default function BlogPage() {
               placeholder="Buscar posts..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white/10 backdrop-blur border-white/20 text-white placeholder-white/70 focus:bg-white/20"
+              className="pl-10 bg-white backdrop-blur border-white/20 text-white placeholder-white focus:bg-white/20"
             />
           </div>
         </div>
@@ -165,7 +165,7 @@ export default function BlogPage() {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-[#1E40AF] text-white">
+                  <Badge className="bg-[#31496e] text-white">
                     Destaque
                   </Badge>
                 </div>
@@ -174,7 +174,7 @@ export default function BlogPage() {
               <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {featuredPost.tags.slice(0, 3).map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-[#1E40AF] border-[#1E40AF]">
+                    <Badge key={tag} variant="outline" className="text-[#31496e] border-[#31496e]">
                       {tag}
                     </Badge>
                   ))}
@@ -205,7 +205,7 @@ export default function BlogPage() {
                   </div>
                 </div>
                 
-                <Button className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white w-fit">
+                <Button className="bg-[#31496e] hover:bg-[#31496e]/90 text-white w-fit">
                   Ler Post Completo
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -233,8 +233,8 @@ export default function BlogPage() {
                     onClick={() => setSelectedCategory(category.id)}
                     className={`flex items-center gap-2 ${
                       selectedCategory === category.id
-                        ? 'bg-[#1E40AF] text-white hover:bg-[#1E40AF]/90'
-                        : 'border-gray-300 text-gray-700 hover:bg-[#1E40AF] hover:text-white hover:border-[#1E40AF]'
+                        ? 'bg-[#31496e] text-white hover:bg-[#31496e]/90'
+                        : 'border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e]'
                     }`}
                   >
                     <IconComponent className="h-4 w-4" />
@@ -271,7 +271,7 @@ export default function BlogPage() {
                     ))}
                   </div>
                   
-                  <h4 className="text-gray-900 mb-3 line-clamp-2 group-hover:text-[#1E40AF] transition-colors">
+                  <h4 className="text-gray-900 mb-3 line-clamp-2 group-hover:text-[#31496e] transition-colors">
                     {post.title}
                   </h4>
                   
@@ -299,7 +299,7 @@ export default function BlogPage() {
             <div className="text-center mt-12">
               <Button 
                 variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-[#1E40AF] hover:text-white hover:border-[#1E40AF]"
+                className="border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e]"
               >
                 Carregar Mais Posts
               </Button>
@@ -311,7 +311,7 @@ export default function BlogPage() {
       {/* Newsletter Signup */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] rounded-lg p-8 lg:p-12 text-white">
+          <div className="bg-gradient-to-r from-[#31496e] to-[#31496e] rounded-lg p-8 lg:p-12 text-white">
             <h3 className="text-white mb-4">
               Não perca nenhuma atualização
             </h3>
@@ -324,9 +324,9 @@ export default function BlogPage() {
               <Input
                 type="email"
                 placeholder="Seu melhor e-mail"
-                className="flex-1 bg-white/10 backdrop-blur border-white/20 text-white placeholder-white/70"
+                className="flex-1 bg-white backdrop-blur border-white/20 text-gray-900 placeholder-white"
               />
-              <Button className="bg-white hover:bg-white/90 text-[#1E40AF] px-8">
+              <Button className="bg-white hover:bg-white/90 text-[#31496e] px-8">
                 Inscrever-se
               </Button>
             </div>
