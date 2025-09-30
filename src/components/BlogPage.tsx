@@ -123,7 +123,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white pt-16">
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-[#31496e] to-[#31496e]">
+      <section className="py-16 md:py-24 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white mb-12">
             <h1 className="text-4xl lg:text-6xl mb-6">
@@ -311,7 +311,7 @@ export default function BlogPage() {
       {/* Newsletter Signup */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-gradient-to-r from-[#31496e] to-[#31496e] rounded-lg p-8 lg:p-12 text-white">
+          <div className="-to-bg-gradientr from-[#31496e] to-[#31496e] rounded-lg p-8 lg:p-12 text-white">
             <h3 className="text-white mb-4">
               Não perca nenhuma atualização
             </h3>

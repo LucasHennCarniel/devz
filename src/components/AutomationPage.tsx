@@ -166,7 +166,7 @@ export default function AutomationPage() {
                 <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer">
                   <CardContent className="p-8 text-center h-full flex flex-col">
                     <div className="w-16 h-16 bg-gradient-to-br from-[#31496e] to-[#31496e] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                      <IconComponent className="w-8 h-8 text-white" />
+                      <IconComponent className="w-8 h-8" />
                     </div>
                     
                     <h3 className="text-gray-900 mb-4">

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
@@ -226,20 +227,34 @@ function AboutDevz() {
             </p>
           </div>
 
-          <div className="space-y-8">
-            {timeline.map((item, index) => (
-              <div key={index} className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 bg-[#1E40AF] rounded-lg flex items-center justify-center">
-                    <span className="text-white font-medium text-lg">{item.year}</span>
+          {/* Minimalist Tech Timeline */}
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-24">
+              {timeline.map((item, index) => (
+                <div key={index} className="group">
+                  {/* Year Badge */}
+                  <div className="flex items-center gap-8 mb-8">
+                    <div className="flex items-center gap-4">
+                      <div className="w-2 h-2 bg-[#1E40AF] rounded-full"></div>
+                      <span className="text-sm font-mono text-[#1E40AF] bg-gray-100 px-4 py-2 rounded">
+                        {item.year}
+                      </span>
+                    </div>
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="ml-12 space-y-6">
+                    <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors duration-200">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed max-w-3xl text-lg">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-medium text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -322,7 +337,7 @@ function AboutDevz() {
               <div className="w-16 h-16 bg-[#3B82F6]/10 rounded-lg flex items-center justify-center mx-auto">
                 <Zap className="w-8 h-8 text-[#3B82F6]" />
               </div>
-              <div>
+              <div>n
                 <h3 className="text-xl font-medium text-gray-900 mb-4">Automação + IA</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Soluções de automação contábil e empresarial utilizando Python 

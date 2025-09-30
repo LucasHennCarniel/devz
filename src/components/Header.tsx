@@ -44,7 +44,7 @@ const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
       }}
       className="group p-0 h-auto bg-transparent transition-all cursor-pointer"
     >
-      <div className={`p-3 w-full text-center border border-gray-100 rounded-lg transition-all ${
+      <div className={`p-3 w-full text-center border border-gray-100 rounded-lg transition-all hover:border-[#1E40AF] focus:border-[#1E40AF] ${
         isDevz 
           ? 'hover:border-[#1E40AF] focus:border-[#1E40AF]' 
           : 'hover:border-green-600 focus:border-green-600'
@@ -311,14 +311,28 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             <div className="px-2 pt-2 pb-3 space-y-1">
               {/* Mobile Navigation Items */}
               <button
-                onClick={() => onNavigate ? onNavigate('home') : scrollToSection('#home')}
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('home');
+                  } else {
+                    scrollToSection('#home');
+                  }
+                  setIsMenuOpen(false);
+                }}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Home
               </button>
               
               <button
-                onClick={() => onNavigate ? onNavigate('about-devz') : scrollToSection('#sobre')}
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('about-devz');
+                  } else {
+                    scrollToSection('#sobre');
+                  }
+                  setIsMenuOpen(false);
+                }}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Sobre a Devz
@@ -337,6 +351,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                         if (product.page && onNavigate) {
                           onNavigate(product.page);
                         }
+                        setIsMenuOpen(false);
                       }}
                       className="block w-full text-left px-3 py-2 hover:bg-gray-50"
                     >
@@ -351,7 +366,10 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   
                   {/* Mobile Custom Solutions */}
                   <button
-                    onClick={() => scrollToSection('#produtos')}
+                    onClick={() => {
+                      scrollToSection('#produtos');
+                      setIsMenuOpen(false);
+                    }}
                     className="block w-full text-left px-3 py-2 hover:bg-blue-50"
                   >
                     <div className="text-sm font-medium text-[#1E40AF] mb-1">
@@ -366,28 +384,48 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               
               {/* Outros itens do menu mobile */}
               <button
-                onClick={() => onNavigate ? onNavigate('automacao') : scrollToSection('#automacao')}
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('automacao');
+                  } else {
+                    scrollToSection('#automacao');
+                  }
+                  setIsMenuOpen(false);
+                }}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Automação
               </button>
               
               <button
-                onClick={() => window.location.href = 'https://devzconecta.com'}
+                onClick={() => {
+                  window.location.href = 'https://devzconecta.com';
+                  setIsMenuOpen(false);
+                }}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Devz Conecta
               </button>
               
               <button
-                onClick={() => onNavigate ? onNavigate('blog') : scrollToSection('#blog')}
+                onClick={() => {
+                  if (onNavigate) {
+                    onNavigate('blog');
+                  } else {
+                    scrollToSection('#blog');
+                  }
+                  setIsMenuOpen(false);
+                }}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Blog
               </button>
               
               <button
-                onClick={handleContactClick}
+                onClick={() => {
+                  handleContactClick();
+                  setIsMenuOpen(false);
+                }}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
               >
                 Contato
@@ -395,7 +433,10 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               
               <div className="pt-4">
                 <button 
-                  onClick={handleContactClick}
+                  onClick={() => {
+                    handleContactClick();
+                    setIsMenuOpen(false);
+                  }}
                   className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white font-medium h-10 whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
                 >
                   Solicitar Demonstração
