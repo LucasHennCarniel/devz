@@ -68,14 +68,14 @@ function Blog() {
   };
 
   return (
-    <section id="blog" className="py-16 md:py-24 bg-white">
+    <section id="blog" className="py-16 md:py-24 bg-devz-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Blog Devz
           </h2>
-          <p className="text-gray-500 max-w-3xl mx-auto mb-8">
+          <p className="text-gray-300 max-w-3xl mx-auto mb-8">
             Conteúdos exclusivos sobre ERP, automação, Python, IA e gestão empresarial
           </p>
 
@@ -183,11 +183,11 @@ function Blog() {
         </div>
 
         {/* Newsletter Subscription */}
-        <div className="mt-20 bg-gray-50 rounded-lg p-8 md:p-12 text-center">
-          <h3 className="text-gray-900 mb-4">
+        <div className="mt-20 bg-white/10 backdrop-blur-sm rounded-lg p-8 md:p-12 text-center border border-white/20">
+          <h3 className="text-white mb-4">
             Receba conteúdos exclusivos
           </h3>
-          <p className="text-gray-500 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
             Assine nossa newsletter e receba semanalmente artigos sobre ERP, automação e tecnologia
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">

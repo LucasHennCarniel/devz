@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { SimpleContactModal } from './SimpleContactModal';
 import logoDevz from '../img/logos/logo_devez.png';
 import { 
   Menu, 
@@ -44,18 +45,21 @@ const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
       }}
       className="group p-0 h-auto bg-transparent transition-all cursor-pointer"
     >
-      <div className={`p-3 w-full text-center border border-gray-100 rounded-lg transition-all hover:border-[#1E40AF] focus:border-[#1E40AF] ${
+      <div className={`dropdown-card p-3 w-full text-center rounded-lg ${
         isDevz 
-          ? 'hover:border-[#1E40AF] focus:border-[#1E40AF]' 
-          : 'hover:border-green-600 focus:border-green-600'
+          ? 'hover:border-blue-600 focus:border-blue-600' 
+          : 'hover:border-devz-accent focus:border-devz-accent'
       }`}>
         <div className="flex flex-col items-center gap-2">
-          <div className={`${isDevz ? 'w-20 h-20 bg-blue-50' : 'w-12 h-12 bg-green-50'} rounded-lg flex items-center justify-center`}>
-            <IconComponent className={`h-5 w-5 ${isDevz ? 'text-[#1E40AF]' : 'text-green-600'}`} />
+          <div className={`${isDevz ? 'w-20 h-20' : 'w-16 h-16 bg-devz-accent/10'} rounded-lg flex items-center justify-center`}>
+            <IconComponent 
+              className={`${isDevz ? 'text-blue-600' : 'text-devz-accent'}`}
+              style={{ width: '32px', height: '32px' }}
+            />
           </div>
           <div>
-            <h5 className="text-sm font-medium text-gray-900 mb-1">{item.name}</h5>
-            <p className="text-xs text-gray-500 line-clamp-2">
+            <h5 className="text-sm font-semibold text-gray-900 mb-1">{item.name}</h5>
+            <p className="text-xs text-gray-600 line-clamp-2">
               {item.description}
             </p>
           </div>
@@ -67,6 +71,19 @@ const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
 
 export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+
+  // Reset dropdown state when menu closes
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setIsProductsDropdownOpen(false);
+    }
+  }, [isMenuOpen]);
+
+  // Debug effect
+  useEffect(() => {
+    console.log('isProductsDropdownOpen changed:', isProductsDropdownOpen);
+  }, [isProductsDropdownOpen]);
 
   const devzProducts = [
     {
@@ -124,13 +141,13 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
       name: 'Dashboards Power BI',
       description: 'Visualização de dados e Business Intelligence',
       icon: BarChart3,
-      href: '#produtos'
+      page: 'dashboards-powerbi'
     },
     {
       name: 'Desenvolvimento Sob Medida',
       description: 'Soluções personalizadas para seu negócio',
       icon: Code,
-      href: '#produtos'
+      page: 'desenvolvimento-sob-medida'
     }
   ];
 
@@ -155,7 +172,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -179,8 +196,8 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               onClick={() => onNavigate ? onNavigate('home') : scrollToSection('#home')}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 currentPage === 'home' 
-                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
-                  : 'text-gray-600 hover:text-[#1E40AF]'
+                  ? 'text-devz-primary border-b-2 border-devz-primary' 
+                  : 'text-gray-600 hover:text-devz-primary'
               }`}
             >
               Home
@@ -191,8 +208,8 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               onClick={() => onNavigate ? onNavigate('about-devz') : scrollToSection('#sobre')}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 currentPage === 'about-devz' 
-                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
-                  : 'text-gray-600 hover:text-[#1E40AF]'
+                  ? 'text-devz-primary border-b-2 border-devz-primary' 
+                  : 'text-gray-600 hover:text-devz-primary'
               }`}
             >
               Sobre a Devz
@@ -201,21 +218,25 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             {/* Produtos Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center text-gray-600 hover:text-[#1E40AF] px-3 py-2 text-sm font-medium transition-colors">
+                <button className="flex items-center text-gray-600 hover:text-devz-primary px-3 py-2 text-sm font-medium transition-colors">
                   Produtos
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[900px] p-6 border border-gray-100 shadow-lg bg-white rounded-lg">
-                {/* Header simples */}
-                <div className="mb-6">
-                  <h3 className="text-lg text-gray-900 mb-1">Produtos</h3>
-                  <p className="text-sm text-gray-500">Soluções completas para seu negócio</p>
+                {/* Header minimalista */}
+                <div className="mb-6 text-center">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Produtos</h3>
+                  <p className="text-sm text-gray-600">Soluções para seu negócio</p>
                 </div>
 
                 {/* Linha DEVZ - Layout Horizontal */}
                 <div className="mb-8">
-                  <h4 className="text-sm text-gray-700 mb-4 hover:text-white transition-colors">Linha DEVZ ERP</h4>
+                  <div className="flex items-center mb-6">
+                    <div className="w-2 h-6 bg-blue-600 rounded-full mr-3"></div>
+                    <h4 className="text-base font-bold text-gray-900">Linha DEVZ ERP</h4>
+                    <div className="flex-1 h-px bg-gradient-to-r from-blue-600 to-transparent ml-4"></div>
+                  </div>
                   <div className="grid grid-cols-4 gap-4">
                     {devzProducts.map((product) => (
                       <ProductCard 
@@ -227,12 +248,13 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   </div>
                 </div>
                 
-                {/* Separator */}
-                <div className="border-t-2 border-gray-200 mb-6 mx-4"></div>
 
                 {/* Soluções Customizadas - Layout Horizontal */}
                 <div>
-                  <h4 className="text-sm text-gray-700 mb-4">Desenvolvimento Customizado</h4>
+        <div className="flex items-center mb-6">
+          <h4 className="text-base font-bold text-gray-900">Desenvolvimento Customizado</h4>
+          <div className="flex-1 h-px bg-gradient-to-r from-gray-300 to-transparent ml-4"></div>
+        </div>
                   <div className="grid grid-cols-3 gap-4">
                     {customSolutions.map((solution) => (
                       <ProductCard 
@@ -252,8 +274,8 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               onClick={() => onNavigate ? onNavigate('automacao') : scrollToSection('#automacao')}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 currentPage === 'automacao' 
-                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
-                  : 'text-gray-600 hover:text-[#1E40AF]'
+                  ? 'text-devz-primary border-b-2 border-devz-primary' 
+                  : 'text-gray-600 hover:text-devz-primary'
               }`}
             >
               Automação
@@ -261,7 +283,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             
             <button
               onClick={() => window.location.href = 'https://devzconecta.com'}
-              className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-[#1E40AF] transition-colors"
+              className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-devz-primary transition-colors"
             >
               Devz Conecta
             </button>
@@ -270,8 +292,8 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               onClick={() => onNavigate ? onNavigate('blog') : scrollToSection('#blog')}
               className={`px-3 py-2 text-sm font-medium transition-colors ${
                 currentPage === 'blog' 
-                  ? 'text-[#1E40AF] border-b-2 border-[#1E40AF]' 
-                  : 'text-gray-600 hover:text-[#1E40AF]'
+                  ? 'text-devz-primary border-b-2 border-devz-primary' 
+                  : 'text-gray-600 hover:text-devz-primary'
               }`}
             >
               Blog
@@ -279,26 +301,24 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             
             <button
               onClick={handleContactClick}
-              className="text-gray-600 hover:text-[#1E40AF] px-3 py-2 text-sm font-medium transition-colors"
+              className="text-gray-600 hover:text-devz-primary px-3 py-2 text-sm font-medium transition-colors"
             >
               Contato
             </button>
           </nav>
 
           <div className="hidden md:block">
-            <button 
-              onClick={handleContactClick}
-              className="bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-6 py-2 font-medium h-10 min-w-fit whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
-            >
-              Solicitar Demonstração
-            </button>
+            <SimpleContactModal 
+              triggerText="Solicitar Demonstração"
+              triggerClassName="bg-devz-primary hover:bg-devz-primary-dark text-white px-6 py-2 font-medium h-10 min-w-fit whitespace-nowrap"
+            />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-600 hover:text-[#1E40AF] p-2"
+              className="text-gray-600 hover:text-devz-primary p-2"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -307,7 +327,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-100 relative z-50">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {/* Mobile Navigation Items */}
               <button
@@ -319,7 +339,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   }
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50"
               >
                 Home
               </button>
@@ -333,53 +353,81 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   }
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50"
               >
                 Sobre a Devz
               </button>
               
               {/* Mobile Products Section */}
               <div className="pt-2">
-                <div className="px-3 py-2 text-base font-medium text-gray-900 border-b border-gray-100">
-                  Produtos DEVZ
-                </div>
-                <div className="pl-4 space-y-1">
-                  {devzProducts.map((product) => (
-                    <button
-                      key={product.name}
-                      onClick={() => {
-                        if (product.page && onNavigate) {
-                          onNavigate(product.page);
-                        }
-                        setIsMenuOpen(false);
-                      }}
-                      className="block w-full text-left px-3 py-2 hover:bg-gray-50"
-                    >
-                      <div className="text-sm font-medium text-gray-900 mb-1">
-                        {product.name}
+                <button
+                  onClick={() => {
+                    console.log('Produtos clicked, current state:', isProductsDropdownOpen);
+                    setIsProductsDropdownOpen(!isProductsDropdownOpen);
+                  }}
+                  className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50 transition-colors rounded-md"
+                >
+                  <span>Produtos</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                    isProductsDropdownOpen ? 'rotate-180' : 'rotate-0'
+                  }`} />
+                </button>
+                
+                {isProductsDropdownOpen && (
+                  <div className="pl-4 space-y-1 border-l-2 border-gray-200 ml-3 mt-1 bg-gray-50 rounded-md">
+                    {/* Linha DEVZ ERP */}
+                    <div className="pt-2">
+                      <div className="px-3 py-1 text-sm font-semibold text-blue-600 mb-2">
+                        Linha DEVZ ERP
                       </div>
-                      <div className="text-xs text-gray-600">
-                        {product.description}
+                      {devzProducts.map((product) => (
+                        <button
+                          key={product.name}
+                          onClick={() => {
+                            if (product.page && onNavigate) {
+                              onNavigate(product.page);
+                            }
+                            setIsMenuOpen(false);
+                          }}
+                          className="block w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors"
+                        >
+                          <div className="text-sm font-medium text-gray-900 mb-1">
+                            {product.name}
+                          </div>
+                          <div className="text-xs text-gray-600">
+                            {product.description}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                    
+                    {/* Desenvolvimento Customizado */}
+                    <div className="pt-2">
+                      <div className="px-3 py-1 text-sm font-semibold text-gray-700 mb-2">
+                        Desenvolvimento Customizado
                       </div>
-                    </button>
-                  ))}
-                  
-                  {/* Mobile Custom Solutions */}
-                  <button
-                    onClick={() => {
-                      scrollToSection('#produtos');
-                      setIsMenuOpen(false);
-                    }}
-                    className="block w-full text-left px-3 py-2 hover:bg-blue-50"
-                  >
-                    <div className="text-sm font-medium text-[#1E40AF] mb-1">
-                      Soluções Personalizadas
+                      {customSolutions.map((solution) => (
+                        <button
+                          key={solution.name}
+                          onClick={() => {
+                            if (solution.page && onNavigate) {
+                              onNavigate(solution.page);
+                            }
+                            setIsMenuOpen(false);
+                          }}
+                          className="block w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors"
+                        >
+                          <div className="text-sm font-medium text-gray-900 mb-1">
+                            {solution.name}
+                          </div>
+                          <div className="text-xs text-gray-600">
+                            {solution.description}
+                          </div>
+                        </button>
+                      ))}
                     </div>
-                    <div className="text-xs text-gray-600">
-                      Automações Python + IA e Dashboards Power BI
-                    </div>
-                  </button>
-                </div>
+                  </div>
+                )}
               </div>
               
               {/* Outros itens do menu mobile */}
@@ -392,7 +440,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   }
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50"
               >
                 Automação
               </button>
@@ -402,7 +450,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   window.location.href = 'https://devzconecta.com';
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50"
               >
                 Devz Conecta
               </button>
@@ -416,7 +464,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   }
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50"
               >
                 Blog
               </button>
@@ -426,21 +474,16 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
                   handleContactClick();
                   setIsMenuOpen(false);
                 }}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-[#1E40AF] hover:bg-gray-50"
+                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50"
               >
                 Contato
               </button>
               
               <div className="pt-4">
-                <button 
-                  onClick={() => {
-                    handleContactClick();
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white font-medium h-10 whitespace-nowrap rounded-md transition-colors inline-flex items-center justify-center"
-                >
-                  Solicitar Demonstração
-                </button>
+                <SimpleContactModal 
+                  triggerText="RECEBA UMA DEMONSTRAÇÃO"
+                  triggerClassName="w-full bg-devz-primary hover:bg-devz-primary-dark text-white font-medium h-10 whitespace-nowrap"
+                />
               </div>
             </div>
           </div>

@@ -30,8 +30,9 @@ export function ValueProposition() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-gray-900 mb-6 text-3xl md:text-4xl lg:text-5xl font-bold">
@@ -48,10 +49,10 @@ export function ValueProposition() {
           {benefits.map((benefit, index) => {
             const IconComponent = benefit.icon;
             return (
-              <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-gray-50">
+              <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-gray-50/50">
                 <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <IconComponent className="w-8 h-8 text-[#1E40AF]" />
+                  <div className="w-16 h-16 bg-[#31496E]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <IconComponent className="w-8 h-8 text-[#31496E]" />
                   </div>
                   
                   <h3 className="text-gray-900 mb-4">
@@ -62,9 +63,9 @@ export function ValueProposition() {
                     {benefit.description}
                   </p>
 
-                  <div className="inline-flex items-center gap-2 bg-[#1E40AF]/10 px-4 py-2 rounded-full">
-                    <Check className="w-4 h-4 text-[#1E40AF]" />
-                    <span className="text-sm text-[#1E40AF]">{benefit.value}</span>
+                  <div className="inline-flex items-center gap-2 bg-[#31496E]/10 px-4 py-2 rounded-full">
+                    <Check className="w-4 h-4 text-[#31496E]" />
+                    <span className="text-sm text-[#31496E]">{benefit.value}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -78,8 +79,8 @@ export function ValueProposition() {
             Tecnologia que gera resultados reais
           </h3>
           <p className="text-gray-500 max-w-2xl mx-auto">
-            Nossos clientes relatam em média <strong className="text-green-600">30% de redução de custos operacionais</strong> e 
-            <strong className="text-green-600"> 50% de aumento na produtividade</strong> nos primeiros 6 meses.
+            Nossos clientes relatam em média <strong className="text-devz-accent">30% de redução de custos operacionais</strong> e 
+            <strong className="text-devz-accent"> 50% de aumento na produtividade</strong> nos primeiros 6 meses.
           </p>
         </div>
       </div>

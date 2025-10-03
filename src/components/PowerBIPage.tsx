@@ -1,57 +1,83 @@
-import React from 'react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { ArrowRight, Bot, Code, BarChart3, Zap, Users, TrendingUp, Clock, Shield, ExternalLink, Sparkles, Brain, Cpu, Database } from 'lucide-react';
+import { ArrowRight, BarChart3, PieChart, TrendingUp, Database, Filter, Share2, Clock, Zap, Eye, RefreshCw, Target, Users, ExternalLink, Sparkles, Brain, Cpu, Globe } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-export default function AutomationPage() {
+export default function PowerBIPage() {
   const solutions = [
     {
-      icon: Code,
-      title: 'Robôs Python Inteligentes',
-      description: 'Scripts que pensam, aprendem e executam tarefas complexas automaticamente',
-      hint: 'Eliminam até 95% do trabalho manual'
-    },
-    {
-      icon: Bot,
-      title: 'Chatbots com IA Generativa',
-      description: 'Assistentes virtuais que conversam como humanos e resolvem problemas reais',
-      hint: 'Disponíveis 24/7 em múltiplos canais'
-    },
-    {
       icon: BarChart3,
-      title: 'Power BI Preditivo',
-      description: 'Dashboards que não apenas mostram dados, mas preveem tendências',
-      hint: 'Decisões baseadas no futuro, não no passado'
+      title: 'Dashboards Interativos',
+      description: 'Visualizações dinâmicas que permitem explorar dados em tempo real com filtros avançados',
+      hint: 'Decisões baseadas em dados atualizados'
     },
     {
-      icon: Brain,
-      title: 'IA Personalizada',
-      description: 'Algoritmos treinados especificamente para resolver seus desafios únicos',
-      hint: 'Machine Learning sob medida'
+      icon: TrendingUp,
+      title: 'Análise Preditiva',
+      description: 'Identificação de tendências e padrões através de algoritmos de machine learning',
+      hint: 'Preveja o futuro do seu negócio'
+    },
+    {
+      icon: Database,
+      title: 'Integração Multi-Fonte',
+      description: 'Conecte ERPs, CRMs, planilhas e APIs em uma única plataforma de análise',
+      hint: 'Todos os dados em um só lugar'
+    },
+    {
+      icon: Target,
+      title: 'Alertas Inteligentes',
+      description: 'Notificações automáticas baseadas em metas e indicadores críticos',
+      hint: 'Nunca perca uma oportunidade'
     }
   ];
 
   const stats = [
-    { icon: TrendingUp, number: '300%', label: 'ROI médio dos clientes' },
-    { icon: Clock, number: '85%', label: 'Redução de tempo em processos' },
-    { icon: Users, number: '50+', label: 'Empresas transformadas' },
-    { icon: Shield, number: '99.9%', label: 'Uptime garantido' }
+    { icon: TrendingUp, number: '70%', label: 'Decisões mais rápidas' },
+    { icon: Clock, number: '80%', label: 'Redução no tempo de análise' },
+    { icon: Users, number: '45%', label: 'Aumento na produtividade' },
+    { icon: Target, number: '100%', label: 'Visibilidade do negócio' }
   ];
 
   const technologies = [
-    { name: 'Python', icon: Cpu, color: 'bg-devz-primary/10 text-devz-primary' },
-    { name: 'OpenAI GPT', icon: Sparkles, color: 'bg-devz-primary/10 text-devz-primary' },
-    { name: 'Power BI', icon: BarChart3, color: 'bg-devz-primary/10 text-devz-primary' },
-    { name: 'Machine Learning', icon: Brain, color: 'bg-devz-primary/10 text-devz-primary' },
-    { name: 'APIs REST', icon: Database, color: 'bg-devz-primary/10 text-devz-primary' },
-    { name: 'Chatbots', icon: Bot, color: 'bg-devz-primary/10 text-devz-primary' }
+    { name: 'Power BI', icon: BarChart3, color: 'bg-orange-100 text-orange-700' },
+    { name: 'Azure Data Factory', icon: Database, color: 'bg-blue-100 text-blue-700' },
+    { name: 'SQL Server', icon: Database, color: 'bg-green-100 text-green-700' },
+    { name: 'Python', icon: Cpu, color: 'bg-yellow-100 text-yellow-700' },
+    { name: 'Machine Learning', icon: Brain, color: 'bg-purple-100 text-purple-700' },
+    { name: 'APIs REST', icon: Globe, color: 'bg-indigo-100 text-indigo-700' }
+  ];
+
+  const useCases = [
+    {
+      title: 'Dashboard Financeiro',
+      description: 'Controle de fluxo de caixa, DRE, análise de lucratividade e projeções financeiras.',
+      industry: 'Financeiro',
+      icon: BarChart3
+    },
+    {
+      title: 'Análise de Vendas',
+      description: 'Performance de vendedores, produtos mais vendidos, sazonalidade e metas comerciais.',
+      industry: 'Comercial',
+      icon: TrendingUp
+    },
+    {
+      title: 'Gestão de Estoque',
+      description: 'Giro de estoque, produtos em falta, análise ABC e otimização de compras.',
+      industry: 'Operacional',
+      icon: Database
+    },
+    {
+      title: 'RH e People Analytics',
+      description: 'Turnover, produtividade, satisfação de funcionários e indicadores de RH.',
+      industry: 'Recursos Humanos',
+      icon: Users
+    }
   ];
 
   const handleExternalRedirect = () => {
     // Placeholder for external domain redirect
-    alert('Aqui seria redirecionado para o domínio da empresa de automação');
+    alert('Aqui seria redirecionado para o domínio da empresa de Power BI');
   };
 
   return (
@@ -75,12 +101,12 @@ export default function AutomationPage() {
                 </Badge>
                 
                 <h1 className="text-4xl lg:text-6xl xl:text-7xl leading-tight">
-                  Automação que <span className="text-[#31496e]">multiplica</span> resultados
+                  Dados que <span className="text-[#31496e]">impulsionam</span> decisões
                 </h1>
                 
                 <p className="text-xl lg:text-2xl text-white/90 leading-relaxed max-w-2xl">
-                  Criamos robôs inteligentes, chatbots com IA e dashboards preditivos 
-                  que transformam dados em lucro real para sua empresa.
+                  Transforme seus dados em insights estratégicos com dashboards interativos 
+                  e análises avançadas que revolucionam a tomada de decisão.
                 </p>
               </div>
 
@@ -101,16 +127,16 @@ export default function AutomationPage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   onClick={handleExternalRedirect}
-                  className="bg-devz-primary hover:bg-devz-primary-dark text-white px-8 py-4 text-lg transition-colors"
+                  className="bg-[#31496e] hover:bg-[#31496e]/90 text-white px-8 py-4 text-lg"
                 >
-                  Descobrir Como Funciona
+                  Ver Dashboards em Ação
                   <ExternalLink className="ml-2 h-5 w-5" />
                 </Button>
                 <Button 
                   variant="outline"
                   className="border-white text-gray-900 hover:!bg-gray-900 hover:!text-white px-8 py-4 text-lg"
                 >
-                  Ver Casos de Sucesso
+                  Solicitar Demonstração
                 </Button>
               </div>
             </div>
@@ -120,26 +146,26 @@ export default function AutomationPage() {
               <div className="relative">
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx8fDE3NTgwMjU3MzR8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                  alt="Automação e IA em ação"
+                  alt="Dashboards Power BI em ação"
                   className="w-full h-[400px] lg:h-[500px] object-cover rounded-lg shadow-2xl"
                 />
                 
                 {/* Floating Cards */}
                 <div className="absolute -top-6 -left-6 bg-white/95 backdrop-blur rounded-lg p-4 shadow-lg">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-devz-primary/10 rounded-full flex items-center justify-center">
-                      <Bot className="w-4 h-4 text-devz-primary" />
+                    <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                      <BarChart3 className="w-4 h-4 text-orange-600" />
                     </div>
                     <div>
-                      <div className="text-sm text-gray-900">IA Ativa</div>
-                      <div className="text-xs text-gray-500">Processando dados</div>
+                      <div className="text-sm text-gray-900">Dashboard Ativo</div>
+                      <div className="text-xs text-gray-500">Dados em tempo real</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur rounded-lg p-4 shadow-lg">
-                  <div className="text-2xl text-gray-900 mb-1">95%</div>
-                  <div className="text-sm text-gray-500">Menos trabalho manual</div>
+                  <div className="text-2xl text-gray-900 mb-1">70%</div>
+                  <div className="text-sm text-gray-500">Decisões mais rápidas</div>
                 </div>
               </div>
             </div>
@@ -152,11 +178,11 @@ export default function AutomationPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              O que podemos automatizar para você
+              Soluções de Business Intelligence
             </h2>
             <p className="text-gray-500 max-w-3xl mx-auto text-lg">
-              Cada solução é desenvolvida especificamente para multiplicar seus resultados. 
-              Não vendemos software, criamos vantagens competitivas.
+              Cada dashboard é desenvolvido especificamente para suas necessidades. 
+              Não vendemos relatórios prontos, criamos insights personalizados.
             </p>
           </div>
 
@@ -194,7 +220,7 @@ export default function AutomationPage() {
                 Stack tecnológico de ponta
               </h3>
               <p className="text-gray-500 max-w-2xl mx-auto">
-                Utilizamos as tecnologias mais avançadas do mercado para garantir soluções robustas e escaláveis
+                Utilizamos as tecnologias mais avançadas do mercado para garantir dashboards robustos e escaláveis
               </p>
             </div>
 
@@ -213,6 +239,47 @@ export default function AutomationPage() {
         </div>
       </section>
 
+      {/* Use Cases */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Casos de uso por área
+            </h2>
+            <p className="text-gray-500 max-w-3xl mx-auto text-lg">
+              Dashboards personalizados para cada departamento da sua empresa
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {useCases.map((useCase, index) => {
+              const IconComponent = useCase.icon;
+              return (
+                <Card key={index} className="border-0 shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#31496e] to-[#31496e] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <IconComponent className="w-6 h-6 text-white" />
+                    </div>
+                    
+                    <h3 className="text-gray-900 mb-2 group-hover:text-[#31496e] transition-colors">
+                      {useCase.title}
+                    </h3>
+                    
+                    <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                      {useCase.description}
+                    </p>
+
+                    <Badge variant="outline" className="text-[#31496e] border-[#31496e]">
+                      {useCase.industry}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Stats & Social Proof */}
       <section className="py-16 md:py-24 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -221,7 +288,7 @@ export default function AutomationPage() {
               Resultados que impressionam
             </h2>
             <p className="text-gray-300 max-w-3xl mx-auto text-lg">
-              Nossos clientes não apenas economizam tempo - eles descobrem novas formas de gerar receita
+              Nossos clientes não apenas visualizam dados - eles descobrem oportunidades ocultas
             </p>
           </div>
 
@@ -247,11 +314,12 @@ export default function AutomationPage() {
           {/* Testimonial */}
           <div className="bg-white/10 backdrop-blur rounded-lg p-8 text-center">
             <blockquote className="text-xl text-white mb-6">
-              "Eles automatizaram nosso atendimento completo. O chatbot resolve 80% das questões sozinho 
-              e nossos analistas agora focam apenas em estratégia. O ROI foi de 400% no primeiro ano."
+              "Os dashboards que criaram revolucionaram nossa gestão. Agora tomamos decisões 
+              baseadas em dados reais e identificamos oportunidades que antes passavam despercebidas. 
+              O ROI foi de 300% no primeiro ano."
             </blockquote>
             <div className="text-[#31496e]">
-              CEO de empresa do setor financeiro
+              Diretor Financeiro de empresa do setor varejo
             </div>
           </div>
         </div>
@@ -261,46 +329,46 @@ export default function AutomationPage() {
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Cada projeto é único como sua empresa
+            Cada dashboard conta uma história única
           </h2>
           <p className="text-gray-500 text-lg mb-8 leading-relaxed">
-            Não trabalhamos com soluções prontas. Analisamos profundamente seu negócio, 
-            identificamos oportunidades ocultas e criamos automações que se pagam em semanas, 
-            não meses. Alguns clientes descobriram receitas que nem sabiam que existiam.
+            Não trabalhamos com templates prontos. Analisamos profundamente seus dados, 
+            identificamos padrões ocultos e criamos visualizações que revelam insights 
+            que transformam seu negócio. Alguns clientes descobriram receitas que nem sabiam que existiam.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="text-center">
-              <div className="text-2xl mb-2">🔍</div>
-              <h4 className="text-gray-900 mb-2">Diagnóstico Profundo</h4>
-              <p className="text-sm text-gray-500">Identificamos oportunidades que você nem sabia que existiam</p>
+              <div className="text-2xl mb-2">📊</div>
+              <h4 className="text-gray-900 mb-2">Análise Profunda</h4>
+              <p className="text-sm text-gray-500">Identificamos padrões que você nem sabia que existiam</p>
             </div>
             <div className="text-center">
               <div className="text-2xl mb-2">⚡</div>
-              <h4 className="text-gray-900 mb-2">Desenvolvimento Ágil</h4>
-              <p className="text-sm text-gray-500">Primeiros resultados em semanas, implementação completa em 30-60 dias</p>
+              <h4 className="text-gray-900 mb-2">Tempo Real</h4>
+              <p className="text-sm text-gray-500">Dados sempre atualizados para decisões instantâneas</p>
             </div>
             <div className="text-center">
-              <div className="text-2xl mb-2">📈</div>
-              <h4 className="text-gray-900 mb-2">ROI Garantido</h4>
-              <p className="text-sm text-gray-500">Acompanhamos os resultados até você ver o retorno do investimento</p>
+              <div className="text-2xl mb-2">🎯</div>
+              <h4 className="text-gray-900 mb-2">Insights Acionáveis</h4>
+              <p className="text-sm text-gray-500">Não apenas dados, mas recomendações práticas</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-[#31496e] to-[#31496e] rounded-lg p-8 text-gray-900">
-            <h3 className="text-gray-900 mb-4">
-              Curioso para ver o que podemos fazer pelo seu negócio?
+          <div className="bg-gradient-to-r from-[#31496e] to-[#31496e] rounded-lg p-8 text-white">
+            <h3 className="text-white mb-4">
+              Pronto para descobrir o poder dos seus dados?
             </h3>
-            <p className="text-gray-900 mb-8 max-w-2xl mx-auto">
-              Cada empresa que conhecemos tem pelo menos 3 processos que podem ser automatizados 
-              com ROI superior a 200%. Descubra quais são os seus.
+            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
+              Cada empresa que conhecemos tem dados valiosos que não estão sendo aproveitados. 
+              Descubra quais insights estão escondidos nos seus dados.
             </p>
             
             <Button 
               onClick={handleExternalRedirect}
-              className="bg-devz-primary hover:bg-devz-primary-dark text-white px-8 py-4 text-lg transition-colors"
+              className="bg-white hover:bg-white/90 text-[#31496e] px-8 py-4 text-lg"
             >
-              Acessar Site Completo
+              Solicitar Análise Gratuita
               <ExternalLink className="ml-2 h-5 w-5" />
             </Button>
           </div>

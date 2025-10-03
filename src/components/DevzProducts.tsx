@@ -120,7 +120,7 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
                             }
                           }}
                           variant="outline"
-                          className="w-full text-sm border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e] transition-colors"
+                          className="w-full text-sm border-gray-300 text-gray-700 hover:bg-devz-primary hover:text-white hover:border-devz-primary transition-colors"
                         >
                           Ver Detalhes
                           <ArrowRight className="ml-2 h-4 w-4" />
@@ -161,7 +161,7 @@ export function DevzProducts({ onNavigate }: DevzProductsProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={() => scrollToSection('#contato')}
-                className="bg-[#31496e] hover:bg-[#31496e]/90 text-white px-8 py-3"
+                className="bg-devz-primary hover:bg-devz-primary-dark text-white px-8 py-3 transition-colors"
               >
                 Falar com Consultor
               </Button>

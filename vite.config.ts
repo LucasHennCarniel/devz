@@ -53,10 +53,11 @@
       target: 'esnext',
       outDir: 'build',
     },
-    server: {
-      port: 3250,
-      open: true,
-    },
+      server: {
+        port: 3250,
+        open: true,
+        host: true, // Permite acesso externo
+      },
   });
 
   

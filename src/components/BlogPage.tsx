@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -123,13 +123,13 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white pt-16">
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-gray-900">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-[#31496e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white mb-12">
             <h1 className="text-4xl lg:text-6xl mb-6">
               Blog Devz
             </h1>
-            <p className="text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
               Atualizações das nossas ferramentas, insights sobre tecnologia e 
               tendências que estão transformando o mercado
             </p>
@@ -143,7 +143,7 @@ export default function BlogPage() {
               placeholder="Buscar posts..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white backdrop-blur border-white/20 text-white placeholder-white focus:bg-white/20"
+              className="pl-10 bg-white backdrop-blur border-gray-300 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-[#31496e] focus:ring-1 focus:ring-[#31496e]"
             />
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function BlogPage() {
       </section>
 
       {/* Categories & Posts */}
-      <section className="py-16 bg-[#F5F6F7]">
+      <section className="py-16 bg-gray-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Filter */}
           <div className="mb-12">
@@ -310,30 +310,25 @@ export default function BlogPage() {
 
       {/* Newsletter Signup */}
       <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="-to-bg-gradientr from-[#31496e] to-[#31496e] rounded-lg p-8 lg:p-12 text-white">
-            <h3 className="text-white mb-4">
-              Não perca nenhuma atualização
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 md:p-12 text-center shadow-2xl border border-gray-200">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Receba conteúdos exclusivos
             </h3>
-            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-              Receba em primeira mão as novidades sobre nossos produtos, 
-              atualizações tecnológicas e insights exclusivos do mercado.
+            <p className="text-gray-900 mb-8 max-w-2xl mx-auto">
+              Assine nossa Newsletter e receba semanalmente artigos sobre ERP, automação e tecnologia em sua caixa de entrada!
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
+              <input
                 type="email"
-                placeholder="Seu melhor e-mail"
-                className="flex-1 bg-white backdrop-blur border-white/20 text-gray-900 placeholder-white"
+                placeholder="Seu e-mail"
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900  border border-gray-300 focus:outline-none focus:border-[#31496e] focus:ring-1 focus:ring-[#31496e]"
               />
-              <Button className="bg-white hover:bg-white/90 text-[#31496e] px-8">
-                Inscrever-se
-              </Button>
+              <button className="bg-devz-primary text-white px-6 py-3 rounded-lg hover:bg-[#31496e]/90 transition-colors cursor-pointer">
+                Assinar
+              </button>
             </div>
-            
-            <p className="text-xs text-white/70 mt-4">
-              Enviamos apenas conteúdo relevante. Sem spam, prometido.
-            </p>
           </div>
         </div>
       </section>

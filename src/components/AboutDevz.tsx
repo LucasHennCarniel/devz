@@ -56,32 +56,38 @@ function AboutDevz() {
     {
       year: "2019",
       title: "Fundação da Devz",
-      description: "Início das atividades focadas em desenvolvimento de software personalizado."
+      description: "Nasceu a paixão por transformar negócios através da tecnologia. Começamos com uma visão clara: democratizar o acesso a soluções tecnológicas de qualidade para empresas de todos os tamanhos.",
+      highlight: "Primeiro cliente conquistado"
     },
     {
       year: "2020",
       title: "Primeira Linha ERP",
-      description: "Lançamento do primeiro sistema ERP modular para pequenas empresas."
+      description: "Desenvolvemos nosso primeiro sistema ERP modular, revolucionando a gestão de pequenas empresas. Uma solução completa que unificou vendas, estoque e financeiro em uma única plataforma.",
+      highlight: "50+ empresas transformadas"
     },
     {
       year: "2021",
       title: "Expansão para IA",
-      description: "Incorporação de soluções de Inteligência Artificial nos produtos."
+      description: "Incorporamos inteligência artificial em nossas soluções, criando sistemas que aprendem e se adaptam. Cada projeto nos aproximou mais de nossos clientes e suas necessidades únicas.",
+      highlight: "100+ automações criadas"
     },
     {
       year: "2022",
       title: "Linha Avante®",
-      description: "Desenvolvimento da linha completa Avante® para diversos segmentos."
+      description: "Desenvolvemos a linha completa Avante® para diversos segmentos, consolidando nossa posição no mercado. Cada sucesso reforçou nossa missão de ser parceiros estratégicos.",
+      highlight: "95% de satisfação dos clientes"
     },
     {
       year: "2023",
       title: "Business Intelligence",
-      description: "Especialização em dashboards e relatórios avançados com Power BI."
+      description: "Especializamo-nos em dashboards e relatórios avançados com Power BI, transformando dados em insights valiosos que impulsionam decisões estratégicas.",
+      highlight: "IA integrada em 80% dos projetos"
     },
     {
       year: "2024",
       title: "Automação Contábil",
-      description: "Lançamento de soluções completas de automação contábil com Python + IA."
+      description: "Lançamos soluções completas de automação contábil com Python + IA, revolucionando processos financeiros e contábeis. O futuro chegou e estamos prontos para liderar.",
+      highlight: "Expansão para novos mercados"
     }
   ];
 
@@ -95,7 +101,7 @@ function AboutDevz() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] relative overflow-hidden">
+      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-[#31496E] to-[#3B82F6] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8">
@@ -118,14 +124,14 @@ function AboutDevz() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={() => scrollToSection('#contato')}
-                className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-4 text-lg font-medium rounded-md inline-flex items-center justify-center"
+                className="bg-white hover:bg-white/90 text-[#31496E] px-8 py-4 text-lg font-medium rounded-md inline-flex items-center justify-center"
               >
                 Fale Conosco
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
               <button 
                 onClick={() => scrollToSection('#missao')}
-                className="border border-white text-white hover:bg-white hover:text-[#1E40AF] px-8 py-4 text-lg font-medium rounded-md inline-flex items-center justify-center"
+                className="border border-white text-white hover:bg-white hover:text-[#31496E] px-8 py-4 text-lg font-medium rounded-md inline-flex items-center justify-center"
               >
                 Nossa Missão
               </button>
@@ -140,8 +146,8 @@ function AboutDevz() {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Missão */}
             <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center mx-auto">
-                <Target className="w-8 h-8 text-[#1E40AF]" />
+              <div className="w-16 h-16 bg-[#31496E]/10 rounded-lg flex items-center justify-center mx-auto">
+                <Target className="w-8 h-8 text-[#31496E]" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Missão</h2>
@@ -170,8 +176,8 @@ function AboutDevz() {
 
             {/* Valores */}
             <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center mx-auto">
-                <Heart className="w-8 h-8 text-[#1E40AF]" />
+              <div className="w-16 h-16 bg-[#31496E]/10 rounded-lg flex items-center justify-center mx-auto">
+                <Heart className="w-8 h-8 text-[#31496E]" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">Valores</h2>
@@ -187,7 +193,7 @@ function AboutDevz() {
       </section>
 
       {/* Nossos Valores Detalhados */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -202,9 +208,9 @@ function AboutDevz() {
             {values.map((value, index) => {
               const IconComponent = value.icon;
               return (
-                <Card key={index} className="p-8 text-center hover:shadow-lg transition-shadow duration-200 border border-gray-200">
-                  <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-                    <IconComponent className="w-6 h-6 text-[#1E40AF]" />
+                <Card key={index} className="p-8 text-center hover:shadow-lg transition-shadow duration-200 border border-gray-100 hover:border-devz-primary/20">
+                  <div className="w-12 h-12 bg-[#31496E]/10 rounded-lg flex items-center justify-center mx-auto mb-6">
+                    <IconComponent className="w-6 h-6 text-[#31496E]" />
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-3">{value.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
@@ -216,41 +222,53 @@ function AboutDevz() {
       </section>
 
       {/* Nossa História */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="w-8 h-1 bg-devz-primary rounded-full"></div>
+              <span className="text-sm font-semibold text-devz-primary uppercase tracking-wider">Nossa História</span>
+              <div className="w-8 h-1 bg-devz-primary rounded-full"></div>
+            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Nossa Jornada
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Cinco anos construindo soluções que fazem a diferença
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Cinco anos de <span className="text-devz-primary font-semibold">paixão</span>, <span className="text-devz-primary font-semibold">inovação</span> e <span className="text-devz-primary font-semibold">resultados</span> que transformam negócios
             </p>
           </div>
 
-          {/* Minimalist Tech Timeline */}
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-24">
+          {/* Minimalist Timeline */}
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-devz-primary"></div>
+            
+            <div className="space-y-8">
               {timeline.map((item, index) => (
-                <div key={index} className="group">
-                  {/* Year Badge */}
-                  <div className="flex items-center gap-8 mb-8">
-                    <div className="flex items-center gap-4">
-                      <div className="w-2 h-2 bg-[#1E40AF] rounded-full"></div>
-                      <span className="text-sm font-mono text-[#1E40AF] bg-gray-100 px-4 py-2 rounded">
-                        {item.year}
-                      </span>
-                    </div>
-                    <div className="flex-1 h-px bg-gray-200"></div>
+                <div key={index} className="flex items-start gap-6 group relative">
+                  {/* Year with connecting line */}
+                  <div className="flex-shrink-0 relative">
+                    <span className="text-sm font-bold text-white bg-devz-primary px-4 py-2 rounded-lg shadow-sm relative z-10">
+                      {item.year}
+                    </span>
+                    {/* Dot on the line */}
+                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-devz-primary rounded-full border-2 border-white"></div>
                   </div>
                   
                   {/* Content */}
-                  <div className="ml-12 space-y-6">
-                    <h3 className="text-2xl font-semibold text-gray-900 group-hover:text-[#1E40AF] transition-colors duration-200">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-devz-primary transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed max-w-3xl text-lg">
+                    <p className="text-gray-700 text-base leading-relaxed mb-3">
                       {item.description}
                     </p>
+                    {/* Highlight */}
+                    <div className="inline-flex items-center gap-2 bg-devz-accent/10 text-devz-accent-dark px-3 py-1 rounded-full text-sm font-medium border border-devz-accent/20">
+                      <div className="w-2 h-2 bg-devz-accent rounded-full"></div>
+                      {item.highlight}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -260,7 +278,7 @@ function AboutDevz() {
       </section>
 
       {/* Estatísticas */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gray-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -274,7 +292,7 @@ function AboutDevz() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-medium text-[#1E40AF] mb-2">
+                <div className="text-4xl md:text-5xl font-medium text-[#31496E] mb-2">
                   {stat.number}
                 </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
@@ -298,7 +316,7 @@ function AboutDevz() {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {technologies.map((tech, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-4 text-center border border-gray-200 hover:border-[#3B82F6] transition-colors duration-200">
+              <div key={index} className="bg-gray-50/50 rounded-lg p-4 text-center border border-gray-100 hover:border-devz-primary/30 transition-colors duration-200">
                 <div className="text-lg font-medium text-gray-900 mb-1">{tech.name}</div>
                 <div className="text-sm text-gray-500">{tech.category}</div>
               </div>
@@ -308,7 +326,7 @@ function AboutDevz() {
       </section>
 
       {/* Expertise */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gray-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -321,8 +339,8 @@ function AboutDevz() {
 
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center mx-auto">
-                <Code className="w-8 h-8 text-[#1E40AF]" />
+              <div className="w-16 h-16 bg-[#31496E]/10 rounded-lg flex items-center justify-center mx-auto">
+                <Code className="w-8 h-8 text-[#31496E]" />
               </div>
               <div>
                 <h3 className="text-xl font-medium text-gray-900 mb-4">Desenvolvimento ERP</h3>
@@ -347,8 +365,8 @@ function AboutDevz() {
             </div>
 
             <div className="text-center space-y-6">
-              <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center mx-auto">
-                <BarChart3 className="w-8 h-8 text-[#1E40AF]" />
+              <div className="w-16 h-16 bg-[#31496E]/10 rounded-lg flex items-center justify-center mx-auto">
+                <BarChart3 className="w-8 h-8 text-[#31496E]" />
               </div>
               <div>
                 <h3 className="text-xl font-medium text-gray-900 mb-4">Business Intelligence</h3>
@@ -378,8 +396,8 @@ function AboutDevz() {
             {/* Informações de Contato */}
             <div className="space-y-8">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-[#1E40AF]" />
+                <div className="w-12 h-12 bg-[#31496E]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-[#31496E]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Sede Principal</h3>
@@ -405,8 +423,8 @@ function AboutDevz() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[#1E40AF]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-[#1E40AF]" />
+                <div className="w-12 h-12 bg-[#31496E]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-6 h-6 text-[#31496E]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Telefone</h3>
@@ -417,7 +435,7 @@ function AboutDevz() {
                 </div>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <div className="bg-gray-50/50 rounded-lg p-6 border border-gray-100">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Agende uma Consultoria</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
                   Converse com nossos especialistas e descubra como a Devz pode 
@@ -425,7 +443,7 @@ function AboutDevz() {
                 </p>
                 <Button 
                   onClick={() => scrollToSection('#contato')}
-                  className="w-full bg-[#1E40AF] hover:bg-[#1E40AF]/90 text-white px-6 py-3 font-medium"
+                  className="w-full bg-[#31496E] hover:bg-[#31496E]/90 text-white px-6 py-3 font-medium"
                 >
                   Solicitar Consultoria Gratuita
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -435,8 +453,8 @@ function AboutDevz() {
 
             {/* Mapa Interativo */}
             <div className="space-y-6">
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="p-6 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] text-white">
+                <div className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="p-6 bg-gradient-to-r from-[#31496E] to-[#3B82F6] text-white">
                   <div className="flex items-center gap-3">
                     <MapPin className="w-6 h-6" />
                     <div>
@@ -471,7 +489,7 @@ function AboutDevz() {
                 <div className="p-6 bg-gray-50">
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center gap-2 text-gray-600">
-                      <MapPin className="w-4 h-4 text-[#1E40AF]" />
+                      <MapPin className="w-4 h-4 text-[#31496E]" />
                       <span>Joaçaba, SC</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
@@ -489,7 +507,7 @@ function AboutDevz() {
                       </div>
                       <button 
                         onClick={() => window.open(`https://www.google.com/maps/dir//-27.172657,-51.522993/@-27.172657,-51.522993,15z`, '_blank')}
-                        className="text-xs text-[#1E40AF] hover:text-[#1E40AF]/80 font-medium flex items-center gap-1"
+                        className="text-xs text-[#31496E] hover:text-[#31496E]/80 font-medium flex items-center gap-1"
                       >
                         <span>Abrir no Maps</span>
                         <ArrowRight className="w-3 h-3" />
@@ -500,7 +518,7 @@ function AboutDevz() {
               </div>
               
               {/* Informações adicionais */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
+              <div className="bg-gradient-to-br from-devz-primary/5 to-devz-primary/10 rounded-lg p-6 border border-devz-primary/20">
                 <h4 className="text-lg font-semibold text-gray-900 mb-3">Como chegar</h4>
                 <div className="space-y-2 text-sm text-gray-600">
                   <p>📍 Centro de Joaçaba - SC</p>
@@ -515,7 +533,7 @@ function AboutDevz() {
       </section>
 
       {/* Call to Action Final */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-[#1E40AF] to-[#3B82F6]">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-[#31496E] to-[#3B82F6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-8">
             <div className="space-y-6">
@@ -531,14 +549,14 @@ function AboutDevz() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 onClick={() => scrollToSection('#contato')}
-                className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-4 text-lg font-medium"
+                className="bg-white hover:bg-white/90 text-[#31496E] px-8 py-4 text-lg font-medium"
               >
                 Fale Conosco Agora
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 variant="outline"
-                className="border-white text-[#1E40AF] hover:bg-[#1E40AF] hover:text-white px-8 py-4 text-lg font-medium"
+                className="border-white text-[#31496E] hover:bg-[#31496E] hover:text-white px-8 py-4 text-lg font-medium"
               >
                 Ver Portfólio
               </Button>

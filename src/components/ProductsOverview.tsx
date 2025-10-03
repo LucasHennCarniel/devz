@@ -84,7 +84,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
                     <div 
                       key={product.name}
                       onClick={() => onNavigate?.(product.page)}
-                      className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer group"
+                      className="flex items-center gap-3 p-4 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors cursor-pointer group"
                     >
                       <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center group-hover:bg-[#31496e]/10 transition-colors">
                         <IconComponent className="w-4 h-4 text-gray-600 group-hover:text-[#31496e]" />
@@ -105,7 +105,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
               <Button 
                 onClick={() => scrollToSection('#contato')}
                 variant="outline" 
-                className="w-full border-gray-300 text-white bg-[#1E40AF] hover:bg-[#1E40AF]/90 hover:text-white hover:border-[#31496e] transition-colors"
+                className="w-full border-gray-300 bg-devz-primary hover:bg-devz-primary-dark text-white transition-colors"
               >
                 Ver Todos os ERPs
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -156,7 +156,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
 
               <Button 
                 onClick={() => onNavigate?.('automacao-python')}
-                className="w-full bg-[#31496e] hover:bg-[#31496e]/90 text-white"
+                className="w-full bg-devz-primary hover:bg-devz-primary-dark text-white transition-colors"
               >
                 Solicitar Automação
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -176,7 +176,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
           
           <Button 
             onClick={() => scrollToSection('#contato')}
-            className="bg-[#31496e] hover:bg-[#31496e]/90 text-white px-8 py-3"
+            className="bg-devz-primary hover:bg-devz-primary-dark text-white px-8 py-3 transition-colors"
           >
             Falar com Especialista
             <ArrowRight className="ml-2 h-5 w-5" />

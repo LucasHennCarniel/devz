@@ -1,33 +1,76 @@
+import React, { useState } from 'react';
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
-import { ArrowRight, Phone, Mail, MessageSquare, Clock, CheckCircle } from 'lucide-react';
+import { ArrowRight, Phone, Mail, MessageSquare, Clock, CheckCircle, Users, Upload, Send, ChevronDown } from 'lucide-react';
+import { SimpleContactModal } from './SimpleContactModal';
 
 export function FinalCTA() {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Mensagem enviada! Entraremos em contato em até 2 horas.');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    telefone: '',
+    arquivo: null as File | null
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, files } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'arquivo' ? (files ? files[0] : null) : value
+    }));
   };
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simula envio do formulário
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    // Reset após 3 segundos
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ email: '', telefone: '', arquivo: null });
+      setIsDropdownOpen(false);
+    }, 3000);
+  };
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+
 
   const contactMethods = [
     {
       icon: MessageSquare,
-      title: 'WhatsApp',
+      title: 'WhatsApp Suporte',
       value: '(11) 99999-9999',
       description: 'Resposta em até 5 minutos'
     },
     {
-      icon: Phone,
-      title: 'Telefone',
-      value: '(11) 3333-4444',
-      description: 'Seg-Sex: 8h às 18h'
+      icon: MessageSquare,
+      title: 'WhatsApp Comercial',
+      value: '(11) 88888-8888',
+      description: 'Resposta em até 5 minutos'
     },
     {
       icon: Mail,
       title: 'E-mail',
       value: 'contato@devz.com.br',
+      description: 'Resposta em até 2 horas'
+    },
+    {
+      icon: Mail,
+      title: 'E-mail Comercial',
+      value: 'comercial@devz.com.br',
       description: 'Resposta em até 2 horas'
     }
   ];
@@ -60,105 +103,7 @@ export function FinalCTA() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="border-0 shadow-lg bg-white">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600">Atendimento online agora</span>
-                </div>
-                
-                <h3 className="text-gray-900 mb-6">
-                  Solicitar Consultoria Gratuita
-                </h3>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Nome completo *</Label>
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="Seu nome"
-                        required
-                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Empresa *</Label>
-                      <Input
-                        id="company"
-                        type="text"
-                        placeholder="Nome da empresa"
-                        required
-                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">E-mail *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="seu@email.com"
-                        required
-                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">WhatsApp</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="(11) 99999-9999"
-                        className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Conte sobre seu negócio</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Qual seu segmento? Quais são seus principais desafios? O que você gostaria de automatizar?"
-                      rows={4}
-                      className="border-gray-300 focus:border-[#31496e] focus:ring-[#31496e]"
-                    />
-                  </div>
-
-                  <Button 
-                    type="submit"
-                    className="w-full bg-[#31496e] hover:bg-[#31496e]/90 text-white py-4 text-lg"
-                  >
-                    Solicitar Consultoria Gratuita
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </form>
-
-                {/* Process Steps */}
-                <div className="mt-8 pt-8 border-t border-gray-200">
-                  <h4 className="text-gray-900 mb-4">
-                    Como funciona nossa consultoria:
-                  </h4>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {process.map((step, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="w-6 h-6 bg-[#31496e] text-white rounded-full flex items-center justify-center text-sm">
-                          {index + 1}
-                        </div>
-                        <span className="text-sm text-gray-600">{step}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
+        <div className="grid grid-cols-1 gap-12 p-12">   
           {/* Contact Info & Benefits */}
           <div className="space-y-6">
             {/* Contact Methods */}
@@ -167,33 +112,200 @@ export function FinalCTA() {
                 Prefere falar diretamente?
               </h3>
               <div className="space-y-4">
-                {contactMethods.map((method, index) => {
-                  const IconComponent = method.icon;
-                  return (
-                    <Card key={index} className="border-0 shadow-sm bg-white hover:shadow-md transition-shadow cursor-pointer">
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-[#31496e]/10 rounded-lg flex items-center justify-center">
-                            <IconComponent className="w-6 h-6 text-[#31496e]" />
+                {/* WhatsApp Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {contactMethods.filter(method => method.title.includes('WhatsApp')).map((method, index) => {
+                    const IconComponent = method.icon;
+                    return (
+                      <Card key={index} className="border-0 shadow-sm bg-white hover:shadow-md transition-shadow cursor-pointer">
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-devz-primary/10 rounded-lg flex items-center justify-center">
+                              <IconComponent className="w-6 h-6 text-devz-primary" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="text-gray-900 mb-1">
+                                {method.title}
+                              </div>
+                              <div className="text-[#31496e]">
+                                {method.value}
+                              </div>
+                              <div className="text-sm text-gray-500">
+                                {method.description}
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex-1">
-                            <div className="text-gray-900 mb-1">
-                              {method.title}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+
+                {/* Email Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {contactMethods.filter(method => method.title.includes('E-mail')).map((method, index) => {
+                    const IconComponent = method.icon;
+                    return (
+                      <Card key={index} className="border-0 shadow-sm bg-white hover:shadow-md transition-shadow cursor-pointer">
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-devz-primary/10 rounded-lg flex items-center justify-center">
+                              <IconComponent className="w-6 h-6 text-devz-primary" />
                             </div>
-                            <div className="text-[#31496e]">
-                              {method.value}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              {method.description}
+                            <div className="flex-1">
+                              <div className="text-gray-900 mb-1">
+                                {method.title}
+                              </div>
+                              <div className="text-[#31496e]">
+                                {method.value}
+                              </div>
+                              <div className="text-sm text-gray-500">
+                                {method.description}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
               </div>
             </div>
+
+
+            {/* Trabalhe Conosco */}
+            <Card className="border-0 shadow-sm bg-white">
+              <CardContent className="p-6">
+                {/* Header do Dropdown */}
+                <div 
+                  className="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-md transition-colors"
+                  onClick={toggleDropdown}
+                >
+                  <div className="w-12 h-12 bg-devz-primary/10 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-devz-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-gray-900 mb-1">
+                      Trabalhe Conosco
+                    </div>
+                    <div className="text-[#31496e] mb-2">
+                      Faça parte da nossa equipe
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      Envie seu currículo e venha crescer conosco
+                    </div>
+                  </div>
+                  <div className="flex-shrink-0">
+                    {isDropdownOpen ? (
+                      <ChevronDown className="w-5 h-5 text-gray-400 rotate-180" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    )}
+                  </div>
+                </div>
+
+                {/* Conteúdo do Dropdown */}
+                {isDropdownOpen && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    {isSubmitted ? (
+                      <div className="text-center py-4">
+                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <CheckCircle className="w-6 h-6 text-green-600" />
+                        </div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                          Currículo enviado com sucesso!
+                        </h4>
+                        <p className="text-sm text-gray-600">
+                          Entraremos em contato em breve. Obrigado!
+                        </p>
+                      </div>
+                    ) : (
+                      <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Email */}
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                            E-mail
+                          </label>
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                            disabled={isSubmitting}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-devz-primary focus:border-devz-primary disabled:bg-gray-50"
+                            placeholder="seu@email.com"
+                          />
+                        </div>
+
+                        {/* Telefone */}
+                        <div>
+                          <label htmlFor="telefone" className="block text-sm font-medium text-gray-700 mb-2">
+                            Telefone
+                          </label>
+                          <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            value={formData.telefone}
+                            onChange={handleInputChange}
+                            required
+                            disabled={isSubmitting}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-devz-primary focus:border-devz-primary disabled:bg-gray-50"
+                            placeholder="(11) 99999-9999"
+                          />
+                        </div>
+
+                        {/* Upload de Arquivo */}
+                        <div>
+                          <label htmlFor="arquivo" className="block text-sm font-medium text-gray-700 mb-2">
+                            Currículo (PDF, DOC, DOCX)
+                          </label>
+                          <div className="relative">
+                            <input
+                              type="file"
+                              id="arquivo"
+                              name="arquivo"
+                              onChange={handleInputChange}
+                              accept=".pdf,.doc,.docx"
+                              required
+                              disabled={isSubmitting}
+                              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-devz-primary focus:border-devz-primary disabled:bg-gray-50 file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-devz-primary/10 file:text-devz-primary hover:file:bg-devz-primary/20"
+                            />
+                            {formData.arquivo && (
+                              <div className="mt-2 text-xs text-gray-600 flex items-center gap-1">
+                                <Upload className="w-3 h-3" />
+                                {formData.arquivo.name}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Botão de Envio */}
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full mt-4 bg-devz-primary hover:bg-devz-primary-dark text-white font-medium py-2 px-4 rounded-md transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isSubmitting ? (
+                            <>
+                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                              Enviando...
+                            </>
+                          ) : (
+                            <>
+                              <Send className="w-4 h-4 mr-2" />
+                              Enviar Currículo
+                            </>
+                          )}
+                        </button>
+                      </form>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Guarantees */}
             <Card className="border-0 shadow-sm bg-white">
@@ -216,6 +328,7 @@ export function FinalCTA() {
                 </div>
               </CardContent>
             </Card>
+
 
             {/* Urgency */}
             <div className="bg-white/10 backdrop-blur-sm  text-green-500 rounded-lg p-6 shadow-sm">

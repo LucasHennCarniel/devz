@@ -38,14 +38,14 @@ export function About() {
   ];
 
   return (
-    <section id="sobre" className="py-16 md:py-24 bg-gray-50">
+    <section id="sobre" className="py-16 md:py-24 bg-gray-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div className="space-y-8">
             <div className="space-y-6">
               <h2 className="text-gray-900">
-                Sobre a <span className="text-[#1E40AF]">Devz</span>
+                Sobre a <span className="text-[#31496E]">Devz</span>
               </h2>
               <p className="text-gray-500 leading-relaxed">
                 Somos uma empresa de tecnologia especializada em soluções ERP modulares, 
@@ -63,7 +63,7 @@ export function About() {
               {values.map((value, index) => {
                 const IconComponent = value.icon;
                 return (
-                  <Card key={index} className="border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+                  <Card key={index} className="border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">

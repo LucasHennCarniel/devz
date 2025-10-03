@@ -75,12 +75,12 @@ function Automation() {
   ];
 
   return (
-    <section id="automacao" className="py-16 md:py-24 bg-gray-50">
+    <section id="automacao" className="py-16 md:py-24 bg-gray-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Automação Contábil com <span className="text-[#1E40AF]">Python & IA</span>
+            Automação Contábil com <span className="text-[#31496E]">Python & IA</span>
           </h2>
           <p className="text-gray-500 max-w-3xl mx-auto">
             Transforme processos manuais em automações inteligentes e ganhe tempo para focar no que realmente importa
@@ -114,7 +114,7 @@ function Automation() {
             <div className="space-y-4">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="h-5 w-5 text-[#1E40AF] flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-[#31496E] flex-shrink-0" />
                   <span className="text-gray-600">{benefit}</span>
                 </div>
               ))}
@@ -136,7 +136,7 @@ function Automation() {
           {automationFeatures.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card key={index} className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <Card key={index} className="border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
                 <CardContent className="p-6">
                   <div className="mb-4">
                     <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
@@ -165,9 +165,9 @@ function Automation() {
         </div>
 
         {/* Python Scripts Examples */}
-        <div className="bg-white rounded-lg p-8 border border-gray-200 shadow-sm">
+        <div className="bg-white rounded-lg p-8 border border-gray-100 shadow-sm">
           <div className="flex items-center gap-3 mb-8">
-            <Code className="h-6 w-6 text-[#1E40AF]" />
+            <Code className="h-6 w-6 text-[#31496E]" />
             <h3 className="text-gray-900">
               Scripts Python em Ação
             </h3>
@@ -175,7 +175,7 @@ function Automation() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {pythonScripts.map((script, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors duration-200">
+              <div key={index} className="border border-gray-100 rounded-lg p-6 hover:border-gray-200 transition-colors duration-200">
                 <div className="flex items-start justify-between mb-3">
                   <h4 className="text-gray-900">{script.name}</h4>
                   <div className="flex items-center gap-2 text-xs text-gray-400">
@@ -188,7 +188,7 @@ function Automation() {
                 </p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <TrendingUp className="h-4 w-4 text-[#1E40AF]" />
+                    <TrendingUp className="h-4 w-4 text-[#31496E]" />
                     <span className="text-xs text-gray-500">{script.frequency}</span>
                   </div>
                   <ArrowRight className="h-4 w-4 text-gray-400" />

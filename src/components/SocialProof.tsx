@@ -154,8 +154,8 @@ export function SocialProof({ onNavigate }: SocialProofProps) {
               const IconComponent = stat.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-[#1E40AF]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-8 h-8 text-[#1E40AF]" />
+                  <div className="w-16 h-16 bg-[#31496E]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <IconComponent className="w-8 h-8 text-[#31496E]" />
                   </div>
                   
                   {/* Contador animado */}
@@ -198,7 +198,7 @@ export function SocialProof({ onNavigate }: SocialProofProps) {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-sm bg-gray-50">
+              <Card key={index} className="border-0 shadow-sm bg-gray-50/50">
                 <CardContent className="p-8">
                   <div className="flex items-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
@@ -206,20 +206,20 @@ export function SocialProof({ onNavigate }: SocialProofProps) {
                     ))}
                   </div>
                   
-                  <Quote className="w-8 h-8 text-[#1E40AF]/20 mb-4" />
+                  <Quote className="w-8 h-8 text-[#31496E]/20 mb-4" />
                   
                   <blockquote className="text-gray-600 leading-relaxed mb-6">
                     "{testimonial.quote}"
                   </blockquote>
                   
-                  <div className="border-t border-gray-200 pt-4">
+                  <div className="border-t border-gray-100 pt-4">
                     <div className="text-gray-900">
                       {testimonial.author}
                     </div>
                     <div className="text-sm text-gray-500">
                       {testimonial.role}
                     </div>
-                    <div className="text-sm text-[#1E40AF]">
+                    <div className="text-sm text-[#31496E]">
                       {testimonial.company}
                     </div>
                   </div>
@@ -230,7 +230,7 @@ export function SocialProof({ onNavigate }: SocialProofProps) {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-[#1E40AF] to-[#3B82F6] rounded-lg p-8 lg:p-12 text-center text-white">
+        <div className="bg-gradient-to-r from-[#31496E] to-[#3B82F6] rounded-lg p-8 lg:p-12 text-center text-white">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Pronto para transformar seu negócio?
           </h3>
@@ -242,14 +242,14 @@ export function SocialProof({ onNavigate }: SocialProofProps) {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => scrollToSection('#contato')}
-              className="bg-white hover:bg-white/90 text-[#1E40AF] px-8 py-3 rounded-md inline-flex items-center justify-center font-medium"
+              className="bg-white hover:bg-white/90 text-[#31496E] px-8 py-3 rounded-md inline-flex items-center justify-center font-medium"
             >
               Agendar Demonstração
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>
             <button 
               onClick={() => onNavigate?.('about-devz')}
-              className="border border-white text-white hover:bg-white hover:text-[#1E40AF] px-8 py-3 rounded-md inline-flex items-center justify-center font-medium"
+              className="border border-white text-white hover:bg-white hover:text-[#31496E] px-8 py-3 rounded-md inline-flex items-center justify-center font-medium"
             >
               Conhecer a Devz
             </button>

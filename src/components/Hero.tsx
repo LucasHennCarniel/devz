@@ -512,6 +512,18 @@ export function Hero() {
       `}</style>
       
       <section id="home" className="pt-16 relative overflow-hidden">
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-4 h-4 bg-devz-primary/30 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-20 w-5 h-5 bg-devz-accent/30 rounded-full animate-float-reverse"></div>
+        <div className="absolute top-60 left-1/4 w-3 h-3 bg-devz-primary/40 rounded-full animate-drift"></div>
+        <div className="absolute top-80 right-1/3 w-4 h-4 bg-devz-accent/30 rounded-full animate-float"></div>
+        <div className="absolute bottom-40 left-20 w-3 h-3 bg-devz-primary/30 rounded-full animate-float-reverse"></div>
+        <div className="absolute bottom-60 right-10 w-4 h-4 bg-devz-accent/40 rounded-full animate-drift"></div>
+        
+        {/* Geometric Shapes */}
+        <div className="absolute top-32 right-1/4 w-6 h-6 border-2 border-devz-primary/20 rotate-45 animate-rotate-slow"></div>
+        <div className="absolute bottom-32 left-1/3 w-5 h-5 bg-devz-accent/20 rounded-full animate-scale-pulse"></div>
+        
         <div className="relative min-h-[80vh] lg:min-h-[90vh]">
           {/* Swiper Container */}
           <div 
