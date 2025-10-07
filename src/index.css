@@ -1,6 +1,60 @@
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 
 /* ========================================
+   DEVZ DESIGN SYSTEM - BREAKPOINT CUSTOMIZADO
+   ======================================== */
+
+/* Menu hambúrguer aparece abaixo de 1070px */
+@media (max-width: 1069px) {
+  .devz-mobile-menu { display: block !important; }
+  .devz-desktop-menu { display: none !important; }
+  .devz-desktop-button { display: none !important; }
+}
+
+@media (min-width: 1070px) {
+  .devz-mobile-menu { display: none !important; }
+  .devz-desktop-menu { display: flex !important; }
+  .devz-desktop-button { display: block !important; }
+}
+
+/* Estilo customizado para scroll do menu mobile */
+.devz-mobile-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #f3f4f6;
+  scroll-behavior: smooth;
+}
+
+.devz-mobile-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.devz-mobile-scroll::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+  margin: 8px;
+}
+
+.devz-mobile-scroll::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+  border: 1px solid #f3f4f6;
+  min-height: 40px;
+}
+
+.devz-mobile-scroll::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+.devz-mobile-scroll::-webkit-scrollbar-thumb:active {
+  background: #4b5563;
+}
+
+/* Espaçamento seguro para iOS */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
+
+/* ========================================
    DEVZ DESIGN SYSTEM - CORES PERSONALIZADAS
    ======================================== */
 

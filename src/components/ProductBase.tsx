@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
@@ -310,14 +311,14 @@ export function ProductBase({
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 onClick={() => scrollToSection('#contato')}
-                className="bg-white hover:bg-white/90 text-devz-primary px-8 py-4 text-lg font-medium"
+                className="bg-white hover:bg-white/90 text-devz-primary px-8 py-4 text-lg font-medium cursor-pointer"
               >
                 Solicitar Demonstração Gratuita
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-devz-primary px-8 py-4 text-lg font-medium"
+                className="border-white text-devz-primary hover:bg-white hover:bg-white/90 px-8 py-4 text-lg font-medium cursor-pointer"
               >
                 Baixar Material
               </Button>

@@ -72,6 +72,7 @@ const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
 export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+  const [isProductsModalOpen, setIsProductsModalOpen] = useState(false);
 
   // Reset dropdown state when menu closes
   useEffect(() => {
@@ -79,6 +80,13 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
       setIsProductsDropdownOpen(false);
     }
   }, [isMenuOpen]);
+
+  // Fecha o menu quando o modal de produtos abre
+  useEffect(() => {
+    if (isProductsModalOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [isProductsModalOpen]);
 
   // Debug effect
   useEffect(() => {
@@ -190,7 +198,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
           </div>
 
           {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8 items-center">
+          <nav className="devz-desktop-menu space-x-8 items-center">
             {/* Home */}
             <button
               onClick={() => onNavigate ? onNavigate('home') : scrollToSection('#home')}
@@ -307,7 +315,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
             </button>
           </nav>
 
-          <div className="hidden md:block">
+          <div className="devz-desktop-button">
             <SimpleContactModal 
               triggerText="Solicitar Demonstração"
               triggerClassName="bg-devz-primary hover:bg-devz-primary-dark text-white px-6 py-2 font-medium h-10 min-w-fit whitespace-nowrap"
@@ -315,7 +323,7 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="devz-mobile-menu">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-600 hover:text-devz-primary p-2"
@@ -327,8 +335,8 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-100 relative z-50">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="devz-mobile-menu bg-white/95 backdrop-blur-sm border-t border-gray-100 relative z-50">
+            <div className="px-2 pt-2 pb-3 space-y-1 max-h-[calc(100vh-5rem)] overflow-y-auto devz-mobile-scroll">
               {/* Mobile Navigation Items */}
               <button
                 onClick={() => {
@@ -362,72 +370,14 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
               <div className="pt-2">
                 <button
                   onClick={() => {
-                    console.log('Produtos clicked, current state:', isProductsDropdownOpen);
-                    setIsProductsDropdownOpen(!isProductsDropdownOpen);
+                    setIsProductsModalOpen(true);
+                    setIsMenuOpen(false); // Fecha o menu hambúrguer
                   }}
                   className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-gray-600 hover:text-devz-primary hover:bg-gray-50 transition-colors rounded-md"
                 >
                   <span>Produtos</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
-                    isProductsDropdownOpen ? 'rotate-180' : 'rotate-0'
-                  }`} />
+                  <ChevronDown className="w-4 h-4" />
                 </button>
-                
-                {isProductsDropdownOpen && (
-                  <div className="pl-4 space-y-1 border-l-2 border-gray-200 ml-3 mt-1 bg-gray-50 rounded-md">
-                    {/* Linha DEVZ ERP */}
-                    <div className="pt-2">
-                      <div className="px-3 py-1 text-sm font-semibold text-blue-600 mb-2">
-                        Linha DEVZ ERP
-                      </div>
-                      {devzProducts.map((product) => (
-                        <button
-                          key={product.name}
-                          onClick={() => {
-                            if (product.page && onNavigate) {
-                              onNavigate(product.page);
-                            }
-                            setIsMenuOpen(false);
-                          }}
-                          className="block w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors"
-                        >
-                          <div className="text-sm font-medium text-gray-900 mb-1">
-                            {product.name}
-                          </div>
-                          <div className="text-xs text-gray-600">
-                            {product.description}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                    
-                    {/* Desenvolvimento Customizado */}
-                    <div className="pt-2">
-                      <div className="px-3 py-1 text-sm font-semibold text-gray-700 mb-2">
-                        Desenvolvimento Customizado
-                      </div>
-                      {customSolutions.map((solution) => (
-                        <button
-                          key={solution.name}
-                          onClick={() => {
-                            if (solution.page && onNavigate) {
-                              onNavigate(solution.page);
-                            }
-                            setIsMenuOpen(false);
-                          }}
-                          className="block w-full text-left px-3 py-2 hover:bg-gray-50 rounded-md transition-colors"
-                        >
-                          <div className="text-sm font-medium text-gray-900 mb-1">
-                            {solution.name}
-                          </div>
-                          <div className="text-xs text-gray-600">
-                            {solution.description}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
               
               {/* Outros itens do menu mobile */}
@@ -489,6 +439,138 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
           </div>
         )}
       </div>
+
+      {/* Modal de Produtos para Mobile - Tela Cheia */}
+      {isProductsModalOpen && (
+        <div 
+          className="fixed top-0 left-0 w-full h-full z-[99999] bg-white"
+          style={{ 
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100vh',
+            overflow: 'hidden'
+          }}
+        >
+          {/* Header da Tela */}
+          <div 
+            className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between"
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '60px',
+              zIndex: 10
+            }}
+          >
+            <button
+              onClick={() => setIsProductsModalOpen(false)}
+              className="p-2 hover:bg-gray-100 rounded-md transition-colors -ml-2"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+            <h1 className="text-lg font-semibold text-gray-900">
+              Nossos Produtos
+            </h1>
+            <div className="w-10"></div>
+          </div>
+          
+          {/* Conteúdo com Scroll */}
+          <div 
+            className="bg-gray-50"
+            style={{ 
+              position: 'absolute',
+              top: '60px',
+              left: 0,
+              right: 0,
+              bottom: 0,
+              overflowY: 'scroll',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            <div className="p-4 space-y-6">
+              {/* Linha DEVZ ERP */}
+              <div>
+                <div className="flex items-center mb-4">
+                  <div className="w-3 h-6 bg-blue-600 rounded-full mr-3"></div>
+                  <h2 className="text-xl font-bold text-blue-600">Linha DEVZ ERP</h2>
+                </div>
+                <div className="space-y-3">
+                  {devzProducts.map((product) => (
+                    <button
+                      key={product.name}
+                      onClick={() => {
+                        if (product.page && onNavigate) {
+                          onNavigate(product.page);
+                        }
+                        setIsProductsModalOpen(false);
+                      }}
+                      className="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition-all"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <product.icon className="w-7 h-7 text-blue-600" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900 mb-1 text-base">
+                            {product.name}
+                          </h3>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            {product.description}
+                          </p>
+                        </div>
+                        <ChevronDown className="w-5 h-5 text-gray-400 rotate-[-90deg]" />
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desenvolvimento Customizado */}
+              <div>
+                <div className="flex items-center mb-4">
+                  <div className="w-3 h-6 bg-green-600 rounded-full mr-3"></div>
+                  <h2 className="text-xl font-bold text-green-600">Desenvolvimento Customizado</h2>
+                </div>
+                <div className="space-y-3">
+                  {customSolutions.map((solution) => (
+                    <button
+                      key={solution.name}
+                      onClick={() => {
+                        if (solution.page && onNavigate) {
+                          onNavigate(solution.page);
+                        }
+                        setIsProductsModalOpen(false);
+                      }}
+                      className="w-full text-left bg-white p-4 rounded-xl border border-gray-200 hover:border-green-500 hover:shadow-md transition-all"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <solution.icon className="w-7 h-7 text-green-600" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900 mb-1 text-base">
+                            {solution.name}
+                          </h3>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            {solution.description}
+                          </p>
+                        </div>
+                        <ChevronDown className="w-5 h-5 text-gray-400 rotate-[-90deg]" />
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Espaço extra no final */}
+              <div className="h-20"></div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

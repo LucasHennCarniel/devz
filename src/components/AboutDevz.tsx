@@ -355,7 +355,7 @@ function AboutDevz() {
               <div className="w-16 h-16 bg-[#3B82F6]/10 rounded-lg flex items-center justify-center mx-auto">
                 <Zap className="w-8 h-8 text-[#3B82F6]" />
               </div>
-              <div>n
+              <div>
                 <h3 className="text-xl font-medium text-gray-900 mb-4">Automação + IA</h3>
                 <p className="text-gray-600 leading-relaxed">
                   Soluções de automação contábil e empresarial utilizando Python 

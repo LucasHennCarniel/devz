@@ -9,6 +9,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [postsToShow, setPostsToShow] = useState(6);
 
   const categories = [
     { id: 'all', name: 'Todos os Posts', icon: Globe },
@@ -39,7 +40,7 @@ export default function BlogPage() {
       author: 'Carlos Silva',
       date: '2024-01-12',
       readTime: '8 min',
-      image: 'https://images.unsplash.com/photo-1667372531881-6f975b1c86db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxweXRob24lMjBwcm9ncmFtbWluZyUyMGNvZGV8ZW58MXx8fHwxNzU4MjAwNjM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['Python', 'Automação', 'Development', 'Performance']
     },
     {
@@ -50,7 +51,7 @@ export default function BlogPage() {
       author: 'Ana Santos',
       date: '2024-01-10',
       readTime: '6 min',
-      image: 'https://images.unsplash.com/photo-1684487747720-1ba29cda82f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwY2hhdGJvdHxlbnwxfHx8fDE3NTgyNDAwNjN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['IA', 'Chatbot', 'GPT', 'Automação']
     },
     {
@@ -61,7 +62,7 @@ export default function BlogPage() {
       author: 'Roberto Lima',
       date: '2024-01-08',
       readTime: '7 min',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGludGVsbGlnZW5jZSUyMGRhc2hib2FyZHxlbnwxfHx8fDE3NTgyMTY2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['Power BI', 'Azure', 'BI', 'Analytics']
     },
     {
@@ -72,7 +73,7 @@ export default function BlogPage() {
       author: 'Equipe Devz',
       date: '2024-01-05',
       readTime: '4 min',
-      image: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmb29kJTIwZGVsaXZlcnklMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzU4MjQwMDcwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['DEVZ Food', 'Delivery', 'Integração', 'iFood']
     },
     {
@@ -83,7 +84,7 @@ export default function BlogPage() {
       author: 'Marina Costa',
       date: '2024-01-03',
       readTime: '10 min',
-      image: 'https://images.unsplash.com/photo-1753955900083-b62ee8d97805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2NvdW50aW5nJTIwYXV0b21hdGlvbiUyMHByb2Nlc3N8ZW58MXx8fHwxNzU4MjQwMDczfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['Automação', 'Contabilidade', 'Python', 'Produtividade']
     },
     {
@@ -94,7 +95,7 @@ export default function BlogPage() {
       author: 'Dr. Felipe Oliveira',
       date: '2023-12-28',
       readTime: '12 min',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGludGVsbGlnZW5jZSUyMGRhc2hib2FyZHxlbnwxfHx8fDE3NTgyMTY2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['Machine Learning', 'DEVZ Shop', 'Vendas', 'Predição']
     },
     {
@@ -105,8 +106,184 @@ export default function BlogPage() {
       author: 'Equipe Devz',
       date: '2023-12-25',
       readTime: '6 min',
-      image: 'https://images.unsplash.com/photo-1649451844931-57e22fc82de3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzb2Z0d2FyZSUyMGRldmVsb3BtZW50JTIwZGFzaGJvYXJkfGVufDF8fHx8MTc1ODE5MjI0OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
       tags: ['DEVZ Clínicas', 'Telemedicina', 'Saúde', 'CFM']
+    },
+    {
+      id: 9,
+      title: 'React 18 + TypeScript: Modernizando Nossos Componentes',
+      excerpt: 'Como migramos nossa base de código para React 18 e implementamos TypeScript em todos os componentes, melhorando performance e manutenibilidade.',
+      category: 'tech',
+      author: 'João Santos',
+      date: '2023-12-20',
+      readTime: '9 min',
+      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['React', 'TypeScript', 'Frontend', 'Performance']
+    },
+    {
+      id: 10,
+      title: 'Dashboards Interativos: Guia Completo de Power BI',
+      excerpt: 'Tutorial passo a passo para criar dashboards profissionais no Power BI, desde conexão de dados até visualizações avançadas.',
+      category: 'powerbi',
+      author: 'Roberto Lima',
+      date: '2023-12-18',
+      readTime: '15 min',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Power BI', 'Dashboard', 'Visualização', 'Tutorial']
+    },
+    {
+      id: 11,
+      title: 'ChatGPT-4o no Atendimento: Implementação no DEVZ',
+      excerpt: 'Como integramos o GPT-4o em nossos sistemas de atendimento, reduzindo tempo de resposta em 70% e melhorando satisfação do cliente.',
+      category: 'ia',
+      author: 'Ana Santos',
+      date: '2023-12-15',
+      readTime: '7 min',
+      image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['GPT-4o', 'Atendimento', 'IA', 'Customer Service']
+    },
+    {
+      id: 12,
+      title: 'DEVZ Agro 2024.2: Gestão de Safras e IoT',
+      excerpt: 'Nova versão com monitoramento IoT de safras, previsão meteorológica integrada e controle financeiro específico para agronegócio.',
+      category: 'updates',
+      author: 'Equipe Devz',
+      date: '2023-12-12',
+      readTime: '8 min',
+      image: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['DEVZ Agro', 'IoT', 'Agronegócio', 'Safras']
+    },
+    {
+      id: 13,
+      title: '10 Dicas para Otimizar Performance em React',
+      excerpt: 'Estratégias práticas para melhorar performance de aplicações React, incluindo lazy loading, memoização e otimização de bundle.',
+      category: 'tips',
+      author: 'Marina Costa',
+      date: '2023-12-10',
+      readTime: '12 min',
+      image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['React', 'Performance', 'Otimização', 'Frontend']
+    },
+    {
+      id: 14,
+      title: 'Docker e Kubernetes: Deploy de Aplicações DEVZ',
+      excerpt: 'Como estruturamos nosso pipeline de deploy usando Docker e Kubernetes, garantindo escalabilidade e alta disponibilidade.',
+      category: 'tech',
+      author: 'Carlos Silva',
+      date: '2023-12-08',
+      readTime: '11 min',
+      image: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Docker', 'Kubernetes', 'DevOps', 'Deploy']
+    },
+    {
+      id: 15,
+      title: 'Power BI Service: Colaboração e Segurança',
+      excerpt: 'Guia completo sobre configuração de workspaces, permissões e políticas de segurança no Power BI Service para empresas.',
+      category: 'powerbi',
+      author: 'Roberto Lima',
+      date: '2023-12-05',
+      readTime: '9 min',
+      image: 'https://images.unsplash.com/photo-1416736969005-85cc29c6e129?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Power BI Service', 'Segurança', 'Colaboração', 'Enterprise']
+    },
+    {
+      id: 16,
+      title: 'RPA com Python: Automatizando Processos Repetitivos',
+      excerpt: 'Como usar bibliotecas Python para criar robôs de automação que eliminam tarefas manuais e reduzem erros operacionais.',
+      category: 'ia',
+      author: 'Dr. Felipe Oliveira',
+      date: '2023-12-03',
+      readTime: '10 min',
+      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['RPA', 'Python', 'Automação', 'Robôs']
+    },
+    {
+      id: 17,
+      title: 'DEVZ Pet 2024.1: Veterinária Digital',
+      excerpt: 'Lançamento do módulo veterinário com agenda online, prontuário digital e integração com laboratórios para exames.',
+      category: 'updates',
+      author: 'Equipe Devz',
+      date: '2023-12-01',
+      readTime: '5 min',
+      image: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['DEVZ Pet', 'Veterinária', 'Agenda', 'Prontuário']
+    },
+    {
+      id: 18,
+      title: 'Metodologias Ágeis no Desenvolvimento DEVZ',
+      excerpt: 'Como implementamos Scrum e Kanban no desenvolvimento de software, melhorando entregas e comunicação com clientes.',
+      category: 'tips',
+      author: 'Marina Costa',
+      date: '2023-11-28',
+      readTime: '8 min',
+      image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Scrum', 'Kanban', 'Metodologias', 'Desenvolvimento']
+    },
+    {
+      id: 19,
+      title: 'Node.js e Express: APIs Robustas e Escaláveis',
+      excerpt: 'Melhores práticas para desenvolvimento de APIs com Node.js e Express, incluindo autenticação, validação e testes.',
+      category: 'tech',
+      author: 'João Santos',
+      date: '2023-11-25',
+      readTime: '13 min',
+      image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Node.js', 'Express', 'API', 'Backend']
+    },
+    {
+      id: 20,
+      title: 'DAX Avançado: Cálculos Complexos no Power BI',
+      excerpt: 'Domine fórmulas DAX avançadas para criar medidas complexas, time intelligence e cálculos personalizados no Power BI.',
+      category: 'powerbi',
+      author: 'Roberto Lima',
+      date: '2023-11-22',
+      readTime: '14 min',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['DAX', 'Power BI', 'Medidas', 'Time Intelligence']
+    },
+    {
+      id: 21,
+      title: 'Segurança em Aplicações Web: Guia Prático',
+      excerpt: 'Implementação de práticas de segurança essenciais: HTTPS, CORS, CSP, autenticação JWT e proteção contra ataques comuns.',
+      category: 'tips',
+      author: 'Carlos Silva',
+      date: '2023-11-20',
+      readTime: '11 min',
+      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Segurança', 'Web Security', 'JWT', 'HTTPS']
+    },
+    {
+      id: 22,
+      title: 'Deep Learning para Análise Preditiva de Vendas',
+      excerpt: 'Como usamos redes neurais para prever tendências de vendas e otimizar estratégias de marketing e estoque.',
+      category: 'ia',
+      author: 'Dr. Felipe Oliveira',
+      date: '2023-11-18',
+      readTime: '16 min',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Deep Learning', 'Vendas', 'Predição', 'Neural Networks']
+    },
+    {
+      id: 23,
+      title: 'DEVZ Salões 2024.2: Agenda Inteligente com IA',
+      excerpt: 'Nova funcionalidade que usa IA para otimizar agendamentos, reduzir faltas e maximizar ocupação do salão.',
+      category: 'updates',
+      author: 'Equipe Devz',
+      date: '2023-11-15',
+      readTime: '6 min',
+      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['DEVZ Salões', 'IA', 'Agenda', 'Otimização']
+    },
+    {
+      id: 24,
+      title: 'Git Flow e CI/CD: Workflow de Desenvolvimento',
+      excerpt: 'Estruturação de workflows com Git Flow, GitHub Actions e deploy automatizado para ambientes de produção.',
+      category: 'tips',
+      author: 'João Santos',
+      date: '2023-11-12',
+      readTime: '9 min',
+      image: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.0.3&q=80&w=1080',
+      tags: ['Git Flow', 'CI/CD', 'GitHub Actions', 'DevOps']
     }
   ];
 
@@ -119,6 +296,15 @@ export default function BlogPage() {
   });
 
   const featuredPost = blogPosts[0];
+
+  const loadMorePosts = () => {
+    setPostsToShow(prev => prev + 6);
+  };
+
+  // Reset posts to show when category or search changes
+  React.useEffect(() => {
+    setPostsToShow(6);
+  }, [selectedCategory, searchTerm]);
 
   return (
     <div className="min-h-screen bg-white pt-16">
@@ -231,10 +417,10 @@ export default function BlogPage() {
                     key={category.id}
                     variant={selectedCategory === category.id ? 'default' : 'outline'}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`flex items-center gap-2 ${
+                    className={`flex items-center gap-2 transition-all duration-300 ${
                       selectedCategory === category.id
-                        ? 'bg-[#31496e] text-white hover:bg-[#31496e]/90'
-                        : 'border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e]'
+                        ? 'bg-devz-primary text-white hover:bg-devz-primary-dark shadow-md'
+                        : 'border-gray-300 text-gray-700 hover:bg-devz-primary hover:text-white hover:border-devz-primary hover:shadow-md transform hover:scale-105'
                     }`}
                   >
                     <IconComponent className="h-4 w-4" />
@@ -247,7 +433,7 @@ export default function BlogPage() {
 
           {/* Posts Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.slice(1).map((post) => (
+            {filteredPosts.slice(1, postsToShow + 1).map((post) => (
               <Card key={post.id} className="border-0 shadow-sm hover:shadow-lg transition-all duration-300 bg-white group cursor-pointer">
                 <div className="relative h-48 overflow-hidden">
                   <ImageWithFallback
@@ -295,13 +481,14 @@ export default function BlogPage() {
           </div>
 
           {/* Load More Button */}
-          {filteredPosts.length > 7 && (
+          {postsToShow < filteredPosts.length - 1 && (
             <div className="text-center mt-12">
               <Button 
+                onClick={loadMorePosts}
                 variant="outline"
-                className="border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e]"
+                className="border-gray-300 text-gray-700 hover:bg-[#31496e] hover:text-white hover:border-[#31496e] transition-all duration-300"
               >
-                Carregar Mais Posts
+                Carregar Mais Posts ({filteredPosts.length - postsToShow - 1} restantes)
               </Button>
             </div>
           )}
