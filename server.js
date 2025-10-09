@@ -2,14 +2,19 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Porta definida pelo ambiente ou fallback para 3000
-const PORT = process.env.PORT || 3000;
+// Configuração de porta seguindo exatamente o padrão KingHost
+// Para script "server.js", a variável será PORT_SERVER
+// Fallback para 21023 conforme configuração desejada no painel
+const PORT = process.env.PORT_SERVER;
 
 // Middleware para logging
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   next();
 });
+
+// Em ambientes com proxy reverso (Nginx/Apache)
+app.set('trust proxy', 1);
 
 // Servir arquivos estáticos da pasta build
 app.use(express.static(path.join(__dirname, 'build')));
@@ -29,9 +34,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor DEVZ rodando na porta ${PORT}`);
-  console.log(`📱 Acesse: http://localhost:${PORT}`);
-  console.log(`📁 Servindo arquivos de: ${path.join(__dirname, 'build')}`);
+  console.log('Servidor rodando na porta: ' + PORT);
 }).on('error', (err) => {
   console.error('❌ Erro ao iniciar servidor:', err);
 });

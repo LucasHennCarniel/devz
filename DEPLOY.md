@@ -87,6 +87,24 @@ pm2 save
 - Configure proxy reverso para porta 3000
 - Ou use a porta fornecida pela KingHost
 
+### 🔧 CONFIGURAÇÕES NO PAINEL KINGHOST
+
+#### 1. Node.js Configuration
+- **Versão**: Node.js 18+
+- **Arquivo Principal**: `server.js`
+- **Porta**: Use a porta fornecida pela KingHost (não 3000)
+- **Comando de Start**: `npm start` ou `node server.js`
+
+#### 2. Variáveis de Ambiente
+```env
+NODE_ENV=production
+PORT=[PORTA_FORNECIDA_KINGHOST]
+```
+
+#### 3. Domain Pointing
+- **Documento Root**: `/www/` ou `/public_html/`
+- **Index File**: Será servido pelo Express (server.js)
+
 ### Nginx (exemplo)
 ```nginx
 server {
