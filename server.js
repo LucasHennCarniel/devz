@@ -1,42 +1,36 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
+const PORT = process.env.PORT || 3001;
 
-// Configuração de porta seguindo exatamente o padrão KingHost
-// Para script "server.js", a variável será PORT_SERVER
-// Fallback para 21023 conforme configuração desejada no painel
-const PORT = process.env.PORT_SERVER;
+// Middlewares
+app.use(cors());
+app.use(express.json());
 
-// Middleware para logging
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
+// Rota de teste básica
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'API Devz funcionando!',
+    email: process.env.EMAIL_USER || 'não configurado'
+  });
 });
 
-// Em ambientes com proxy reverso (Nginx/Apache)
-app.set('trust proxy', 1);
+// Rotas de email
+const emailRoutes = require('./backend/routes/email');
+app.use('/api/email', emailRoutes);
 
-// Servir arquivos estáticos da pasta build
-app.use(express.static(path.join(__dirname, 'build')));
-
-// Servir arquivos de imagem da pasta public
-app.use('/img', express.static(path.join(__dirname, 'public/img')));
-
-// Rota para todas as páginas (SPA)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build/index.html'));
+// Rota de saúde
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    message: 'API funcionando',
+    timestamp: new Date().toISOString()
+  });
 });
 
-// Tratamento de erros
-app.use((err, req, res, next) => {
-  console.error('Erro:', err);
-  res.status(500).send('Erro interno do servidor');
-});
-
+// Iniciar servidor
 app.listen(PORT, () => {
-  console.log('Servidor rodando na porta: ' + PORT);
-}).on('error', (err) => {
-  console.error('❌ Erro ao iniciar servidor:', err);
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`📧 Email configurado: ${process.env.EMAIL_USER || 'NÃO CONFIGURADO'}`);
 });
-
-module.exports = app;
