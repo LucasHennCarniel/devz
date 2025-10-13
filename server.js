@@ -29,8 +29,10 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
+// Iniciar servidor - 0.0.0.0 permite acesso pela rede local
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
   console.log(`📧 Email configurado: ${process.env.EMAIL_USER || 'NÃO CONFIGURADO'}`);
+  console.log(`🌐 Acesso local: http://localhost:${PORT}`);
+  console.log(`🌐 Acesso rede: http://172.16.31.129:${PORT}`);
 });

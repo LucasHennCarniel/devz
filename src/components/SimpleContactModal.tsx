@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
 import { X, Send } from 'lucide-react';
+import { API_ENDPOINTS } from '../config/api';
 
 interface SimpleContactModalProps {
-  /** Texto do botão que abre o modal */
   triggerText?: string;
-  /** Classe CSS adicional para o botão trigger */
   triggerClassName?: string;
-  /** Se true, usa classe com margem superior (para página de contato) */
   useOffset?: boolean;
 }
 
-/**
- * Modal de contato simples - Passo 1 da implementação
- * Apenas um modal básico para testar se funciona
- */
 export function SimpleContactModal({
   triggerText = "RECEBA UMA DEMONSTRAÇÃO",
   triggerClassName = "",
@@ -23,50 +17,136 @@ export function SimpleContactModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleButtonClick = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => {
     setIsOpen(false);
     setIsSubmitted(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simula envio do formulário
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Fecha o modal após 2 segundos
-    setTimeout(() => {
-      handleClose();
-    }, 2000);
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const dados = {
+      nome: formData.get('nome') as string,
+      email: formData.get('email') as string,
+      telefone: formData.get('telefone') as string,
+      cargo: formData.get('cargo') as string,
+      empresa: formData.get('empresa') as string,
+      tamanho: formData.get('tamanho') as string,
+      site: formData.get('site') as string,
+      estado: formData.get('estado') as string,
+      segmento: formData.get('segmento') as string,
+      servico: 'Demonstração',
+      mensagem: `Solicitação de demonstração através do site.
+
+Detalhes do contato:
+- Cargo: ${formData.get('cargo') || 'Não informado'}
+- Empresa: ${formData.get('empresa') || 'Não informada'}
+- Tamanho da empresa: ${formData.get('tamanho') || 'Não informado'}
+- Site: ${formData.get('site') || 'Não informado'}
+- Estado: ${formData.get('estado') || 'Não informado'}
+- Segmento: ${formData.get('segmento') || 'Não informado'}`
+    };
+
+    console.log('Enviando dados:', dados);
+    console.log('URL da API:', API_ENDPOINTS.EMAIL);
+
+    try {
+      const response = await fetch(API_ENDPOINTS.EMAIL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dados)
+      });
+
+      const result = await response.json();
+      console.log('Resposta da API:', result);
+
+      if (result.success) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          closeModal();
+        }, 2500);
+      } else {
+        throw new Error(result.message || 'Erro ao enviar formulário');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao enviar formulário. Tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Estilos inline para garantir funcionamento
+  const modalOverlayStyle = {
+    position: 'fixed' as const,
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1000,
+  };
+
+  const modalContentStyle = {
+    backgroundColor: 'white',
+    borderRadius: '8px',
+    width: '90%',
+    maxWidth: '500px',
+    maxHeight: '90vh',
+    overflow: 'auto',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
+    marginTop: '0',
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '5px',
+    border: '2px solid #ccc',
+    borderRadius: '4px',
+    fontSize: '16px',
+    backgroundColor: 'white',
+    color: 'black',
+    boxSizing: 'border-box' as const,
+  };
+
+  const buttonStyle = {
+    width: '100%',
+    padding: '15px',
+    backgroundColor: '#31496e',
+    color: 'white',
+    border: 'none',
+    borderRadius: '4px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
   };
 
   return (
     <>
       <button 
-        onClick={handleButtonClick}
+        onClick={openModal}
         className={`${triggerClassName} font-medium rounded-md transition-colors inline-flex items-center justify-center`}
       >
         {triggerText}
       </button>
 
       {isOpen && (
-        <>
-          {/* Overlay escuro que cobre toda a tela */}
-          <div 
-            className="contact-modal-overlay"
-            onClick={handleClose}
-          />
-          
-          {/* Modal centralizado */}
-          <div className={useOffset ? "contact-modal-content-offset" : "contact-modal-content"}>
+        <div style={modalOverlayStyle} onClick={closeModal}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             {isSubmitted ? (
               // Tela de sucesso
               <div className="p-4 sm:p-8 text-center">
@@ -84,13 +164,13 @@ export function SimpleContactModal({
               </div>
             ) : (
               <>
-                {/* Header do Modal */}
+                {/* Header */}
                 <div className="flex items-start justify-between p-4 sm:p-6 border-b border-gray-300">
                   <h2 className="text-sm sm:text-base font-semibold text-gray-900 pr-3 leading-tight">
                     Preencha o formulário e um dos nossos consultores entrará em contato!
                   </h2>
                   <button
-                    onClick={handleClose}
+                    onClick={closeModal}
                     className="text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0 p"
                   >
                     <X className="w-4 h-4 sm:w-5 sm:h-5 cursor-pointer" />
@@ -100,24 +180,25 @@ export function SimpleContactModal({
                 {/* Formulário */}
                 <form onSubmit={handleSubmit} className="p-4 sm:p-6 contact-modal-form">
                   <div className="space-y-3 sm:space-y-4">
+                    
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Nome
+                        Nome *
                       </label>
                       <input
                         type="text"
                         id="name"
-                        name="name"
+                        name="nome"
                         required
                         disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
-                        placeholder="Seu nome completo"
+                        placeholder="Seu Nome Completo"
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       />
                     </div>
-                    
+
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        E-mail
+                        E-mail *
                       </label>
                       <input
                         type="email"
@@ -125,8 +206,8 @@ export function SimpleContactModal({
                         name="email"
                         required
                         disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2" 
                         placeholder="seu@email.com"
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       />
                     </div>
 
@@ -135,12 +216,12 @@ export function SimpleContactModal({
                         Telefone
                       </label>
                       <input
-                        type="tel"
+                        type="text"
                         id="telefone"
                         name="telefone"
                         disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
                         placeholder="(11) 99999-9999"
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       />
                     </div>
 
@@ -148,11 +229,11 @@ export function SimpleContactModal({
                       <label htmlFor="cargo" className="block text-sm font-medium text-gray-700 mb-2">
                         Cargo
                       </label>
-                      <select
+                      <select 
                         id="cargo"
-                        name="cargo"
-                        disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
+                        name="cargo" 
+                        disabled={isSubmitting} 
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       >
                         <option value="">Selecione...</option>
                         <option value="Sócio(a) / CEO / Proprietário(a)">Sócio(a) / CEO / Proprietário(a)</option>
@@ -178,8 +259,8 @@ export function SimpleContactModal({
                         id="empresa"
                         name="empresa"
                         disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
                         placeholder="Nome da sua empresa"
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       />
                     </div>
 
@@ -187,11 +268,11 @@ export function SimpleContactModal({
                       <label htmlFor="tamanho" className="block text-sm font-medium text-gray-700 mb-2">
                         Tamanho da Empresa
                       </label>
-                      <select
+                      <select 
                         id="tamanho"
-                        name="tamanho"
-                        disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
+                        name="tamanho" 
+                        disabled={isSubmitted} 
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       >
                         <option value="">Selecione...</option>
                         <option value="Microempresa (1-9 funcionários)">Microempresa (1-9 funcionários)</option>
@@ -207,12 +288,12 @@ export function SimpleContactModal({
                         Site da Empresa
                       </label>
                       <input
-                        type="url"
+                        type="text"
                         id="site"
                         name="site"
                         disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
                         placeholder="www.suaempresa.com.br"
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       />
                     </div>
 
@@ -220,11 +301,11 @@ export function SimpleContactModal({
                       <label htmlFor="estado" className="block text-sm font-medium text-gray-700 mb-2">
                         Estado
                       </label>
-                      <select
+                      <select 
                         id="estado"
-                        name="estado"
-                        disabled={isSubmitting}
-                        className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
+                        name="estado" 
+                        disabled={isSubmitting} 
+                        className="w-full px-2 py-1.5 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50"
                       >
                         <option value="">Selecione...</option>
                         <option value="AC">Acre</option>
@@ -257,16 +338,11 @@ export function SimpleContactModal({
                       </select>
                     </div>
 
-                     <div className="mb-6">
-                       <label htmlFor="segmento" className="block text-sm font-medium text-gray-700 mb-2">
-                         Segmento da Empresa
-                       </label>
-                       <select
-                         id="segmento"
-                         name="segmento"
-                         disabled={isSubmitting}
-                         className="w-full px-3 sm:px-5 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#31496e] focus:border-[#31496e] disabled:bg-gray-50 p-2"
-                       >
+                    <div>
+                      <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#333' }}>
+                        Segmento da Empresa
+                      </label>
+                      <select name="segmento" disabled={isSubmitting} style={inputStyle}>
                         <option value="">Selecione...</option>
                         <option value="Agronegócio">Agronegócio</option>
                         <option value="Alimentação e Bebidas">Alimentação e Bebidas</option>
@@ -297,38 +373,63 @@ export function SimpleContactModal({
                         <option value="Outro">Outro</option>
                       </select>
                     </div>
+
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full mt-4 sm:mt-6 bg-devz-primary text-white font-semibold px-4 sm:px-5 py-2.5 sm:py-3 rounded-md transition-colors flex items-center justify-center cursor-pointer p-2"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                        Enviando...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 mr-2" />
-                        Enviar
-                      </>
-                    )}
-                  </button>
+                  <div style={{ marginTop: '20px' }}>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      style={buttonStyle}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div style={{
+                            width: '20px',
+                            height: '20px',
+                            border: '2px solid white',
+                            borderTop: '2px solid transparent',
+                            borderRadius: '50%',
+                            animation: 'spin 1s linear infinite'
+                          }}></div>
+                          Enviando...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={20} />
+                          Enviar
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-                  <p className="text-xs text-gray-500 text-center mt-2 sm:mt-3 px-2">
+                  <p style={{ 
+                    fontSize: '12px', 
+                    color: '#666', 
+                    textAlign: 'center', 
+                    marginTop: '15px' 
+                  }}>
                     Ao informar meus dados, eu concordo com a{' '}
-                    <a href="#" className="text-[#31496e] hover:underline">
+                    <a href="#" style={{ color: '#31496e' }}>
                       Política de Privacidade
                     </a>
                   </p>
+
                 </form>
               </>
             )}
           </div>
-        </>
+        </div>
       )}
+      
+      <style>
+        {`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}
+      </style>
     </>
   );
 }

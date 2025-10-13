@@ -440,6 +440,19 @@ export function Hero() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      // Verifica se o foco está em um input, textarea ou contenteditable
+      const activeElement = document.activeElement;
+      const isInputFocused = activeElement && (
+        activeElement.tagName === 'INPUT' || 
+        activeElement.tagName === 'TEXTAREA' || 
+        activeElement.hasAttribute('contenteditable')
+      );
+      
+      // Se houver um input focado, não intercepta as teclas
+      if (isInputFocused) {
+        return;
+      }
+
       switch (event.key) {
         case 'ArrowLeft':
           event.preventDefault();
