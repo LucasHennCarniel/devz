@@ -1,9 +1,10 @@
 // Configuração da API
 // Usa variável de ambiente ou detecta automaticamente o host
 const getApiUrl = () => {
-  // Se estiver em produção, use a URL de produção
-  if (import.meta.env && (import.meta.env as any).VITE_API_URL) {
-    return (import.meta.env as any).VITE_API_URL;
+  // Tenta usar variável de ambiente do Vite
+  const viteApiUrl = typeof window !== 'undefined' && (window as any).__VITE_API_URL__;
+  if (viteApiUrl) {
+    return viteApiUrl;
   }
   
   // Em desenvolvimento, usa o IP da rede local se não for localhost

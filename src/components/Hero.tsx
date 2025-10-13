@@ -85,12 +85,14 @@ const SLIDES: Slide[] = [
 ];
 
 // Components
-const SlideContent: React.FC<{
+interface SlideContentProps {
   slide: Slide;
   index: number;
   currentSlide: number;
   scrollToSection: (href: string) => void;
-}> = ({ slide, index, currentSlide, scrollToSection }) => (
+}
+
+const SlideContent = ({ slide, index, currentSlide, scrollToSection }: SlideContentProps) => (
   <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[60vh]">
       {/* Left Column - Content */}
@@ -228,11 +230,13 @@ const SlideContent: React.FC<{
   </div>
 );
 
-const DynamicPagination: React.FC<{
+interface DynamicPaginationProps {
   currentSlide: number;
   isTransitioning: boolean;
   onGoToSlide: (index: number) => void;
-}> = ({ currentSlide, isTransitioning, onGoToSlide }) => (
+}
+
+const DynamicPagination = ({ currentSlide, isTransitioning, onGoToSlide }: DynamicPaginationProps) => (
   <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
     {SLIDES.map((slide, index) => (
       <button
@@ -275,7 +279,11 @@ const DynamicPagination: React.FC<{
   </div>
 );
 
-const ProgressIndicator: React.FC<{ currentSlide: number }> = ({ currentSlide }) => (
+interface ProgressIndicatorProps {
+  currentSlide: number;
+}
+
+const ProgressIndicator = ({ currentSlide }: ProgressIndicatorProps) => (
   <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3">
     <div className="relative w-8 h-8">
       <svg className="w-8 h-8 transform -rotate-90" viewBox="0 0 32 32">
@@ -317,7 +325,7 @@ export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const intervalRef = useRef<number | undefined>();
   
   // Touch/Mouse handling for drag navigation
   const [isDragging, setIsDragging] = useState(false);
@@ -395,12 +403,12 @@ export function Hero() {
   }, [isDragging, dragStart, dragEnd, nextSlide, prevSlide]);
 
   // Mouse events
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+  const handleMouseDown = useCallback((e: any) => {
     e.preventDefault();
     handleDragStart(e.clientX, e.clientY);
   }, [handleDragStart]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: any) => {
     handleDragMove(e.clientX, e.clientY);
   }, [handleDragMove]);
 
@@ -409,12 +417,12 @@ export function Hero() {
   }, [handleDragEnd]);
 
   // Touch events
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+  const handleTouchStart = useCallback((e: any) => {
     const touch = e.touches[0];
     handleDragStart(touch.clientX, touch.clientY);
   }, [handleDragStart]);
 
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+  const handleTouchMove = useCallback((e: any) => {
     const touch = e.touches[0];
     handleDragMove(touch.clientX, touch.clientY);
   }, [handleDragMove]);
