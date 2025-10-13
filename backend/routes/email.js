@@ -1,7 +1,31 @@
 const express = require('express');
-const transporter = require('../config/gmail');
+const multer = require('multer');
+const { contatoTransporter, trabalheConoscoTransporter } = require('../config/gmail');
 
 const router = express.Router();
+
+// Configurar multer para upload de arquivos em memória
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // Limite de 5MB
+  },
+  fileFilter: (req, file, cb) => {
+    // Aceitar apenas PDF, DOC e DOCX
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ];
+    
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Tipo de arquivo não permitido. Use PDF, DOC ou DOCX.'));
+    }
+  }
+});
 
 // Rota específica para formulário de contato do site
 router.post('/contato', async (req, res) => {
@@ -44,17 +68,17 @@ router.post('/contato', async (req, res) => {
       </div>
     `;
 
-    // Configuração do email
+    // Configuração do email usando o transporter de contato
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER, // Enviar para você mesmo
+      from: 'atena.digital03@gmail.com',
+      to: 'atena.digital03@gmail.com', // Enviar para você mesmo
       subject: `[SITE] Novo contato: ${nome}`,
       html: htmlContent,
       replyTo: email // Para responder direto para o cliente
     };
 
     // Enviar email
-    await transporter.sendMail(mailOptions);
+    await contatoTransporter.sendMail(mailOptions);
 
     res.json({
       success: true,
@@ -66,6 +90,77 @@ router.post('/contato', async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Erro ao enviar mensagem. Tente novamente.'
+    });
+  }
+});
+
+// Rota para enviar email de "Trabalhe Conosco" (com upload de arquivo)
+router.post('/trabalhe-conosco', upload.single('curriculo'), async (req, res) => {
+  try {
+    const { nome, email, telefone, mensagem } = req.body;
+    const arquivo = req.file;
+
+    // Validação
+    if (!nome || !email || !telefone || !mensagem) {
+      return res.status(400).json({
+        success: false,
+        message: 'Todos os campos são obrigatórios'
+      });
+    }
+
+    // Conteúdo do email
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #333; border-bottom: 2px solid #4a90e2; padding-bottom: 10px;">
+          Nova Candidatura - Trabalhe Conosco
+        </h2>
+        
+        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
+          <p><strong>Nome:</strong> ${nome}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Telefone:</strong> ${telefone}</p>
+          ${arquivo ? `<p><strong>Currículo:</strong> ${arquivo.originalname}</p>` : ''}
+        </div>
+
+        <div style="margin: 20px 0;">
+          <h3 style="color: #555;">Mensagem:</h3>
+          <p style="line-height: 1.6; color: #666;">${mensagem}</p>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
+        
+        <p style="color: #999; font-size: 12px; text-align: center;">
+          Email enviado através do formulário "Trabalhe Conosco" do site Devz
+        </p>
+      </div>
+    `;
+
+    // Configurar email
+    const mailOptions = {
+      from: process.env.EMAIL_USER_TRABALHE_CONOSCO,
+      to: 'financeiro01atena@gmail.com', // Email do financeiro
+      subject: `[TRABALHE CONOSCO] Nova candidatura: ${nome}`,
+      html: htmlContent,
+      replyTo: email, // Para responder direto para o candidato
+      attachments: arquivo ? [{
+        filename: arquivo.originalname,
+        content: arquivo.buffer
+      }] : []
+    };
+
+    // Enviar email usando o transporter de trabalhe conosco
+    await trabalheConoscoTransporter.sendMail(mailOptions);
+
+    res.json({
+      success: true,
+      message: 'Candidatura enviada com sucesso! Entraremos em contato em breve.'
+    });
+
+  } catch (error) {
+    console.error('Erro ao enviar email de trabalhe conosco:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao enviar candidatura. Tente novamente.'
     });
   }
 });
@@ -90,7 +185,7 @@ router.post('/send', async (req, res) => {
       html
     };
 
-    await transporter.sendMail(mailOptions);
+    await contatoTransporter.sendMail(mailOptions);
 
     res.json({
       success: true,

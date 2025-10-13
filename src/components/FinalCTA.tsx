@@ -3,23 +3,34 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowRight, Phone, Mail, MessageSquare, Clock, CheckCircle, Users, Upload, Send, ChevronDown } from 'lucide-react';
 import { SimpleContactModal } from './SimpleContactModal';
+import { API_ENDPOINTS } from '../config/api';
 
 export function FinalCTA() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [formData, setFormData] = useState({
+    nome: '',
     email: '',
     telefone: '',
+    mensagem: '',
     arquivo: null as File | null
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === 'arquivo' ? (files ? files[0] : null) : value
-    }));
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
+    if (e.target instanceof HTMLInputElement && e.target.files) {
+      setFormData(prev => ({
+        ...prev,
+        arquivo: e.target.files ? e.target.files[0] : null
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
 
@@ -27,18 +38,45 @@ export function FinalCTA() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simula envio do formulário
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset após 3 segundos
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ email: '', telefone: '', arquivo: null });
-      setIsDropdownOpen(false);
-    }, 3000);
+    try {
+      // Criar FormData para enviar arquivo
+      const formDataToSend = new FormData();
+      formDataToSend.append('nome', formData.nome);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('telefone', formData.telefone);
+      formDataToSend.append('mensagem', formData.mensagem);
+      
+      // Adicionar arquivo se existir
+      if (formData.arquivo) {
+        formDataToSend.append('curriculo', formData.arquivo);
+      }
+
+      // Enviar dados para a API (sem Content-Type, o navegador define automaticamente)
+      const response = await fetch(API_ENDPOINTS.TRABALHE_CONOSCO, {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        
+        // Reset após 3 segundos
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({ nome: '', email: '', telefone: '', mensagem: '', arquivo: null });
+          setIsDropdownOpen(false);
+        }, 3000);
+      } else {
+        throw new Error(data.message || 'Erro ao enviar candidatura');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      alert('Erro ao enviar candidatura. Por favor, tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -221,6 +259,24 @@ export function FinalCTA() {
                       </div>
                     ) : (
                       <form onSubmit={handleSubmit} className="space-y-4">
+                        {/* Nome */}
+                        <div>
+                          <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-2">
+                            Nome Completo
+                          </label>
+                          <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            value={formData.nome}
+                            onChange={handleInputChange}
+                            required
+                            disabled={isSubmitting}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-devz-primary focus:border-devz-primary disabled:bg-gray-50"
+                            placeholder="Seu nome completo"
+                          />
+                        </div>
+
                         {/* Email */}
                         <div>
                           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -257,10 +313,28 @@ export function FinalCTA() {
                           />
                         </div>
 
-                        {/* Upload de Arquivo */}
+                        {/* Mensagem / Apresentação */}
+                        <div>
+                          <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700 mb-2">
+                            Mensagem / Apresentação
+                          </label>
+                          <textarea
+                            id="mensagem"
+                            name="mensagem"
+                            value={formData.mensagem}
+                            onChange={handleInputChange}
+                            required
+                            disabled={isSubmitting}
+                            rows={4}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-devz-primary focus:border-devz-primary disabled:bg-gray-50 resize-none"
+                            placeholder="Conte-nos sobre sua experiência e por que gostaria de fazer parte da nossa equipe..."
+                          />
+                        </div>
+
+                        {/* Upload de Arquivo - OPCIONAL */}
                         <div>
                           <label htmlFor="arquivo" className="block text-sm font-medium text-gray-700 mb-2">
-                            Currículo (PDF, DOC, DOCX)
+                            Currículo (PDF, DOC, DOCX) - Opcional
                           </label>
                           <div className="relative">
                             <input
@@ -269,7 +343,6 @@ export function FinalCTA() {
                               name="arquivo"
                               onChange={handleInputChange}
                               accept=".pdf,.doc,.docx"
-                              required
                               disabled={isSubmitting}
                               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-devz-primary focus:border-devz-primary disabled:bg-gray-50 file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-devz-primary/10 file:text-devz-primary hover:file:bg-devz-primary/20"
                             />

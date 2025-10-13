@@ -20,5 +20,6 @@ const getApiUrl = () => {
 export const API_URL = getApiUrl();
 export const API_ENDPOINTS = {
   EMAIL: `${API_URL}/api/email/contato`,
+  TRABALHE_CONOSCO: `${API_URL}/api/email/trabalhe-conosco`,
   HEALTH: `${API_URL}/api/health`
 };

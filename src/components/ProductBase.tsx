@@ -5,6 +5,7 @@ import { Badge } from './ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 import { ArrowRight, Check, MessageCircle, Star } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { SimpleContactModal } from './SimpleContactModal';
 
 interface Feature {
   title: string;
@@ -100,17 +101,14 @@ export function ProductBase({
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  onClick={() => scrollToSection('#contato')}
-                  className="bg-white hover:bg-white/90 text-devz-primary px-8 py-4 text-lg font-medium"
-                >
-                  Solicitar Demonstração
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <SimpleContactModal
+                  triggerText="Solicitar Demonstração →"
+                  triggerClassName="bg-white hover:bg-white/90 text-devz-primary px-8 py-1 text-lg font-medium inline-flex items-center justify-center rounded-md h-auto"
+                />
                 <Button 
                   variant="outline"
                   onClick={() => scrollToSection('#funcionalidades')}
-                  className="bg-white hover:bg-white/90 text-devz-primary px-8 py-4 text-lg font-medium"
+                  className="bg-white hover:bg-white/90 text-devz-primary px-8 py-1 text-lg font-medium"
                 >
                   Ver Funcionalidades
                 </Button>
@@ -309,16 +307,13 @@ export function ProductBase({
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                onClick={() => scrollToSection('#contato')}
-                className="bg-white hover:bg-white/90 text-devz-primary px-8 py-4 text-lg font-medium cursor-pointer"
-              >
-                Solicitar Demonstração Gratuita
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <SimpleContactModal
+                triggerText="Solicitar Demonstração Gratuita →"
+                triggerClassName="bg-white hover:bg-white/90 text-devz-primary px-8 py-1 text-lg font-medium inline-flex items-center justify-center rounded-md h-auto"
+              />
               <Button 
                 variant="outline"
-                className="border-white text-devz-primary hover:bg-white hover:bg-white/90 px-8 py-4 text-lg font-medium cursor-pointer"
+                className="border-white text-devz-primary hover:bg-white hover:bg-white/90 px-8 py-1 text-lg font-medium cursor-pointer"
               >
                 Baixar Material
               </Button>

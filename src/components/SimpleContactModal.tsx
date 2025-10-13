@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { API_ENDPOINTS } from '../config/api';
+import { Button } from './ui/button';
 
 interface SimpleContactModalProps {
   triggerText?: string;
@@ -17,7 +18,10 @@ export function SimpleContactModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const openModal = () => setIsOpen(true);
+  const openModal = () => {
+    console.log('🔔 Modal abrindo...');
+    setIsOpen(true);
+  };
   const closeModal = () => {
     setIsOpen(false);
     setIsSubmitted(false);
@@ -90,22 +94,23 @@ Detalhes do contato:
     left: 0,
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 1000,
+    backdropFilter: 'blur(4px)',
   };
 
   const modalContentStyle = {
     backgroundColor: 'white',
-    borderRadius: '8px',
+    borderRadius: '12px',
     width: '90%',
     maxWidth: '500px',
     maxHeight: '90vh',
     overflow: 'auto',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)',
-    marginTop: '0',
+    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.4)',
+    marginTop: '60px',
+    position: 'relative' as const,
   };
 
   const inputStyle = {
@@ -137,19 +142,24 @@ Detalhes do contato:
 
   return (
     <>
-      <button 
-        onClick={openModal}
-        className={`${triggerClassName} font-medium rounded-md transition-colors inline-flex items-center justify-center`}
+      <Button 
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          openModal();
+        }}
+        className={triggerClassName}
+        type="button"
       >
         {triggerText}
-      </button>
+      </Button>
 
       {isOpen && (
         <div style={modalOverlayStyle} onClick={closeModal}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             {isSubmitted ? (
               // Tela de sucesso
-              <div className="p-4 sm:p-8 text-center">
+              <div className="p-4 sm:p-8 ">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -166,7 +176,7 @@ Detalhes do contato:
               <>
                 {/* Header */}
                 <div className="flex items-start justify-between p-4 sm:p-6 border-b border-gray-300">
-                  <h2 className="text-sm sm:text-base font-semibold text-gray-900 pr-3 leading-tight">
+                  <h2 className="text-sm sm:text-base font-semibold text-gray-900 pr-3 leading-tight text-left">
                     Preencha o formulário e um dos nossos consultores entrará em contato!
                   </h2>
                   <button
@@ -178,11 +188,11 @@ Detalhes do contato:
                 </div>
 
                 {/* Formulário */}
-                <form onSubmit={handleSubmit} className="p-4 sm:p-6 contact-modal-form">
+                <form onSubmit={handleSubmit} className="p-4 sm:p-6 contact-modal-form text-left">
                   <div className="space-y-3 sm:space-y-4">
                     
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <div className="text-left">
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2 text-left">
                         Nome *
                       </label>
                       <input
@@ -406,7 +416,6 @@ Detalhes do contato:
                   <p style={{ 
                     fontSize: '12px', 
                     color: '#666', 
-                    textAlign: 'center', 
                     marginTop: '15px' 
                   }}>
                     Ao informar meus dados, eu concordo com a{' '}
