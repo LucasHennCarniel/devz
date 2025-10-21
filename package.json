@@ -24,10 +24,13 @@
       "devDependencies": {
             "@types/node": "^20.10.0",
             "@vitejs/plugin-react-swc": "^3.10.2",
+            "concurrently": "^9.2.1",
             "vite": "6.3.5"
       },
       "scripts": {
-            "dev": "vite",
+            "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+            "dev:frontend": "vite",
+            "dev:backend": "node server.js",
             "build": "vite build",
             "start": "node server.js",
             "start:prod": "NODE_ENV=production node server.js",

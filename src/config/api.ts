@@ -1,20 +1,30 @@
 // Configuração da API
-// Usa variável de ambiente ou detecta automaticamente o host
+// Detecta automaticamente o ambiente e configura a URL correta
+
 const getApiUrl = () => {
-  // Tenta usar variável de ambiente do Vite
-  const viteApiUrl = typeof window !== 'undefined' && (window as any).__VITE_API_URL__;
+  // 1. Se houver VITE_API_URL definida nas variáveis de ambiente, usa ela (PRODUÇÃO)
+  const viteApiUrl = import.meta.env.VITE_API_URL;
   if (viteApiUrl) {
+    console.log('🌐 Usando API URL do ambiente:', viteApiUrl);
     return viteApiUrl;
   }
   
-  // Em desenvolvimento, usa o IP da rede local se não for localhost
+  // 2. Detecção automática para PRODUÇÃO (quando não está em localhost)
   const hostname = window.location.hostname;
-  if (hostname === 'localhost' || hostname === '127.0.0.1') {
-    return 'http://localhost:3000';
+  const protocol = window.location.protocol;
+  
+  // Se não for localhost/127.0.0.1, assume que está em produção
+  if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+    // Em produção, usa o mesmo domínio com /api
+    const prodUrl = `${protocol}//${hostname}/api`;
+    console.log('🚀 Produção detectada. API URL:', prodUrl);
+    return prodUrl;
   }
   
-  // Se acessando pelo IP da rede, usa o mesmo IP para a API
-  return `http://${hostname}:3000`;
+  // 3. Desenvolvimento local - usa porta 3001
+  const devUrl = 'http://localhost:3001';
+  console.log('💻 Desenvolvimento local detectado. API URL:', devUrl);
+  return devUrl;
 };
 
 export const API_URL = getApiUrl();
