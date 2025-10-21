@@ -89,26 +89,14 @@ export function FinalCTA() {
   const contactMethods = [
     {
       icon: MessageSquare,
-      title: 'WhatsApp Suporte',
-      value: '(11) 99999-9999',
-      description: 'Resposta em até 5 minutos'
-    },
-    {
-      icon: MessageSquare,
       title: 'WhatsApp Comercial',
-      value: '(11) 88888-8888',
+      value: '0800 591 1276',
       description: 'Resposta em até 5 minutos'
     },
     {
       icon: Mail,
       title: 'E-mail',
       value: 'contato@devz.com.br',
-      description: 'Resposta em até 2 horas'
-    },
-    {
-      icon: Mail,
-      title: 'E-mail Comercial',
-      value: 'comercial@devz.com.br',
       description: 'Resposta em até 2 horas'
     }
   ];
@@ -150,38 +138,9 @@ export function FinalCTA() {
                 Prefere falar diretamente?
               </h3>
               <div className="space-y-4">
-                {/* WhatsApp Cards */}
+                {/* Todos os métodos de contato em linha */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {contactMethods.filter(method => method.title.includes('WhatsApp')).map((method, index) => {
-                    const IconComponent = method.icon;
-                    return (
-                      <Card key={index} className="border-0 shadow-sm bg-white hover:shadow-md transition-shadow cursor-pointer">
-                        <CardContent className="p-6">
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-devz-primary/10 rounded-lg flex items-center justify-center">
-                              <IconComponent className="w-6 h-6 text-devz-primary" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="text-gray-900 mb-1">
-                                {method.title}
-                              </div>
-                              <div className="text-[#31496e]">
-                                {method.value}
-                              </div>
-                              <div className="text-sm text-gray-500">
-                                {method.description}
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
-                </div>
-
-                {/* Email Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {contactMethods.filter(method => method.title.includes('E-mail')).map((method, index) => {
+                  {contactMethods.map((method, index) => {
                     const IconComponent = method.icon;
                     return (
                       <Card key={index} className="border-0 shadow-sm bg-white hover:shadow-md transition-shadow cursor-pointer">

@@ -17,14 +17,14 @@ function Contact() {
       icon: MessageSquare,
       title: 'WhatsApp',
       description: 'Resposta em até 5 minutos',
-      value: '(11) 99999-9999',
+      value: '0800 591 1276',
       action: 'Chamar no WhatsApp'
     },
     {
       icon: Phone,
       title: 'Telefone',
       description: 'Seg-Sex: 8h às 18h',
-      value: '(11) 3333-4444',
+      value: '0800 591 1276',
       action: 'Ligar agora'
     },
     {

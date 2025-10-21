@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { ArrowRight, Target, Eye, Heart, Users, Code, BarChart3, Zap, Calendar, MapPin, Mail, Phone } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import sobreBackground from '../img/logos/Sobre.png';
 
 
 function AboutDevz() {
@@ -101,8 +102,19 @@ function AboutDevz() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-[#31496E] to-[#3B82F6] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/5"></div>
+      <section 
+        className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden"
+        style={{ 
+          backgroundImage: `url(${sobreBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div 
+          className="absolute top-0 left-0 w-full h-full" 
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+        ></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-8">
             <div className="space-y-6">
@@ -123,17 +135,11 @@ function AboutDevz() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
-                onClick={() => scrollToSection('#contato')}
+                onClick={() => scrollToSection('#missao')}
                 className="bg-white hover:bg-white/90 text-[#31496E] px-8 py-4 text-lg font-medium rounded-md inline-flex items-center justify-center"
               >
-                Fale Conosco
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
-              <button 
-                onClick={() => scrollToSection('#missao')}
-                className="border border-white text-white hover:bg-white hover:text-[#31496E] px-8 py-4 text-lg font-medium rounded-md inline-flex items-center justify-center"
-              >
                 Nossa Missão
+                <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </div>
           </div>
@@ -381,7 +387,7 @@ function AboutDevz() {
       </section>
 
       {/* Localização e Contato */}
-      <section className="py-16 md:py-24 bg-white">
+      <section id="contato" className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -429,7 +435,7 @@ function AboutDevz() {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Telefone</h3>
                   <p className="text-gray-600">
-                    (49) 9999-9999<br />
+                    0800 591 1276<br />
                     Horário comercial: 8h às 18h
                   </p>
                 </div>

@@ -1,11 +1,11 @@
 import { 
   Facebook, 
-  Twitter, 
   Linkedin, 
   Instagram, 
   Mail, 
   Phone,
-  MapPin
+  MapPin,
+  MessageCircle
 } from 'lucide-react';
 import logoDevzWhiteHorizontal from '../img/logos/white group horizontal.png';
 
@@ -45,15 +45,15 @@ export function Footer({ onNavigate }: FooterProps) {
   };
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Instagram, href: '#', label: 'Instagram' }
+    { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61550844434502', label: 'Facebook' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/devz-group0/posts/?feedView=all', label: 'LinkedIn' },
+    { icon: Instagram, href: 'https://www.instagram.com/devzgroup', label: 'Instagram' }
   ];
 
   const contactInfo = [
     { icon: Mail, value: 'suporte@devz.com.br' },
-    { icon: Phone, value: '(49) 9999-9999' },
+    { icon: Phone, value: '0800 591 1276' },
+    { icon: MessageCircle, value: '0800 591 1276', label: 'WhatsApp Comercial' },
     { icon: MapPin, value: 'Joaçaba - SC' }
   ];
 
@@ -101,6 +101,8 @@ export function Footer({ onNavigate }: FooterProps) {
                     <a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors duration-200"
                       aria-label={social.label}
                     >
@@ -189,19 +191,9 @@ export function Footer({ onNavigate }: FooterProps) {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-gray-400 text-sm">
-              © {currentYear} Devz Group. Todos os direitos reservados.
-            </div>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Política de Privacidade
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Termos de Uso
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                Cookies
-              </a>
+            <div className="text-gray-400 text-sm text-center md:text-left">
+              <div>© {currentYear} Devz Group. Todos os direitos reservados.</div>
+              <div className="mt-1">CNPJ: 35.115.124/0001-05</div>
             </div>
           </div>
         </div>
