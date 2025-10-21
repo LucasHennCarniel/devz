@@ -21,7 +21,6 @@ import DevzSaloes from './components/products/DevzSaloes';
 import DevzPet from './components/products/DevzPet';
 import DevzAgro from './components/products/DevzAgro';
 import AutomacaoPython from './components/products/AutomacaoPython';
-import DashboardsPowerBI from './components/products/DashboardsPowerBI';
 import DesenvolvimentoSobMedida from './components/products/DesenvolvimentoSobMedida';
 
 
@@ -74,8 +73,6 @@ export default function App() {
         return <DevzAgro />;
       case 'automacao-python':
         return <AutomacaoPython />;
-      case 'dashboards-powerbi':
-        return <DashboardsPowerBI />;
       case 'desenvolvimento-sob-medida':
         return <DesenvolvimentoSobMedida />;
       default:

@@ -30,6 +30,7 @@ const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
   onNavigate?: (page: string) => void;
   scrollToSection?: (href: string) => void;
 }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
   const IconComponent = item.icon;
   const isDevz = type === 'devz';
   
@@ -44,12 +45,19 @@ const ProductCard = ({ item, type, onNavigate, scrollToSection }: {
         }
       }}
       className="group p-0 h-auto bg-transparent transition-all cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className={`dropdown-card p-3 w-full text-center rounded-lg ${
-        isDevz 
-          ? 'hover:border-blue-600 focus:border-blue-600' 
-          : 'hover:border-devz-accent focus:border-devz-accent'
-      }`}>
+      <div 
+        className="dropdown-card p-3 w-full text-center rounded-lg"
+        style={{
+          backgroundColor: '#ffffff',
+          border: `2px solid ${isHovered ? (isDevz ? '#2563eb' : '#10B981') : '#e5e7eb'}`,
+          boxShadow: isHovered ? '0 4px 6px -1px rgba(59, 130, 246, 0.1)' : 'none',
+          transform: isHovered ? 'translateY(-1px)' : 'translateY(0)',
+          transition: 'all 0.2s ease-in-out'
+        }}
+      >
         <div className="flex flex-col items-center gap-2">
           <div className={`${isDevz ? 'w-20 h-20' : 'w-16 h-16 bg-devz-accent/10'} rounded-lg flex items-center justify-center`}>
             <IconComponent 
@@ -146,12 +154,6 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
       page: 'automacao-python'
     },
     {
-      name: 'Dashboards Power BI',
-      description: 'Visualização de dados e Business Intelligence',
-      icon: BarChart3,
-      page: 'dashboards-powerbi'
-    },
-    {
       name: 'Desenvolvimento Sob Medida',
       description: 'Soluções personalizadas para seu negócio',
       icon: Code,
@@ -162,7 +164,11 @@ export function Header({ onNavigate, currentPage = 'home' }: HeaderProps) {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
     }
     setIsMenuOpen(false);
   };

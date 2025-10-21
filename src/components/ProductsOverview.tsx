@@ -37,7 +37,7 @@ export function ProductsOverview({ onNavigate }: ProductsOverviewProps) {
       features: [
         'Scripts Python inteligentes',
         'Automação de processos contábeis',
-        'Dashboards personalizados em Power BI',
+        'Dashboards personalizados',
         'Integração com sistemas existentes'
       ]
     }
