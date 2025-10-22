@@ -178,6 +178,7 @@ function DevzAgro() {
       faqs={faqs}
       ctaTitle="Modernize sua produção com o DEVZ Agro"
       ctaDescription="Junte-se a milhares de produtores que já otimizaram sua gestão rural e aumentaram sua rentabilidade."
+      primaryColor="#149156"
     />
   );
 }

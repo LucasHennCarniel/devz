@@ -178,6 +178,7 @@ function DevzWeb() {
       faqs={faqs}
       ctaTitle="Simplifique sua gestão com o DEVZ Web"
       ctaDescription="Junte-se a mais de 1.000 empresas que já transformaram sua gestão com nossa solução completa."
+      primaryColor="#1d4fdb"
     />
   );
 }

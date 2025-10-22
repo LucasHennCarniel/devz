@@ -106,12 +106,6 @@ export default function AutomationPage() {
                   Descobrir Como Funciona
                   <ExternalLink className="ml-2 h-5 w-5" />
                 </Button>
-                <Button 
-                  variant="outline"
-                  className="border-white text-gray-900 hover:!bg-gray-900 hover:!text-white px-8 py-4 text-lg"
-                >
-                  Ver Casos de Sucesso
-                </Button>
               </div>
             </div>
 

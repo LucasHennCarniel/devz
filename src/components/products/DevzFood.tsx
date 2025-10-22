@@ -203,6 +203,7 @@ function DevzFood() {
       faqs={faqs}
       ctaTitle="Revolucione seu restaurante com o DEVZ Food"
       ctaDescription="Mais de 500 estabelecimentos já aumentaram suas vendas e reduziram custos com nossa solução especializada."
+      primaryColor="#ff6666"
     />
   );
 }

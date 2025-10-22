@@ -203,6 +203,7 @@ function DevzShop() {
       faqs={faqs}
       ctaTitle="Transforme seu varejo com o DEVZ Shop"
       ctaDescription="Mais de 800 lojas já aumentaram suas vendas e fidelizaram clientes com nossa solução completa."
+      primaryColor="#865dfb"
     />
   );
 }

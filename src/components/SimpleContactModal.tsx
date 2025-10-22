@@ -6,12 +6,14 @@ import { Button } from './ui/button';
 interface SimpleContactModalProps {
   triggerText?: string;
   triggerClassName?: string;
+  triggerStyle?: React.CSSProperties;
   useOffset?: boolean;
 }
 
 export function SimpleContactModal({
   triggerText = "RECEBA UMA DEMONSTRAÇÃO",
   triggerClassName = "",
+  triggerStyle = {},
   useOffset = false
 }: SimpleContactModalProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -149,6 +151,7 @@ Detalhes do contato:
           openModal();
         }}
         className={triggerClassName}
+        style={triggerStyle}
         type="button"
       >
         {triggerText}

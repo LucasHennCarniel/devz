@@ -203,6 +203,7 @@ function DevzClinicas() {
       faqs={faqs}
       ctaTitle="Modernize sua clínica com o DEVZ Clínicas"
       ctaDescription="Mais de 300 clínicas já transformaram seu atendimento e aumentaram a eficiência com nossa solução médica."
+      primaryColor="#00b1f7"
     />
   );
 }

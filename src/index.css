@@ -1829,20 +1829,32 @@ html {
 
   /* Melhorar contraste dos elementos do dropdown */
   .dropdown-card {
-    background-color: #ffffff;
-    border: 2px solid #e5e7eb;
-    transition: all 0.2s ease-in-out;
+    background-color: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    transition: all 0.2s ease-in-out !important;
   }
 
   .dropdown-card:hover {
-    border-color: #2563eb;
-    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
-    transform: translateY(-1px);
+    border-color: #2563eb !important;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1) !important;
+    transform: translateY(-1px) !important;
   }
 
   .dropdown-card:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  }
+
+  /* Sobrescrever estilos do Radix UI DropdownMenuItem */
+  [data-slot="dropdown-menu-item"]:has(.dropdown-card) {
+    background: transparent !important;
+  }
+
+  [data-slot="dropdown-menu-item"]:hover .dropdown-card,
+  [data-slot="dropdown-menu-item"][data-highlighted] .dropdown-card {
+    border-color: #2563eb !important;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1) !important;
+    transform: translateY(-1px) !important;
   }
 
   .border-gray-200 {

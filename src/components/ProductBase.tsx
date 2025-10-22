@@ -52,6 +52,9 @@ interface ProductBaseProps {
   // CTA
   ctaTitle?: string;
   ctaDescription?: string;
+  
+  // Customização de cores
+  primaryColor?: string;
 }
 
 export function ProductBase({
@@ -65,7 +68,8 @@ export function ProductBase({
   useCases,
   faqs,
   ctaTitle = "Pronto para transformar sua gestão?",
-  ctaDescription = "Solicite uma demonstração personalizada e descubra como podemos ajudar seu negócio."
+  ctaDescription = "Solicite uma demonstração personalizada e descubra como podemos ajudar seu negócio.",
+  primaryColor = "#31496E"
 }: ProductBaseProps) {
   
   const scrollToSection = (href: string) => {
@@ -76,9 +80,12 @@ export function ProductBase({
   };
 
   return (
-    <div className="min-h-screen bg-devz-primary">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-devz-primary to-devz-primary relative overflow-hidden">
+      <section 
+        className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden"
+        style={{ backgroundColor: primaryColor }}
+      >
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -103,12 +110,14 @@ export function ProductBase({
               <div className="flex flex-col sm:flex-row gap-4">
                 <SimpleContactModal
                   triggerText="Solicitar Demonstração →"
-                  triggerClassName="bg-white hover:bg-white/90 text-devz-primary px-8 py-1 text-lg font-medium inline-flex items-center justify-center rounded-md h-auto"
+                  triggerClassName="bg-white hover:bg-white/90 px-8 py-1 text-lg font-medium inline-flex items-center justify-center rounded-md h-auto"
+                  triggerStyle={{ color: primaryColor }}
                 />
                 <Button 
                   variant="outline"
                   onClick={() => scrollToSection('#funcionalidades')}
-                  className="bg-white hover:bg-white/90 text-devz-primary px-8 py-1 text-lg font-medium"
+                  className="bg-white hover:bg-white/90 px-8 py-1 text-lg font-medium"
+                  style={{ color: primaryColor }}
                 >
                   Ver Funcionalidades
                 </Button>
@@ -148,8 +157,11 @@ export function ProductBase({
               return (
                 <Card key={index} className="p-8 hover:shadow-lg transition-all duration-300 border border-gray-200 hover:scale-105">
                   <div className="space-y-4">
-                    <div className="w-12 h-12 bg-devz-primary/10 rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-devz-primary" />
+                    <div 
+                      className="w-12 h-12 rounded-lg flex items-center justify-center"
+                      style={{ backgroundColor: `${primaryColor}1A` }}
+                    >
+                      <IconComponent className="w-6 h-6" style={{ color: primaryColor }} />
                     </div>
                     <div>
                       <h3 className="text-lg font-medium text-gray-900 mb-2">{feature.title}</h3>
@@ -197,9 +209,9 @@ export function ProductBase({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-4">
-              <div className="w-8 h-1 bg-devz-primary rounded-full"></div>
-              <span className="text-sm font-semibold text-devz-primary uppercase tracking-wider">Aplicações Reais</span>
-              <div className="w-8 h-1 bg-devz-primary rounded-full"></div>
+              <div className="w-8 h-1 rounded-full" style={{ backgroundColor: primaryColor }}></div>
+              <span className="text-sm font-semibold uppercase tracking-wider" style={{ color: primaryColor }}>Aplicações Reais</span>
+              <div className="w-8 h-1 rounded-full" style={{ backgroundColor: primaryColor }}></div>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Casos de Uso
@@ -211,7 +223,20 @@ export function ProductBase({
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {useCases.map((useCase, index) => (
-              <Card key={index} className="group p-6 bg-white border border-gray-200 hover:border-devz-primary hover:shadow-lg transition-all duration-300 rounded-lg hover:scale-105">
+              <Card 
+                key={index} 
+                className="group p-6 bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 rounded-lg hover:scale-105"
+                style={{ 
+                  borderColor: 'rgb(229, 231, 235)',
+                  '--hover-border-color': primaryColor 
+                } as React.CSSProperties}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = primaryColor;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgb(229, 231, 235)';
+                }}
+              >
                 <div className="space-y-4">
                   {useCase.industry && (
                     <div className="flex items-center gap-2">
@@ -222,7 +247,15 @@ export function ProductBase({
                   )}
                   
                   <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-devz-primary transition-colors duration-200">
+                    <h3 
+                      className="text-lg font-semibold text-gray-900 transition-colors duration-200"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = primaryColor;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'rgb(17, 24, 39)';
+                      }}
+                    >
                       {useCase.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed text-sm">
@@ -231,7 +264,7 @@ export function ProductBase({
                   </div>
                   
                   {/* Accent line */}
-                  <div className="w-8 h-0.5 bg-devz-accent rounded-full group-hover:w-12 transition-all duration-300"></div>
+                  <div className="h-0.5 rounded-full transition-all duration-300" style={{ width: '32px', backgroundColor: primaryColor }}></div>
                 </div>
               </Card>
             ))}
@@ -243,8 +276,11 @@ export function ProductBase({
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="w-16 h-16 bg-devz-primary/10 rounded-lg flex items-center justify-center mx-auto mb-6">
-              <MessageCircle className="w-8 h-8 text-devz-primary" />
+            <div 
+              className="w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-6"
+              style={{ backgroundColor: `${primaryColor}1A` }}
+            >
+              <MessageCircle className="w-8 h-8" style={{ color: primaryColor }} />
             </div>
             <h2 className="text-3xl md:text-4xl font-medium text-gray-900 mb-4">
               Tire suas dúvidas
@@ -287,7 +323,10 @@ export function ProductBase({
       </section>
 
       {/* Call to Action Final */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-devz-primary to-devz-primary">
+      <section 
+        className="py-16 md:py-24"
+        style={{ background: `linear-gradient(to right, ${primaryColor}, ${primaryColor})` }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="space-y-8">
             <div className="space-y-6">
@@ -309,11 +348,13 @@ export function ProductBase({
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <SimpleContactModal
                 triggerText="Solicitar Demonstração Gratuita →"
-                triggerClassName="bg-white hover:bg-white/90 text-devz-primary px-8 py-1 text-lg font-medium inline-flex items-center justify-center rounded-md h-auto"
+                triggerClassName="bg-white hover:bg-white/90 px-8 py-1 text-lg font-medium inline-flex items-center justify-center rounded-md h-auto"
+                triggerStyle={{ color: primaryColor }}
               />
               <Button 
                 variant="outline"
-                className="border-white text-devz-primary hover:bg-white hover:bg-white/90 px-8 py-1 text-lg font-medium cursor-pointer"
+                className="border-white hover:bg-white hover:bg-white/90 px-8 py-1 text-lg font-medium cursor-pointer"
+                style={{ borderColor: 'white', color: primaryColor }}
               >
                 Baixar Material
               </Button>

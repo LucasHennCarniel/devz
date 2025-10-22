@@ -178,6 +178,7 @@ function DevzSaloes() {
       faqs={faqs}
       ctaTitle="Transforme seu salão com o DEVZ Salões"
       ctaDescription="Junte-se a centenas de salões que já otimizaram sua gestão e aumentaram sua rentabilidade."
+      primaryColor="#ff7896"
     />
   );
 }

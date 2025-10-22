@@ -178,6 +178,7 @@ function DevzPet() {
       faqs={faqs}
       ctaTitle="Cuide melhor dos pets com o DEVZ Pet"
       ctaDescription="Junte-se a centenas de veterinários que já modernizaram seus atendimentos e melhoraram a qualidade do cuidado pet."
+      primaryColor="#ffd45c"
     />
   );
 }
